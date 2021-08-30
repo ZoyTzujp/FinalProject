@@ -21,6 +21,11 @@ public class ProductServiceImpl implements ProductService {
 	public Product insert(Product product) {
 		return productRepository.insert(product);		
 	}
+	
+	@Override
+	public void update(Product product) {
+		productRepository.update(product);		
+	}
 
 	@Override
 	public List<Product> getAllProduct() {
@@ -28,14 +33,21 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product getProductById(Integer id) {
-		return productRepository.getProductById(id);
+	public Product getProductById(Integer productID) {
+		return productRepository.getProductById(productID);
 	}
 
 	@Override
-	public List<Product> productListSortByTypeID(Integer productTypeID) {
-		return productRepository.productListSortByTypeID(productTypeID);
+	public List<Product> getProductListByTypeID(Integer productTypeID) {
+		return productRepository.getProductListByTypeID(productTypeID);
 	}
+
+	@Override
+	public List<Product> getProductListByShopID(Integer shopID) {
+		return productRepository.getProductListByShopID(shopID);
+	}
+
+
 
 
 

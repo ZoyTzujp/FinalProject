@@ -16,10 +16,10 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 
-	@GetMapping("/showForm")
+	@GetMapping("/showOrderForm")
     public String showForm(Model m) {
-    	OrderList orderList = new OrderList();
-    	m.addAttribute("orders", orderList);
+		OrderList order = new OrderList();
+    	m.addAttribute("orders", order);
     	return "orderSelect";
     }
 			

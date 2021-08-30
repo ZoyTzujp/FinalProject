@@ -1,5 +1,6 @@
 package tw.eeit131.first.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,13 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "shop")
-public class ShopBean {
+public class ShopBean implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "shopID")
@@ -44,7 +44,7 @@ public class ShopBean {
 	@Column(name = "password")
 	private String password;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shop", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shopBean", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Product> product = new HashSet<Product>();
 

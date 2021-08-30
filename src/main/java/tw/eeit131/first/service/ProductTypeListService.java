@@ -8,6 +8,10 @@ public interface ProductTypeListService {
 
 	List<ProductTypeList> getAllProductTypeList();
 
-	ProductTypeList findByProductTypeListID(int i);
+	ProductTypeList getProductTypeListByTypeID(Integer productTypeID);
+
+	List<ProductTypeList> getProductTypeListByShopID(Integer shopID);
+
+	List<ProductTypeList> getProductTypeListByProductID(Integer productID);
 
 }

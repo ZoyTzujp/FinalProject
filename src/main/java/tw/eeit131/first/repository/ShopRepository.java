@@ -2,6 +2,8 @@ package tw.eeit131.first.repository;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import tw.eeit131.first.model.ShopBean;
 
 public interface ShopRepository {
@@ -20,6 +22,6 @@ public interface ShopRepository {
 
 	List<ShopBean> findAll();
 
-	Integer getLogout();
+	Integer getLogout(HttpSession session);
 
 }

@@ -16,7 +16,7 @@ public class OrderRepositoryImpl implements OrderRepository{
 
 	@Override
 	public OrderList findByOrderId(int id) {
-		String hql = "FROM OrderList WHERE orderID=:id";
+		String hql = "FROM Order WHERE orderID=:id";
 		OrderList order = null;
 		order= entityManager.createQuery(hql,OrderList.class)
 		                    .setParameter("id", id)

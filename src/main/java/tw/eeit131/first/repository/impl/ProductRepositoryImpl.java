@@ -1,6 +1,5 @@
 package tw.eeit131.first.repository.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import tw.eeit131.first.model.Product;
-import tw.eeit131.first.model.ProductType;
 import tw.eeit131.first.repository.ProductRepository;
 
 @Repository
@@ -24,6 +22,11 @@ public class ProductRepositoryImpl implements ProductRepository {
 		entityManager.persist(product);//等於 Hibernate 的 Session.save(member)
 		return product;
 	}
+	
+	@Override
+	public void update(Product product) {
+		entityManager.merge(product);		
+	}
 
 	@Override
 	public List<Product> getAllProduct() {		
@@ -32,36 +35,31 @@ public class ProductRepositoryImpl implements ProductRepository {
 	}
 
 	@Override
-	public Product getProductById(Integer id) {
-		String hql = "FROM Product WHERE PRODUCTID=:id";
+	public Product getProductById(Integer productID) {
+		String hql = "FROM Product WHERE PRODUCTID=:productID";
 		Product product = null;
 		product= entityManager.createQuery(hql,Product.class)
-		                    .setParameter("id", id)
+		                    .setParameter("productID", productID)
 		                    .getSingleResult();	
         return product;
 	}
 
 	@Override
-	public List<Product> productListSortByTypeID(Integer productTypeID) {
-		String hqlType = "FROM ProductType WHERE PRODUCTTYPEID=:productTypeID";
-		String hqlProduct = "FROM Product WHERE PRODUCTID=:productID";
-		List<ProductType> productType = null;
-		productType= entityManager.createQuery(hqlType,ProductType.class)
-		                          .setParameter("productTypeID", productTypeID)
-		                          .getResultList();
-		System.out.println("productListSortByTypeID:"+productType);
-		
-		List<Product> productList = new ArrayList<>();
-		for(int i=0; i < productType.size();i++) { 
-			Integer productID  = productType.get(i).getProductID();
-			System.out.println("item:"+i+"="+productID);
-			Product product = entityManager.createQuery(hqlProduct,Product.class)
-                                           .setParameter("productID", productID)
-                                          .getSingleResult();
-			System.out.println(product);
-			productList.add(product);
-			System.out.println(productList);
-		}
+	public List<Product> getProductListByTypeID(Integer productTypeID) {
+		String hql = "select p from ProductTypeList t left Join t.products p where t.productTypeID=:productTypeID";
+		List<Product> product = entityManager.createQuery(hql,Product.class)
+                                             .setParameter("productTypeID", productTypeID)
+                                             .getResultList();		
+		return product;
+	}
+
+	@Override
+	public List<Product> getProductListByShopID(Integer shopID) {
+		String hql = "FROM Product WHERE shopID=:shopID";
+		List<Product> productList = null;
+		productList= entityManager.createQuery(hql,Product.class)
+                     .setParameter("shopID", shopID)
+                     .getResultList();		
 		return productList;
 	}
 

@@ -24,8 +24,18 @@ public class ProductTypeListServiceImpl implements ProductTypeListService {
 	}
 
 	@Override
-	public ProductTypeList findByProductTypeListID(int i) {
-		return productTypeListRepository.findByProductTypeListID(i);
+	public ProductTypeList getProductTypeListByTypeID(Integer productTypeID) {
+		return productTypeListRepository.getProductTypeListByTypeID(productTypeID);
+	}
+
+	@Override
+	public List<ProductTypeList> getProductTypeListByShopID(Integer shopID) {
+		return productTypeListRepository.getProductTypeListByShopID(shopID);
+	}
+
+	@Override
+	public List<ProductTypeList> getProductTypeListByProductID(Integer productID) {
+		return productTypeListRepository.getProductTypeListByProductID(productID);
 	}
 
 }

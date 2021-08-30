@@ -30,15 +30,12 @@ import tw.eeit131.first.model.ShopBean;
 //				@WebInitParam(name = "mustLogin3", value = "/_05_orderProcess/*"),
 //				@WebInitParam(name = "mustLogin4", value = "/_20_productMaintain/*")
 				
-				@WebInitParam(name = "mustLogin1", value = "/modifyMemberInfo/*"),
-				@WebInitParam(name = "mustLogin2", value = "/memberArtical/*"),
-				@WebInitParam(name = "mustLogin3", value = "/shoppingCart/*"),
-				@WebInitParam(name = "mustLogin4", value = "/orderSelect/*"),
+				@WebInitParam(name = "mustLogin1", value = "/modifyMemberInfo"),
+				@WebInitParam(name = "mustLogin2", value = "/memberArtical"),
+				@WebInitParam(name = "mustLogin3", value = "/shoppingCart"),
+				@WebInitParam(name = "mustLogin4", value = "/orderSelect"),
 				
-				@WebInitParam(name = "mustLogin5", value = "/addShopForm"),
-				@WebInitParam(name = "mustLogin6", value = "/showProductCooperateForm"),
-				@WebInitParam(name = "mustLogin7", value = "/getAllProductInfo"),
-				
+				@WebInitParam(name = "mustLogin5", value = "/showProductCooperateForm"),							
 		})
 public class LoginCheckingFilter implements Filter {
 	
@@ -53,9 +50,9 @@ private static Logger log = LoggerFactory.getLogger(LoginCheckingFilter.class);
 		Enumeration<String> e = fConfig.getInitParameterNames();
 		while (e.hasMoreElements()) {
 			String path = e.nextElement();
-			System.out.println("-------->"+path);
+//			System.out.println("-------->"+path);
 			url.add(fConfig.getInitParameter(path));
-			System.out.println("-------->"+url);
+//			System.out.println("-------->"+url);
 		}
 	}
 
@@ -93,7 +90,7 @@ private static Logger log = LoggerFactory.getLogger(LoginCheckingFilter.class);
 					return;
 				}
 			} else {   //
-				log.info("不需要登入，直接去執行他要執行的程式");
+				log.info("不需要登入，直接去執行他要執行的程式:"+requestURI);
 				
 				chain.doFilter(request, response);
 			}

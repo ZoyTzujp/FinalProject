@@ -2,11 +2,12 @@ package tw.eeit131.first.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tw.eeit131.first.model.Shop;
 import tw.eeit131.first.model.ShopBean;
 import tw.eeit131.first.repository.ShopRepository;
 import tw.eeit131.first.service.ShopService;
@@ -54,8 +55,8 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public Integer getLogout() {
-		return shopRepository.getLogout();
+	public Integer getLogout(HttpSession session) {
+		return shopRepository.getLogout(session);
 	}
 
 }

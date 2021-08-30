@@ -27,9 +27,6 @@ import tw.eeit131.first.service.ShopService;
 @SessionAttributes("shopbean")
 public class ShopController {
 	
-	public ShopController() {
-		
-	}
 	@Autowired
 	ShopService service;
 	
@@ -38,8 +35,7 @@ public class ShopController {
 	
 	@Autowired
 	HttpSession session;
-	
-	
+		
 	public void setService(ShopService service) {
 		this.service = service;
 	}
@@ -47,27 +43,29 @@ public class ShopController {
 	//空白表單頁面
 	@GetMapping("/addShopForm")    
 	public  String addShopForm() {
-		return "addShop";         
+		return "ShopAdd";         
 	}
 	
 	@GetMapping("/login")
 	public String login() {  //轉至登入頁面
-		return "login";
+		return "ShopLogin";
 	}
 	
 	@GetMapping("/HomeLogined")    //登入成功
 	public  String homeLogin() {
-		return "Home(login)";         
+		return "Home";         
 	}
 	
-
-	
-	@GetMapping("/EditShopInfo")   //編輯店家資料
+	@GetMapping("/showAllShopNameInfo")
+	public String showAllShopNameInfo() {   //查詢所有商家
+		return "ShopShowAllShopName";
+	}
+		
+	@GetMapping("/modifyMemberInfo")   //編輯店家資料
 	public String editShopInfo() {
-		return "EditShop";
+		return "ShopEdit";
 	}
-	
-	
+		
 	@PostMapping("/userLogin")
 	public String userLogin(
 			@RequestParam("Email") String email,
@@ -89,13 +87,13 @@ public class ShopController {
 		}
 		
 		if(errors!=null && !errors.isEmpty()) {
-			return "login";
+			return "ShopLogin";
 		}
 		
 		ShopBean shopbean = service.checkLogin(email,password);
 		
 		if(shopbean != null) {
-		// OK, 登入成功, 將shopbean物件放入Session範圍內，識別字串為"shopbean"
+		// OK, 登入成功, 將shopbean物件放入Session範圍內，識別字串為"LoginOK"
 		session.setAttribute("LoginOK", shopbean);
 		// 建立登出所需的LogoutBean物件
 //		LogoutBean logoutBean = new LogoutBean(session);
@@ -110,7 +108,7 @@ public class ShopController {
 
 		
 		if(errors.isEmpty()) {
-			return "success";
+			return "Home";
 		}
 		
 		model.addAttribute("shopEmail", email);
@@ -118,45 +116,44 @@ public class ShopController {
 
 		errors.put("msg", "please input correct username and password");
 		
-		return "login";
+		return "ShopLogin";
 
 	}
 	
 	//新增店家資料
-	@PostMapping("/addShop")
-	public String addShop(
-		@RequestParam("shopName") String shopName,
-		@RequestParam("shopKeeper") String shopKeeper,
-		@RequestParam("Email") String Email,
-		@RequestParam("mobile") String mobile,
-		@RequestParam("introduce")String introduce,
-		ShopBean shops
-		) {	
-		
-		shops.setShopName(shopName);
-		shops.setShopKeeper(shopKeeper);
-		shops.setEmail(Email);
-		shops.setMobile(mobile);
-		shops.setIntroduce(introduce);
-		
-		int checkResult = service.saveShopBean(shops);
-			if(checkResult ==1) {	
-					return "Home"; //接註冊成功發驗證信的頁面					
-			}		
-		return "addshop";   //註冊失敗 回到空白表單		  
-	}
+		@PostMapping("/addNewShop")
+		public String addShop(
+			@RequestParam("shopName") String shopName,
+			@RequestParam("shopKeeper") String shopKeeper,
+			@RequestParam("Email") String Email,
+			@RequestParam("mobile") String mobile,
+			@RequestParam("introduce")String introduce,
+			ShopBean shops
+			) {	
+			
+			shops.setShopName(shopName);
+			shops.setShopKeeper(shopKeeper);
+			shops.setEmail(Email);
+			shops.setMobile(mobile);
+			shops.setIntroduce(introduce);
+			
+			int checkResult = service.saveShopBean(shops);
+				if(checkResult ==1) {	
+						return "Home"; //接註冊成功發驗證信的頁面					
+				}		
+			return "ShopAdd";   //註冊失敗 回到空白表單		  
+		}
 	
-	@GetMapping("/findSingleShop/{shopID}")
-	 public String findSingleShopByTypeID(
-			 @PathVariable("shopID") Integer shopID,
-	         Model model
-	         ){
-	  System.out.println(shopID);
-	  ShopBean shopBean = service.findById(shopID);
-//	  System.out.println(shopBeanList);
-//	  model.addAttribute("shopBeanList",shopBeanList); 
-	  return "ShopInfo";
-	 }
+		@GetMapping("/findSingleShop/{shopID}")
+		 public String findSingleShopByTypeID(
+				 @PathVariable("shopID") Integer shopID,
+		         Model model
+		         ){
+		  System.out.println(shopID);
+		  ShopBean shopBean = service.findById(shopID);
+		  model.addAttribute("shopBean",shopBean); 
+		  return "ShopInfo";
+		 }
 	
 	@GetMapping(value="/findAllShop.json" , produces = { "application/json; charset=UTF-8" })    
 	public  @ResponseBody List<ShopBean> findAllShop() {
@@ -170,7 +167,7 @@ public class ShopController {
 			Model model,
 			HttpSession session
 			) { 
-		ShopBean shop = (ShopBean)session.getAttribute("shopbean");
+		ShopBean shop = (ShopBean)session.getAttribute("LoginOK");
 //		ShopBean shop = (ShopBean)model.getAttribute("shopbean");
 		System.out.println("========================");
 		System.out.println("shopbean="+shop.getShopID());    
@@ -204,6 +201,12 @@ public class ShopController {
 		return map;
 	}
 	
-	
-	
+	//查詢所有店家
+	@GetMapping("/showAllShopName")
+	public  @ResponseBody List<ShopBean> showAllShopName() {
+		List<ShopBean> shopBeanList =service.findAll();
+		return shopBeanList;
+	}
+
+		
 }

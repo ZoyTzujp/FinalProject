@@ -54,7 +54,7 @@
             	 if(productTypeID==0){
             		 location.href ="<c:url value='/getAllProductInfo' />"
             	 }else{
-            	 location.href ="<c:url value='/productListSortByTypeID/' />"+productTypeID;
+            	     location.href ="<c:url value='/productListSortByTypeID/' />"+productTypeID;
             	 }
               }
 	/*              var selectElement = document.getElementById('productTypeIDList');  
@@ -100,83 +100,22 @@
                             </div>
                             <div class="product-content" id="product_name_price">
                                 <div class="product-title">
-                                    <h4 class="title-2"> <a href="product-details.html">${productList.productName}</a></h4>
-                                </div>
-                                <div class="price-box">
-                                    <span class="regular-price ">$${productList.price}</span>
-                                </div>
-                            </div>
-                            <div class="add-action d-flex position-absolute">
-                                <a href="cart.html" title="Add To cart">
-                                    <i class="ion-bag"></i>
-                                </a>
-                            </div>
-                            <div class="product-content-listview" id="product_name_price_2">
-                                <div class="product-title">
-                                    <h4 class="title-2"> <a href="product-details.html">${productList.productName}</a></h4>
-                                </div>
-                                <div class="price-box">
-                                    <span class="regular-price ">$${productList.price}</span>                               
-                                </div>
-                                <div class="add-action-listview d-flex">
-                                    <a href="cart.html" title="Add To cart">
-                                        <i class="ion-bag"></i>
-                                    </a>                                   
+                                    <h4 class="title-2"> <a href="product-details.html">${productList.productName}</a></h4>                                                                      
+                                </div>                          
+                                <div class="product-title">                                   
+                                    <h4 class="title-2"><span class="regular-price " >$${productList.price}</span></h4> 
+                                      <div style="text-align:right">
+                                        <h6 class="title-2">                                  
+                                            <a href="<c:url value='/singleProductEditForm/${productList.productID}' />" title="edit" ><i class="fa fa-edit mr-2"></i></a>
+                                            <a href="#" title="remove"><i class="ion-trash-b"></i></a>
+                                        </h6>
+                                      </div>                                   
                                 </div>
                             </div>
                         </div>
                      </div> 
                    </c:forEach>                                     
-                </div>
-            <!--   <script>
-                    var xhr = new XMLHttpRequest();
-                    var imageURL = "<c:url value='/getProductImage' />"
-                    xhr.open("GET","<c:url value='/getAllProduct' />",true);
-                    xhr.send();
-                    xhr.onreadystatechange = function(){
-                    	if(xhr.readyState == 4 && xhr.status == 200){
-                    		var productList = JSON.parse(xhr.responseText);
-                    		var context = "";
-                    		for(var i=0;i<productList.length;i++){                                            
-                              context += "<div class='col-md-6 col-sm-6 col-lg-4 col-custom product-area' >"
-                                       + "<div class='single-product position-relative'>"
-                                       + "<div class='product-image' id='img'>"
-                                       + "<a class='d-block' href='XXXXXXXXX'>"
-                                       + "<img src='"+imageURL+"?id="+productList[i].productID
-                                       + "' alt='' class='product-image-1 w-100'>"
-                                       + "</a>"
-                                       + "</div>"
-                                       + "<div class='product-content' id='product_name_price'>"
-                                       + "<div class='product-title'>"
-                                       + "<h4 class='title-2'> <a href='XXXXXXXXX'>" + productList[i].productName + "</a></h4>"                                  
-                                       + "</div>"
-                                       + "<div class='price-box'>"
-                                       + "<span class='regular-price '>$" + productList[i].price + "</span>"
-                                       + "</div>"
-                                       + "</div>"
-                                       + "<div class='add-action d-flex position-absolute'>"
-                                       + "<a href='cart.html' title='Add To cart'>"
-                                       + "<i class='ion-bag'></i>"
-                                       + "</a>"
-                                       + "</div>"
-                                       + "<div class='product-content-listview' id='product_name_price_2'>"
-                                       + "<div class='product-title'>"
-                                       + "<h4 class='title-2'> <a href='XXXXXXXXX'>" + productList[i].productName + "</a></h4>"
-                                       + "</div>"
-                                       + "<div class='price-box'>"
-                                       + "<span class='regular-price '>$" + productList[i].price + "</span>"
-                                       + "</div>"
-                                       + "<div class='add-action-listview d-flex'>"
-                                       + "<a href='cart.html' title='Add To cart'>"
-                                       + "<i class='ion-bag'></i>"
-                                       + "</a>"
-                                       + "</div></div></div></div>"                          
-                    		}                    		
-                    		var divs = document.getElementById("single-product");
-                       		divs.innerHTML = context;
-                    	}
-                    }
-                </script> -->
+                </div>           
                 <!-- 商品銷售欄 商品欄 End -->
                 <!-- 商品銷售欄 下方分頁欄 Start -->
                 <div class="row">
@@ -219,7 +158,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- 商品銷售欄 右方分類欄 商品分類 Start -->
+                        <!-- 商品銷售欄 左方分類欄 商品分類 Start -->
    <!--                     <div class="widget-list widget-mb-1">
                             <h3 class="widget-title">商品分類</h3>                                                     
                             <nav>
@@ -258,13 +197,13 @@
                                 </ul>
                             </nav>                           
                         </div>                -->
-                        <!-- 商品銷售欄 右方分類欄 商品分類 End -->
+                        <!-- 商品銷售欄 左方分類欄 商品分類 End -->
                         <div class="widget-list widget-mb-1">
                             <h3 class="widget-title">商品分類</h3>
                             <div class="sidebar-body">
                                 <ul class="sidebar-list">
                                     <c:forEach var="productTypeList" items="${productTypeList}">
-                                        <li><a href="<c:url value='/productListSortByTypeID/${productTypeList.productTypeID}' />">${productTypeList.productTypeName}</a></li>
+                                        <li><a href="<c:url value='/getProductListByTypeID/${productTypeList.productTypeID}' />">${productTypeList.productTypeName}</a></li>
                                     </c:forEach>
 <!--                                     <li><a href="#">All Product</a></li> -->
 <!--                                     <li><a href="#">Best Seller (5)</a></li> -->
@@ -343,7 +282,7 @@
                         </div>
                     </div>
                 </aside>
-                <!-- 商品銷售欄 右方分類欄 End -->
+                <!-- 商品銷售欄 左方分類欄 End -->
             </div>
         </div>
     </div>

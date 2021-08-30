@@ -18,11 +18,12 @@ public class ShopRepositoryImpl implements ShopRepository {
 	@Autowired
 	EntityManager entityManager;
 	
+	@Autowired
 	HttpSession session;
 
 	@Override
 	public ShopBean findByShopId(int id) {
-		String hql = "FROM Shop WHERE shopID=:id";
+		String hql = "FROM ShopBean WHERE shopID=:id";
 		ShopBean shop = null;
 		shop = entityManager.createQuery(hql, ShopBean.class).setParameter("id", id).getSingleResult();
 		return shop;
@@ -80,7 +81,7 @@ public class ShopRepositoryImpl implements ShopRepository {
 	}
 	
 	@Override
-	public Integer getLogout() {
+	public Integer getLogout(HttpSession session) {
 		session.invalidate();
 		return 0;
 	}

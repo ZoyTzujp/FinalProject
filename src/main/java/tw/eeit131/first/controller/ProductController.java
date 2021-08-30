@@ -49,39 +49,177 @@ public class ProductController {
 	@Autowired
 	ShopService shopService;
 	
-	@GetMapping(value="/getAllProductTypeList", produces = { "application/json; charset=UTF-8" })
+	@GetMapping(value="/getAllProductTypeList.json", produces = { "application/json; charset=UTF-8" })
 	public @ResponseBody List<ProductTypeList> getAllProductTypeList(){
 		List<ProductTypeList> productTypeList = productTypeListService.getAllProductTypeList();
-		System.out.println(productTypeList);
 		return productTypeList;
 	}
 	
-	@GetMapping("/productListSortByTypeID/{productTypeID}")
-	public String productListSortByTypeID(@PathVariable("productTypeID") Integer productTypeID,
+	@GetMapping(value="/getProductTypeListByProductID.json/{productID}", produces = { "application/json; charset=UTF-8" })
+	public @ResponseBody List<ProductTypeList> getProductTypeListByProductID(@PathVariable("productID") Integer productID){
+		List<ProductTypeList> productTypeList = productTypeListService.getProductTypeListByProductID(productID);
+		return productTypeList;
+	}
+	
+	@GetMapping("/getproductDetailsByID/{productID}")
+	public String getproductDetailsByID(@PathVariable("productID") Integer productID,
+                                     Model m) {
+		Product product = productService.getProductById(productID);
+		m.addAttribute("product",product);
+		return "ProductDetails";		
+	}
+		
+	@GetMapping("/getProductListByTypeID/{productTypeID}")
+	public String getProductListByTypeID(@PathVariable("productTypeID") Integer productTypeID,
 			                              Model m){
-//		System.out.println(productTypeID);
-		List<Product> productList = productService.productListSortByTypeID(productTypeID);
+		List<Product> productList = productService.getProductListByTypeID(productTypeID);
 		List<ProductTypeList> productTypeList = productTypeListService.getAllProductTypeList();
 		System.out.println(productList);
 		m.addAttribute("productList",productList);
-		m.addAttribute("productTypeList",productTypeList);
-		return "Shop";
+		m.addAttribute("productTypeList",productTypeList); //給頁面左方商品類型列表使用
+		return "Product";
+	}
+		
+	@GetMapping("/singleProductEditForm/{productID}")
+	public String singleProductEditForm(@PathVariable("productID") Integer productID,
+			                              Model m){
+//		System.out.println(productID);
+		Product product = productService.getProductById(productID);
+		m.addAttribute("product",product);
+		return "ProductSingleProductEdit";
+	}	
+	
+	@PostMapping("/editproduct")
+	public String editproduct(@RequestParam("shopID")Integer shopID,
+			                  @RequestParam("productID")Integer productID,
+			                  @RequestParam("saleDate")Timestamp saleDate,
+			                  @RequestParam("saleQty")Integer saleQty,
+			                  @RequestParam("productName")String productName,
+			                  @RequestParam("productTypeIDList")String[] productTypeIDList,
+			                  @RequestParam("quantity")Integer quantity,
+			                  @RequestParam("price")Integer price,
+			                  @RequestParam("standard")String standard,
+			                  @RequestParam("capacity")String capacity,
+			                  @RequestParam("place")String place,
+			                  @RequestParam("preserve")String preserve,
+			                  @RequestParam("productDescribe")String productDescribe,
+			                  @RequestParam("producImage")MultipartFile multipartFile,
+			                  Model m,
+			                  HttpServletRequest request) throws SerialException, IOException, SQLException {
+		
+					
+		String saveDirPath = request.getSession().getServletContext().getRealPath("/")+"uploadTempDir\\";
+		String fileName;
+		String saveFilePathStr;
+		
+//		String desc = multipartFile.toString();
+//		System.out.println("------------:"+desc);		
+//		System.out.println(multipartFile.isEmpty());
+		
+		if(multipartFile.isEmpty()) {
+			fileName =productService.getProductById(productID).getFilename();
+			saveFilePathStr = saveDirPath+fileName;
+		}else {	
+			fileName = multipartFile.getOriginalFilename();
+			File savefileDir = new File(saveDirPath);
+			savefileDir.mkdirs();
+			
+			File saveFilePath = new File(savefileDir,fileName);
+			multipartFile.transferTo(saveFilePath);
+			
+			saveFilePathStr = saveDirPath+fileName;				
+		}
+		
+		Product product = setFile(shopID,productID,saleDate,saleQty,productName,productTypeIDList,quantity,price,standard,capacity,place,preserve,productDescribe,fileName,saveFilePathStr);
+		productService.update(product);
+		
+		
+		//導回ProductEdit.jsp 帶入商品及商品類型資料
+		List<Product> productList = productService.getProductListByShopID(shopID);
+		List<ProductTypeList> productTypeList = productTypeListService.getAllProductTypeList();
+		m.addAttribute("productList",productList);
+		m.addAttribute("productTypeList",productTypeList); //給頁面左方商品類型列表使用
+				
+	    return "ProductEdit";		
 	}
 	
-	@PostMapping("/addnewproduct")
-//	@ResponseBody
+	private Product setFile(Integer shopID,
+			             Integer productID,
+			             Timestamp saleDate,
+			             Integer saleQty,
+			             String productName,
+			             String[] productTypeIDList,
+			             Integer quantity,
+			             Integer price,
+			             String standard,
+			             String capacity,
+			             String place,
+			             String preserve,
+			             String productDescribe,
+			             String fileName,
+			             String path) throws IOException, SerialException, SQLException {
+		Product product = new Product();
+		ShopBean shop = new ShopBean();
+		shop = shopService.findByShopId(shopID);		
+		product.setShopBean(shop);
+		product.setProductID(productID);
+		product.setSaleDate(saleDate);
+		product.setSaleQty(saleQty);
+		product.setProductName(productName);
+		product.setQuantity(quantity);
+		product.setPrice(price);
+		product.setStandard(standard);
+		product.setCapacity(capacity);
+		product.setPlace(place);
+		product.setPreserve(preserve);
+		product.setProductDescribe(productDescribe);
+		product.setFilename(fileName);		
+		
+		//將路徑資料夾中圖片上傳至資料庫
+		FileInputStream fis1 = new FileInputStream(path);
+		byte[] b =new byte[fis1.available()];
+		fis1.read(b);
+		SerialBlob sb = null;
+		fis1.close();
+		sb = new SerialBlob(b);
+		product.setProducImage(sb);
+		
+//		Timestamp saleDate =new Timestamp(System.currentTimeMillis());
+//		System.out.println(saleDate);
+//		product.setSaleDate(saleDate);
+		
+		int[] productTypeID = new int[productTypeIDList.length];
+		
+		for(int i = 0; i < productTypeIDList.length;i++) {
+			productTypeID[i] = Integer.parseInt(productTypeIDList[i]);
+			ProductTypeList productTypeList = new ProductTypeList();
+			productTypeList = productTypeListService.getProductTypeListByTypeID(productTypeID[i]);
+//			System.out.println("ProductTypeID:"+productTypeList.getProductTypeID());
+			product.getProductTypeList().add(productTypeList);
+		}				
+		return product;		
+	}
+	
+	@PostMapping("/addNewProduct")
 	public String addNewProduct(@RequestParam("shopID")Integer shopID,
-			                    @RequestParam("productName")String productName,
-			                    @RequestParam("productTypeIDList")String productTypeIDList,
+//			                    @RequestParam("saleDate")Timestamp saleDate,
+			                    @RequestParam("productName")String productName,			                   
+			                    @RequestParam("productTypeIDList")String[] productTypeIDList,
 			                    @RequestParam("quantity")Integer quantity,
 			                    @RequestParam("price")Integer price,
+			                    @RequestParam("standard")String standard,
+			                    @RequestParam("capacity")String capacity,
+			                    @RequestParam("place")String place,
+			                    @RequestParam("preserve")String preserve,
 			                    @RequestParam("productDescribe")String productDescribe,
 			                    @RequestParam("producImage")MultipartFile multipartFile,
 			                    HttpServletRequest request) throws IllegalStateException, IOException, SerialException, SQLException {
 		String fileName = multipartFile.getOriginalFilename();
-		System.out.println("OriginalFilename:"+fileName );
-		System.out.println("shopID:"+shopID+";productTypeIDList:"+productTypeIDList+";productName:"+productName+";quantity:"+quantity);
-		
+//		System.out.println("OriginalFilename:"+fileName );
+//		System.out.println("addNewProduct=shopID:"+shopID+";productName:"+productName+";quantity:"+quantity);
+//		System.out.println("productTypeIDList:"+Arrays.toString(productTypeIDList));
+	    
+		//抓出圖片路徑(含建立)
 		String saveDirPath = request.getSession().getServletContext().getRealPath("/")+"uploadTempDir\\";
 		File savefileDir = new File(saveDirPath);
 		savefileDir.mkdirs();
@@ -92,24 +230,29 @@ public class ProductController {
 		
 		if(fileName!=null && fileName.length()!=0) {
 			String saveFilePathStr = saveDirPath+fileName;
-			saveFile(shopID,productTypeIDList,productName,quantity,price,productDescribe,fileName,saveFilePathStr);
+			saveFile(shopID,productName,productTypeIDList,quantity,price,standard,capacity,place,preserve,productDescribe,fileName,saveFilePathStr);
 		}		
 		return "success";
 	}
 		
-	private void saveFile(Integer shopID,String productTypeIDList,String productName,Integer quantity,Integer price,String productDescribe,String fileName,String path) 
+	private void saveFile(Integer shopID,String productName,String[] productTypeIDList,Integer quantity,Integer price,String standard,String capacity,String place,String preserve,String productDescribe,String fileName,String path) 
 			throws IOException, SerialException, SQLException {
 		Product product = new Product();
 		ShopBean shop = new ShopBean();
 		shop = shopService.findByShopId(shopID);
-		product.setShop(shop);
+		product.setShopBean(shop);
+//		product.setSaleDate(saleDate);
 		product.setProductName(productName);
-
 		product.setQuantity(quantity);
 		product.setPrice(price);
+		product.setStandard(standard);
+		product.setCapacity(capacity);
+		product.setPlace(place);
+		product.setPreserve(preserve);
 		product.setProductDescribe(productDescribe);
 		product.setFilename(fileName);		
 		
+		//將路徑資料夾中圖片上傳至資料庫
 		FileInputStream fis1 = new FileInputStream(path);
 		byte[] b =new byte[fis1.available()];
 		fis1.read(b);
@@ -120,39 +263,37 @@ public class ProductController {
 		
 		Timestamp saleDate =new Timestamp(System.currentTimeMillis());
 		System.out.println(saleDate);
-		product.setSaleDate(saleDate);		
+		product.setSaleDate(saleDate);
 		
-		String[] productTypeID0 = productTypeIDList.split(",");
-		int[] productTypeID = new int[productTypeID0.length];
+		int[] productTypeID = new int[productTypeIDList.length];
 		
-		for(int i = 0; i < productTypeID0.length;i++) {
-			productTypeID[i] = Integer.parseInt(productTypeID0[i]);
+		for(int i = 0; i < productTypeIDList.length;i++) {
+			productTypeID[i] = Integer.parseInt(productTypeIDList[i]);
 			ProductTypeList productTypeList = new ProductTypeList();
-//			productTypeList.setProductTypeID(productTypeID[i]);
-			productTypeList = productTypeListService.findByProductTypeListID(productTypeID[i]);
-			System.out.println("ProductTypeID:"+productTypeList.getProductTypeID());
+			productTypeList = productTypeListService.getProductTypeListByTypeID(productTypeID[i]);
+//			System.out.println("ProductTypeID:"+productTypeList.getProductTypeID());
 			product.getProductTypeList().add(productTypeList);
-//			productTypeList.getProducts().add(product);
-		}		
+		}
+				
 		productService.insert(product);
 		
 	}
 			
-	@GetMapping(value = "/getAllProduct", produces = { "application/json; charset=UTF-8" })
+	@GetMapping(value = "/getAllProduct.json", produces = { "application/json; charset=UTF-8" })
 	public @ResponseBody List<Product> getAllProduct(){
 		List<Product> productList = productService.getAllProduct();
-		System.out.println(productList);
+//		System.out.println(productList);
 		return productList;
 	}	
 	
 	@GetMapping("/getAllProductInfo")
-	public String getAllProduct0(Model m){
+	public String getAllProductInfo(Model m){
 		List<Product> productList = productService.getAllProduct();
 		List<ProductTypeList> productTypeList = productTypeListService.getAllProductTypeList();
-		System.out.println(productList);
+//		System.out.println(productList);
 		m.addAttribute("productList",productList);
 		m.addAttribute("productTypeList",productTypeList);
-		return "Shop";
+		return "Product";
 	}
 	
 	@Autowired
@@ -165,7 +306,7 @@ public class ProductController {
 		String filename = productbean.getFilename();
 		Blob blob = productbean.getProducImage();
 		String mimeType = ctx.getMimeType(filename);
-		System.out.println(mimeType);
+//		System.out.println(mimeType);
 		MediaType mediaType = MediaType.valueOf(mimeType);
 		HttpHeaders headers = new HttpHeaders();
 		try {

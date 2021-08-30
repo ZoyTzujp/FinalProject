@@ -10,12 +10,17 @@ import tw.eeit131.first.model.Product;
 public interface ProductService {
 
 	Product insert(Product product);
+	
+	void update(Product product);
 
 	List<Product> getAllProduct();
 
-	Product getProductById(Integer id);
+	Product getProductById(Integer productID);
 
-	List<Product> productListSortByTypeID(Integer productTypeID);
+	List<Product> getProductListByTypeID(Integer productTypeID);
+
+	List<Product> getProductListByShopID(Integer shopID);
+
 
 
 }
