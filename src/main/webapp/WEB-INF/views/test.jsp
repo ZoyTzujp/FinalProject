@@ -10,6 +10,7 @@
 <body>
 	<h3>Success</h3>
 	<a href="<c:url value='/getAllProduct0' />">A</a><br>
+	<a href="<c:url value='/getAllProduct0' />">A</a><br>
 	<c:forEach var="productList" items="${productList}">
                 ${productList.productName}<br>
 	</c:forEach>
