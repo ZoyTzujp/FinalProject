@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import tw.eeit131.first.model.ShopBean;
+import tw.eeit131.first.model.ShopComment;
 
 public interface ShopRepository {
 
@@ -13,7 +14,7 @@ public interface ShopRepository {
 
 	ShopBean findById(Integer shopID);
 	
-	int saveShopBean(ShopBean shopBean);
+	ShopBean saveShopBean(ShopBean shopBean);
 
 
 	ShopBean checkLogin(String email, String password);
@@ -24,4 +25,17 @@ public interface ShopRepository {
 
 	Integer getLogout(HttpSession session);
 
+
+	ShopBean findByShopEmail(String email);
+
+
+	void enabled(ShopBean shopBean);
+	
+	ShopBean findByVerificationCode(String code);
+
+
+	List<ShopComment> findCommentsById(Integer shopID);
+
+
+	ShopComment saveComments(ShopComment shopComment);
 }
