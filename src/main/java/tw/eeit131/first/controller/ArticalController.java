@@ -69,6 +69,7 @@ public class ArticalController {
 			@PathVariable Integer id,
 			Artical artical) {
 		System.out.println("id======"+id);
+		System.out.println("id======"+id);
 		System.err.println("subject======="+subject);
 		System.err.println("content======="+content);
 		artical.setArticalID(id);
