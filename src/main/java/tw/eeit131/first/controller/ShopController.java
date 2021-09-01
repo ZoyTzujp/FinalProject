@@ -249,8 +249,8 @@ public class ShopController {
 	@PutMapping(value ="/updateShop/{shopID}",consumes = { "application/json" }, 
 			produces = { "application/json" })
 //	@PostMapping(value ="/updateShop")
-	public @ResponseBody Map<String, String> update(
-			  @RequestBody ShopBean shopBean
+	public @ResponseBody Map<String, String> update(     //將物件轉成JSON格式
+			  @RequestBody ShopBean shopBean             //將JSON格式物件轉為java物件
 			  ,@PathVariable Integer shopID
 			) {
 		

@@ -29,10 +29,10 @@
                     <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-custom">
                         <div class="login-register-wrapper">
                             <div class="section-content text-center mb-5">
-                                <h2 class="title-4 mb-2">商品銷售合作</h2>
+                                <h2 class="title-4 mb-2">店家合作</h2>
                                 <p class="desc-content">請輸入銷售資訊</p>
                             </div>
-                            <form action="addNewShop" role="form" method="post" class="needs-validation " novalidate >
+                            <form action="addNewShop" role="form" method="post" enctype="multipart/form-data" class="needs-validation "   novalidate >
 <!--                                  <div class="single-input-item mb-3">  form-control -->
 <!--                                     <input type="text" id="shopName"name="shopName" placeholder="店家名稱"  required>  -->
 <!--                                 		<div class="invalid-feedback"> -->
@@ -68,17 +68,33 @@
                                 </div>
                                 
                                 <div class="col-md-4 single-input-item mb-3">
-                                    <input type="text" class="form-control" id="mobile" name="mobile"  placeholder="手機號碼"  required/>
+                                    <input type="text" class="form-control" id="mobile" name="mobile"  placeholder="手機號碼"  required   pattern="^09\d{8}$" />
+                               			<div class="invalid-feedback">
+											號碼不可空白
+									 	</div>
+                                </div>
+                                
+                                <div class="col-md-4 single-input-item mb-3">
+                                    <input type="text" class="form-control" id="shopPhone" name="shopPhone"  placeholder="店家電話，例如:(02-12345678)"  required pattern="^0[2-8]-\d{8}"/>
                                			<div class="invalid-feedback">
 											電話不可空白
 									 	</div>
                                 </div>
                                 
                                 <div class="col-md-4 single-input-item mb-3">
+                                    <input type="text" class="form-control" id="webLink" name="webLink"  placeholder="網址連結，若無則無需填寫"  />              			
+                                </div>
+                                
+                                <div class="col-md-4 single-input-item mb-3">
+                                	<label>店家介紹</label>
                                     <textarea  name="introduce" class="form-control" cols="30" rows="5" placeholder="請輸入內容" required></textarea>
                                 		<div class="invalid-feedback">
 									 	</div>
                                 </div>
+                                
+                                
+                                    <label>商品圖片:</label><input type="file" name="shopImage" />
+                               
                         
                              	  <div class="single-input-item mb-3"> 
                                      <div class="login-reg-form-meta d-flex align-items-center justify-content-between"> 
@@ -112,6 +128,29 @@
 		      }, false)
 		    })
 		})()
+		
+// 		function sendRegisterSuccessEmail(email) {
+
+//     	let xhremail = new XMLHttpRequest();
+//     	xhremail.open("POST", "<c:url value='/send' />" ,true);
+    	
+//     	let msg="請點選下面連結，確認是否以此信箱註冊:";
+//     	var mailDetail={
+//     			"recipient"	= "a0926611416@gmail.com",
+//         		"subject"	= "註冊成功通知，請確認!!",
+//         		"message" 	= msg
+// //     			"您的驗證碼為：" + checkCode +"，請輸入驗證碼完成驗證，（請勿向任何人提供您收到的驗證碼）";
+//     	}
+//     	console.log(mailDetail);
+//     	xhremail.setRequestHeader("Content-Type","application/json");
+//     	xhremail.send(JSON.stringify(mailDetail));
+//     	xhremail.onreadystatechange = function(){
+//     		if (xhremail.readyState == 4 && xhremail.status == 200){
+//     			var result = xhremail.responseText;
+			
+//     		}
+//     	}
+// }  	
 	</script>
                         </div>
                     </div>
