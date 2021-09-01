@@ -54,9 +54,7 @@
 						              <label>聯絡人姓名</label>
 						                   <input type="text"  id="shopKeeper"name="shopKeeper"  /> 
 						          </div> 
-							        <div id='result1c' style="height: 10px;"></div><br>
-									<div id='result1s' style="height: 10px;"></div>   
-                                
+               
                                 <div class="single-input-item  mb-3">
 						             <label>電子郵件</label>
 						                	<input type="text"  id="Email" name="Email" disabled />
@@ -65,13 +63,21 @@
 								<div class="single-input-item  mb-3">
 									<label>手機號碼</label> <input type="text" id="mobile" name="mobile" />
 								</div>
-								<div id='result2c' style="height: 10px;"></div><br>
-									<div id='result2s' style="height: 10px;"></div>
+								
+								<div class="single-input-item  mb-3">
+									<label>商店電話</label> <input type="text" id="shopPhone" name="shopPhone" />
+								</div>
+								
+								<div class="single-input-item  mb-3">
+						              <label>連結網址</label><input type="text" id="webLink" name="webLink" />
+						          </div>
 						                                
 						          <div class="single-input-item  mb-3">
 						              <label>商店介紹</label><br>
 						         	<textarea id="introduce" name="introduce" cols="72" rows="5" ></textarea>
 						          </div>
+						          
+						          
                         
                              	  <div class="single-input-item mb-3"> 
                                      <div class="login-reg-form-meta d-flex align-items-center justify-content-between"> 
@@ -94,6 +100,8 @@
     	let Email 		= document.getElementById("Email");
     	let mobile 		= document.getElementById("mobile");
     	let introduce 	= document.getElementById("introduce");
+    	let shopPhone 	= document.getElementById("shopPhone");
+    	let webLink 	= document.getElementById("webLink");
 
     	let xhr = new XMLHttpRequest();
 
@@ -111,7 +119,8 @@
     		Email.value 		= member.email;
     		mobile.value 		= member.mobile;
     		introduce.value 	= member.introduce;
-    		
+    		shopPhone.value 	= member.shopPhone;
+    		webLink.value 		= member.webLink;
     		}
     	}
    	
@@ -127,6 +136,8 @@
     		let EmailValue 			= document.getElementById("Email").value;
     		let mobileValue			= document.getElementById("mobile").value;
     		let introduceValue		= document.getElementById("introduce").value;
+    		let shopPhoneValue		= document.getElementById("shopPhone").value;
+    		let webLinkValue		= document.getElementById("webLink").value;
     		var div0 = document.getElementById('result0c');
    		var div1 = document.getElementById('result1c');
    		var div2 = document.getElementById('result2c');
@@ -140,6 +151,8 @@
    			"shopKeeper": shopKeeperValue,
    			"Email": EmailValue,
    			"mobile": mobileValue,
+   			"shopPhone": shopPhoneValue,
+   			"webLink": webLinkValue,
    			"introduce": introduceValue
       		}
       		xhr1.setRequestHeader("Content-Type", "application/json");

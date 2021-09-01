@@ -3222,12 +3222,16 @@ button,
 }
 
 .error_form h1 {
-  font-size: 200px;
+  font-size: 80px;
   font-weight: 700;
-  color: #E98C81;
   letter-spacing: 10px;
   line-height: 160px;
   margin: 0 0 52px;
+}
+
+.error_form h4{
+	font-size: 55px;
+	color: #E98C81;
 }
 
 @media (max-width: 991px) {
@@ -3238,6 +3242,7 @@ button,
     margin: 0 0 40px;
   }
 }
+
 
 .error_form h2 {
   font-size: 24px;
