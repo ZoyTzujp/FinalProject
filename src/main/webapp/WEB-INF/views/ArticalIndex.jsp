@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,23 +57,14 @@
 
 									<a class="active" data-toggle="tab"> <i
 										class="fa fa-dashboard"></i> 文章功能
-									</a> <a href="<c:url value='/allartical' />" class=""
-										data-toggle="tab"><i class="fa fa-book fa-fw"></i> 全部文章</a> <a
-										href="<c:url value='/create' />" data-toggle="tab"><i
-										class="fa fa-pencil fa-fw"></i> 新增文章</a> <a
-										href="<c:url value='/create' />" data-toggle="tab"> 新增文章</a> <a
-										href="#dashboad" class="active" data-toggle="tab"><i
-										class="fa fa-dashboard"></i> Dashboard</a> <a href="#orders"
-										data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
-										Orders</a> <a href="#download" data-toggle="tab"><i
-										class="fa fa-cloud-download"></i> Download</a> <a
-										href="#payment-method" data-toggle="tab"><i
-										class="fa fa-credit-card"></i> Payment Method</a> <a
-										href="#address-edit" data-toggle="tab"><i
-										class="fa fa-map-marker"></i> address</a> <a href="#account-info"
-										data-toggle="tab"><i class="fa fa-user"></i> Account
-										Details</a> <a href="login.html"><i class="fa fa-sign-out"></i>
-										Logout</a>
+										</a> 
+									<a href="#allArtical" data-toggle="tab" class=""
+										><i class="fa fa-book fa-fw"></i> 全部文章
+										</a> 
+									<a href="#addArtical" data-toggle="tab"><i
+										class="fa fa-pencil fa-fw"></i> 新增文章
+										</a> 	
+									
 								</div>
 							</div>
 					
@@ -89,9 +81,9 @@
 										<!-- 		全部文章 -->
 										<!-- 		全部文章 -->
 										<!-- 		全部文章 -->
-									<c:forEach var='artical' items='${allArtical }'>
-										<div class="tab-pane fade show active" id="dashboad"
+										<div class="tab-pane fade show active" id="allArtical"
 											role="tabpanel">
+									<c:forEach var='artical' items='${allArtical }'>
 											<div class="myaccount-content">
 												<div class="col-lg-9 col-md-8 col-custom">
 													
@@ -106,13 +98,148 @@
 														<p class="mb-0">${artical.content }</p>
 												</div>
 											</div>
-										</div>
 										<br>
 									</c:forEach>
+										</div>
 								<!-- 全部文章END -->
 								<!-- 全部文章END -->
 								<!-- 全部文章END -->
 									<!-- Single Tab Content End -->
+									
+									<!-- 新增文章 -->
+									<!-- 新增文章 -->
+									<!-- 新增文章 -->
+									
+									
+									 <!-- Single Tab Content Start -->
+<!--                                         <div class="tab-pane fade" id="addArtical" role="tabpanel"> -->
+<!--                                             <div class="myaccount-content"> -->
+<!--                                                 <h3>新增文章</h3> -->
+<!--                                                 <div class="account-details-form"> -->
+<%--                                                     <form action="#"> --%>
+<!--                                                         <div class="row"> -->
+<!--                                                             <div class="col-lg-6 col-custom"> -->
+<!--                                                                 <div class="single-input-item mb-3"> -->
+<!--                                                                     <label for="first-name" class="required mb-1">First -->
+<!--                                                                         Name</label> -->
+<!--                                                                     <input type="text" id="first-name" -->
+<!--                                                                         placeholder="First Name" /> -->
+<!--                                                                 </div> -->
+<!--                                                             </div> -->
+<!--                                                             <div class="col-lg-6 col-custom"> -->
+<!--                                                                 <div class="single-input-item mb-3"> -->
+<!--                                                                     <label for="last-name" class="required mb-1">Last -->
+<!--                                                                         Name</label> -->
+<!--                                                                     <input type="text" id="last-name" -->
+<!--                                                                         placeholder="Last Name" /> -->
+<!--                                                                 </div> -->
+<!--                                                             </div> -->
+<!--                                                         </div> -->
+<!--                                                         <div class="single-input-item mb-3"> -->
+<!--                                                             <label for="display-name" class="required mb-1">Display -->
+<!--                                                                 Name</label> -->
+<!--                                                             <input type="text" id="display-name" -->
+<!--                                                                 placeholder="Display Name" /> -->
+<!--                                                         </div> -->
+<!--                                                         <div class="single-input-item mb-3"> -->
+<!--                                                             <label for="email" class="required mb-1">Email -->
+<!--                                                                 Addres</label> -->
+<!--                                                             <input type="email" id="email" -->
+<!--                                                                 placeholder="Email Address" /> -->
+<!--                                                         </div> -->
+<!--                                                         <fieldset> -->
+<!--                                                             <legend>Password change</legend> -->
+<!--                                                             <div class="single-input-item mb-3"> -->
+<!--                                                                 <label for="current-pwd" class="required mb-1">Current -->
+<!--                                                                     Password</label> -->
+<!--                                                                 <input type="password" id="current-pwd" -->
+<!--                                                                     placeholder="Current Password" /> -->
+<!--                                                             </div> -->
+<!--                                                             <div class="row"> -->
+<!--                                                                 <div class="col-lg-6 col-custom"> -->
+<!--                                                                     <div class="single-input-item mb-3"> -->
+<!--                                                                         <label for="new-pwd" class="required mb-1">New -->
+<!--                                                                             Password</label> -->
+<!--                                                                         <input type="password" id="new-pwd" -->
+<!--                                                                             placeholder="New Password" /> -->
+<!--                                                                     </div> -->
+<!--                                                                 </div> -->
+<!--                                                                 <div class="col-lg-6 col-custom"> -->
+<!--                                                                     <div class="single-input-item mb-3"> -->
+<!--                                                                         <label for="confirm-pwd" -->
+<!--                                                                             class="required mb-1">Confirm -->
+<!--                                                                             Password</label> -->
+<!--                                                                         <input type="password" id="confirm-pwd" -->
+<!--                                                                             placeholder="Confirm Password" /> -->
+<!--                                                                     </div> -->
+<!--                                                                 </div> -->
+<!--                                                             </div> -->
+<!--                                                         </fieldset> -->
+<!--                                                         <div class="single-input-item single-item-button"> -->
+<!--                                                             <button class="btn obrien-button primary-btn">Save -->
+<!--                                                                 Changes</button> -->
+<!--                                                         </div> -->
+<%--                                                     </form> --%>
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                         </div> Single Tab Content End -->
+									
+<!--                                                                 --- -->
+<!--                                                                 --- -->
+<!--                                                                 --- -->
+<div class="tab-pane fade" id="addArtical" role="tabpanel">
+    <div class="myaccount-content">
+      <h3>新增文章</h3>
+ <div class="account-details-form">
+ <div class="myaccount-content">
+<!--  <h3>新增文章</h3> -->
+ <div class="account-details-form">                                                               
+	<form:form modelAttribute="artical" action="save" method="POST">
+	<table>
+	 <div class="row">
+        <div class="col-lg-6 col-custom">
+	<fieldset>
+ <div class="single-input-item mb-3">
+ <legend> 文章標題 </legend>
+    <label for="display-name" class="required mb-1">  </label>
+	<form:input path="subject" placeholder="請輸入標題內容" 
+					id="display-name" type="text"></form:input>
+    </div>
+	</fieldset>
+    </div>
+    </div>
+
+<!-- 	<fieldset> -->
+	<div class="single-input-item mb-3">
+	<legend>文章內容:</legend>
+	<form:input path="content" placeholder="請輸入文章內容" 
+					id="display-name" type="text" ></form:input>
+	</div>
+<!-- 	</fieldset> -->
+<%-- <tr><td><form:input path="picture" action="create" method="GET" ></form:input></td> --%>
+	<form:button value="Send" id="addArtical" class="btn obrien-button primary-btn">Submit</form:button>
+	
+	</table>
+	</form:form>
+	
+</div>
+</div>
+</div>
+</div>
+</div>
+                                                                
+<!--                                                                 --- -->
+<!--                                                                 --- -->
+<!--                                                                 --- -->
+<!--                                                                 --- -->
+									<!-- 新增文章END -->
+									<!-- 新增文章END -->
+									<!-- 新增文章END -->
+									
+									
+									
+									
+									
 
 									<!-- Single Tab Content Start -->
 									<div class="tab-pane fade" id="orders" role="tabpanel">
