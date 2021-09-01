@@ -7,9 +7,12 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Repository;
 
+import tw.eeit131.first.model.Product;
 import tw.eeit131.first.model.ShopBean;
+import tw.eeit131.first.model.ShopComment;
 import tw.eeit131.first.repository.ShopRepository;
 
 @Repository
@@ -29,26 +32,44 @@ public class ShopRepositoryImpl implements ShopRepository {
 		return shop;
 
 	}
+	
 
 	@Override
-	public int saveShopBean(ShopBean shopBean) {
-		int n = 0;
-//		boolean exist = isMemberExist(shopBean);
-		if (shopBean != null) {
-			try {
-				entityManager.persist(shopBean);
-				n = 1;
-			} catch (Exception e) {
-				n = -2;
-			}
-		}
-		return n;
+	public ShopBean findByShopEmail(String email) {
+		String hql = "FROM ShopBean WHERE Email=:email";
+		ShopBean shop = null;
+		shop = entityManager.createQuery(hql, ShopBean.class).setParameter("email", email).getSingleResult();
+		return shop;
+
+	}
+
+	@Override
+	public void enabled(ShopBean shop) {
+		entityManager.merge(shop);
+	};
+	
+	public ShopBean findByVerificationCode(String code) {
+		
+		String hql = "FROM ShopBean WHERE code=:code";
+		ShopBean shop = null;
+		shop = entityManager.createQuery(hql, ShopBean.class).setParameter("code",code).getSingleResult();
+		return shop;
+	}
+
+	@Override
+	public ShopBean saveShopBean(ShopBean shopBean) {
+		
+		entityManager.persist(shopBean);
+
+		return shopBean;
 	}
 
 	@Override
 	public ShopBean checkLogin(String email, String password) {
 		String hql = "from ShopBean where Email=:email and password=:password";
 		Query<ShopBean> query = (Query<ShopBean>) entityManager.createQuery(hql, ShopBean.class);
+
+		
 		query.setParameter("email", email);
 		query.setParameter("password", password);
 		ShopBean result = query.uniqueResult();
@@ -59,9 +80,14 @@ public class ShopRepositoryImpl implements ShopRepository {
 
 	@Override
 	public ShopBean findById(Integer shopID) {
-
-		return entityManager.find(ShopBean.class, shopID);
-
+		
+		String hql = "FROM ShopBean WHERE shopID=:shopID";
+		ShopBean shopBean = null;
+		shopBean= entityManager.createQuery(hql,ShopBean.class)
+		                    .setParameter("shopID", shopID)
+		                    .getSingleResult();	
+//		return entityManager.find(ShopBean.class, shopID);
+		return shopBean;
 	}
 
 	@Override
@@ -84,6 +110,24 @@ public class ShopRepositoryImpl implements ShopRepository {
 	public Integer getLogout(HttpSession session) {
 		session.invalidate();
 		return 0;
+	}
+
+
+	@Override
+	public List<ShopComment> findCommentsById(Integer shopID) {
+		String hql = "FROM ShopComment WHERE shopID=:shopID";
+		List<ShopComment> shopComment = null;
+		shopComment= entityManager.createQuery(hql,ShopComment.class)
+                .setParameter("shopID", shopID)
+                .getResultList();	
+		return shopComment;
+	}
+
+
+	@Override
+	public ShopComment saveComments(ShopComment shopComment) {
+		entityManager.persist(shopComment);
+		return shopComment;
 	}
 	
 }
