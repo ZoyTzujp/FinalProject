@@ -129,5 +129,12 @@ public class ShopRepositoryImpl implements ShopRepository {
 		entityManager.persist(shopComment);
 		return shopComment;
 	}
+
+
+	@Override
+	public ShopComment deleteCommentById(Integer commentID) {
+		
+		return null;
+	}
 	
 }

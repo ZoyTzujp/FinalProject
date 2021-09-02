@@ -13,7 +13,13 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    
+    <style>
+    	#deletedata{
+    		font-size:15px;
+    		padding-left:95px;
+    		
+    	}
+    </style>
 <script >
 window.onload = function() {
  		let divp 		=  document.getElementById("p");
@@ -27,35 +33,46 @@ window.onload = function() {
  		xhr.send(); //資料送出
  		xhr.onreadystatechange = function() {
  			if (xhr.readyState == 4 && xhr.status == 200) {
- 				
+ 				 
   				var shopComments = JSON.parse(xhr.responseText);	
-
+  				console.log(shopComments)
   				var context="";
  				for(let i=0;i< shopComments.length;i++){
- 					console.log(shopComments[i].commentCreateTime)
+				
  					context += " <div class='pro_review mb-5' > <div class='review_details'  ><div class='review_info mb-2' ><h5>"+shopComments[i].name 
 // 					+"</h5>"
 					+" - "
  					+"<span>"+shopComments[i].commentCreateTime+"</span></h5>"
  					
-					+"</div><p>"+shopComments[i].shopContent+"</p></div></div>"  			  				
-//  	 				console.log(shopComments)  
-//  					console.log(shopComments.length) 
-//  					console.log(shopComments[0].name) 
+					+"</div><p>"+shopComments[i].shopContent+"</p>"
+					+"<button id='deletedata'>刪除</button></div></div>"  			  				
  				}	
  				var div = document.getElementById("commentID");
 	  				div.innerHTML = context
  			}
     }
-		
-		var saveComment = document.getElementById("saveComment");
+ 		
+  		var deleteComment = document.getElementById("deletedata");
+  		deleteComment.onclick = function(){
+  			deleteData.addEventListener('click', (e)=> {
+  			   var result = confirm("確定刪除此筆記錄" + ${ShopComment.commentID} + ")?");
+  			   if (result) {
+  				    var xhr2 = new XMLHttpRequest();
+  			   		xhr2.open("DELETE", "<c:url value='/deleteComment/' />" + ${ShopComment.commentID}, true);
+  			   		xhr2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  			   		xhr2.send();
+  			   		xhr2.onreadystatechange = function()
+  		}
+ 		
+		var saveComment   = document.getElementById("saveComment");
 		saveComment.onclick = function() {	 
 			let NameValue	= document.getElementById("Name").value;
 	    	let emailValue 	= document.getElementById("email").value;
 	    	let shopContentValue = document.getElementById("shopContent").value;
 	    	var xhr1 = new XMLHttpRequest();
 	    	xhr1.open("POST", "<c:url value='/saveComment/' />${shopBean.shopID}" , true);
- 	    	xhr1.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ 	    	xhr1.setRequestHeader("Content-type", "application/x-www-form-urlencoded");	    
+ 	    	
 	  		xhr1.send("Name="+NameValue+"&email="+emailValue+"&shopContent="+shopContentValue);
 
  	  		xhr1.onreadystatechange = function() {
@@ -66,7 +83,7 @@ window.onload = function() {
  	  			var context="";
  				for(let i=0;i< shopComments.length;i++){
  					
- 					console.log(shopComments[i].commentCreateTime)
+
  					context += " <div class='pro_review mb-5' > <div class='review_details'  ><div class='review_info mb-2' ><h5>"+shopComments[i].name 
 // 					+"</h5>"
 					+" - "
@@ -80,6 +97,10 @@ window.onload = function() {
 	  				div.innerHTML = context
  	  			}
  	  		}
+ 	  		
+ 	  		document.getElementById("shopContent").value=''; //把input清空
+ 	  		document.getElementById("email").value='';
+ 	  		document.getElementById("Name").value='';
 	}		
 }		
 </script>
