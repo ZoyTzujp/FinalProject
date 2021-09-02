@@ -7,9 +7,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
@@ -249,8 +254,8 @@ public class ShopController {
 	@PutMapping(value ="/updateShop/{shopID}",consumes = { "application/json" }, 
 			produces = { "application/json" })
 //	@PostMapping(value ="/updateShop")
-	public @ResponseBody Map<String, String> update(     //將物件轉成JSON格式
-			  @RequestBody ShopBean shopBean             //將JSON格式物件轉為java物件
+	public @ResponseBody Map<String, String> update(
+			  @RequestBody ShopBean shopBean
 			  ,@PathVariable Integer shopID
 			) {
 		
@@ -340,7 +345,12 @@ public class ShopController {
 				@RequestParam("shopContent") String shopContent,
 				@PathVariable Integer shopID,
 				ShopComment shopComment
-				) {
+				) throws ParseException {
+			
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date time = sdf.parse(sdf.format(new Date()));
+			
 			System.out.println("name="+name);
 			System.out.println("email="+email);
 			ShopBean shopBean = service.findByShopId(shopID);
@@ -348,10 +358,12 @@ public class ShopController {
 			shopComment.setName(name);
 			shopComment.setEmail(email);
 			shopComment.setShopContent(shopContent);
-			System.out.println(shopComment.toString());
+			shopComment.setCommentCreateTime(time);
 			service.saveComments(shopComment);
 			
 			List<ShopComment> sc = service.findCommentsById(shopID);
+			
+
 			return sc;
 		}
 		

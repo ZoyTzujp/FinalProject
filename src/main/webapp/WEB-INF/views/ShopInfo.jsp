@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -28,12 +29,16 @@ window.onload = function() {
  			if (xhr.readyState == 4 && xhr.status == 200) {
  				
   				var shopComments = JSON.parse(xhr.responseText);	
+
   				var context="";
  				for(let i=0;i< shopComments.length;i++){
+ 					console.log(shopComments[i].commentCreateTime)
+ 					context += " <div class='pro_review mb-5' > <div class='review_details'  ><div class='review_info mb-2' ><h5>"+shopComments[i].name 
+// 					+"</h5>"
+					+" - "
+ 					+"<span>"+shopComments[i].commentCreateTime+"</span></h5>"
  					
- 					context += " <div class='pro_review mb-5' > <div class='review_details'  ><div class='review_info mb-2' >  "+shopComments[i].name 
-						+"<br>"
-						+shopComments[i].shopContent+"</div></div></div>"	  				
+					+"</div><p>"+shopComments[i].shopContent+"</p></div></div>"  			  				
 //  	 				console.log(shopComments)  
 //  					console.log(shopComments.length) 
 //  					console.log(shopComments[0].name) 
@@ -61,10 +66,12 @@ window.onload = function() {
  	  			var context="";
  				for(let i=0;i< shopComments.length;i++){
  					
- 					console.log(shopComments[i])
- 	  				context += " <div class='pro_review mb-5' > <div class='review_details'  ><div class='review_info mb-2' >  "+shopComments[i].name 
- 	  						+"<br>"
- 	  						+shopComments[i].shopContent+"</div></div></div>"
+ 					console.log(shopComments[i].commentCreateTime)
+ 					context += " <div class='pro_review mb-5' > <div class='review_details'  ><div class='review_info mb-2' ><h5>"+shopComments[i].name 
+// 					+"</h5>"
+					+" - "
+ 					+"<span><time>"+shopComments[i].commentCreateTime+"</time></span></h5>"
+					+"</div><p>"+shopComments[i].shopContent+"</p></div></div>"   		
  	  						
  	  						
 
@@ -87,7 +94,7 @@ window.onload = function() {
         <div class="single-product-main-area">
             <div class="container container-default custom-area">
                 <div class="row">
-
+						<div class="col-lg-9 col-12 col-custom widget-mt">
 
                             <div class="product-head mb-3">
                                 <h1 class="product-title"  >${shopBean.shopName }</h1> 
@@ -114,7 +121,92 @@ window.onload = function() {
 							<div class="product-image" id="img">  
 							<a href="${shopBean.webLink}"><img src="http://chart.apis.google.com/chart?cht=qr&choe=UTF-8&chs=200x200&chl=${shopBean.webLink}" /></a>
                 			</div>
+                		</div>
+                    <div class="col-lg-3 col-12 col-custom">
+                        <!-- Sidebar Widget Start -->
+                        <aside class="sidebar_widget widget-mt">
+                            <div class="widget_inner">
+                              
+                                
+                                <div class="widget-list widget-mb-4">   
+                                    <h3 class="widget-title"><a href="<c:url value='/showProductFormByShopID/${shopBean.shopID}' />">上架商品</a></h3>
+                                    <div class="sidebar-body">
+                                        <div class="sidebar-product align-items-center">
+                                            <a href="product-details.html" class="image">
+                                                <img src="assets/images/product/small-product/1.jpg" alt="product">
+                                            </a>
+                                            <div class="product-content">
+                                                <div class="product-title">
+                                                    <h4 class="title-2"> <a href="product-details.html">Product dummy name</a></h4>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="regular-price ">$80.00</span>
+                                                    <span class="old-price"><del>$90.00</del></span>
+                                                </div>
+                                                <div class="product-rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="sidebar-product align-items-center">
+                                            <a href="product-details.html" class="image">
+                                                <img src="assets/images/product/small-product/2.jpg" alt="product">
+                                            </a>
+                                            <div class="product-content">
+                                                <div class="product-title">
+                                                    <h4 class="title-2"> <a href="product-details.html">Product dummy title</a></h4>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="regular-price ">$50.00</span>
+                                                    <span class="old-price"><del>$60.00</del></span>
+                                                </div>
+                                                <div class="product-rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="sidebar-product align-items-center">
+                                            <a href="product-details.html" class="image">
+                                                <img src="assets/images/product/small-product/3.jpg" alt="product">
+                                            </a>
+                                            <div class="product-content">
+                                                <div class="product-title">
+                                                    <h4 class="title-2"> <a href="product-details.html">Product title here</a></h4>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span class="regular-price ">$40.00</span>
+                                                    <span class="old-price"><del>$50.00</del></span>
+                                                </div>
+                                                <div class="product-rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                        <!-- Sidebar Widget End -->
+                    </div>
+
+            
+        </div>
+        <!-- Shop Main Area End Here -->
+                			
                 </div>	
+                
                 <div class="row mt-no-text">
                     <div class="col-lg-12">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -160,8 +252,8 @@ window.onload = function() {
                                     </div>
                                     <!-- Start RAting Area -->
                                     <div class="rating_wrap">
-                                        <h5 class="rating-title-1 mb-2">Add a review </h5>
-                                        <p class="mb-2">Your email address will not be published. Required fields are marked *</p>
+                                        <h5 class="rating-title-1 mb-2">添加評論 </h5>
+                                        <p class="mb-2">評論僅會顯示留言， 「*」為必填欄位。</p>
                                         <h6 class="rating-title-2 mb-2">Your Rating</h6>
                                         <div class="rating_list mb-4">
                                             <div class="review_info">
@@ -226,9 +318,13 @@ window.onload = function() {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Single Product Main Area End -->
+             </div> 
+
+       
+        
+
+
+    
 
 </body>
 
