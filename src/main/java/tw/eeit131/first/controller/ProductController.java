@@ -49,6 +49,21 @@ public class ProductController {
 	@Autowired
 	ShopService shopService;
 	
+	@GetMapping("/showProductFormByShopID/{shopID}")
+	public String showProductFormByShopID(@PathVariable("shopID") Integer shopID,
+			                              Model m){
+		List<Product> productList = productService.getProductListByShopID(shopID);
+
+		//改成getProductTypeListByShopID，未完成
+		List<ProductTypeList> productTypeList = productTypeListService.getAllProductTypeList();   
+//		List<ProductTypeList> productTypeList = productTypeListService.getProductTypeListByShopID(shopID);
+
+		
+		m.addAttribute("productList",productList);
+		m.addAttribute("productTypeList",productTypeList); //給頁面左方商品類型列表使用，未完成
+		return "Product";
+	}
+	
 	@GetMapping(value="/getAllProductTypeList.json", produces = { "application/json; charset=UTF-8" })
 	public @ResponseBody List<ProductTypeList> getAllProductTypeList(){
 		List<ProductTypeList> productTypeList = productTypeListService.getAllProductTypeList();

@@ -1,6 +1,7 @@
 package tw.eeit131.first.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -33,6 +35,10 @@ public class ShopComment implements Serializable{
 	
 	@Column(name="shopContent")
 	private String shopContent;
+	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT-8")
+	@Column(name="commentCreateTime")
+	private Date commentCreateTime;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="shopID")
@@ -109,6 +115,15 @@ public class ShopComment implements Serializable{
 		this.shopContent = shopContent;
 	}
 
+	public Date getCommentCreateTime() {
+		return commentCreateTime;
+	}
+
+
+	public void setCommentCreateTime(Date commentCreateTime) {
+		this.commentCreateTime = commentCreateTime;
+	}
+
 
 	@Override
 	public String toString() {
@@ -121,6 +136,8 @@ public class ShopComment implements Serializable{
 		builder.append(email);
 		builder.append(", shopContent=");
 		builder.append(shopContent);
+		builder.append(", commentCreateTime=");
+		builder.append(commentCreateTime);
 		builder.append(", shopBean=");
 		builder.append(shopBean);
 		builder.append(", shopID=");
@@ -130,5 +147,26 @@ public class ShopComment implements Serializable{
 	}
 	
 	
+
+//	@Override
+//	public String toString() {
+//		StringBuilder builder = new StringBuilder();
+//		builder.append("ShopComment [commentID=");
+//		builder.append(commentID);
+//		builder.append(", name=");
+//		builder.append(name);
+//		builder.append(", email=");
+//		builder.append(email);
+//		builder.append(", shopContent=");
+//		builder.append(shopContent);
+//		builder.append(", shopBean=");
+//		builder.append(shopBean);
+//		builder.append(", shopID=");
+//		builder.append(shopID);
+//		builder.append("]");
+//		return builder.toString();
+//	}
+	
+
 	
 }
