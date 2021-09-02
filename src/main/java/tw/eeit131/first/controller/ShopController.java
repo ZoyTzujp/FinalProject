@@ -333,6 +333,7 @@ public class ShopController {
 				){
 		
 			List<ShopComment> shopCommentList = service.findCommentsById(shopID);
+
 			System.err.println("shopID="+shopID);
 			return shopCommentList; 
 		}
