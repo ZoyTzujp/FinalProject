@@ -321,7 +321,7 @@
                                                         <ul>
                                                             <li><a href="${pageContext.request.contextPath}/customer/profile">會員資料</a></li>
                                                             <li><a href="/memberArtical">我的發文</a></li>
-                                                            <li><a href="/showOrderForm">訂單查詢</a></li>
+                                                            <li><a href="<c:url value='/getCustomersAllOrder' />">訂單查詢</a></li>
                                                             <li><a href="<c:url value='/showProductCart' />">購物車</a></li>
                                                         </ul>
                                                     </div>
@@ -499,7 +499,7 @@
                                                         <ul>   
                                                             <li><a href="${pageContext.request.contextPath}/customer/profil">會員資料</a></li>
                                                             <li><a href="/memberArtical">我的發文</a></li>
-                                                            <li><a href="/orderSelect">訂單查詢</a></li>
+                                                            <li><a href="<c:url value='/getCustomersAllOrder' />">訂單查詢</a></li>
                                                             <li><a href="<c:url value='/showProductCart' />">購物車</a></li>
                                                         </ul>
                                                     </div>

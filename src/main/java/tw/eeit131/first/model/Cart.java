@@ -49,5 +49,39 @@ public class Cart {
 		}
 	}
 	
-
+	//查看購物車內容物(鄧)
+	public Map<Integer, Integer> getOrderProductByCart(){//List<OrderProduct>
+		Map<Integer, Integer> orderProductMap = new LinkedHashMap<>();
+		for (OrderProduct orderProduct : cart.values()) {
+//			System.out.println("產品名 = " + orderProduct.getProductName());
+//			System.out.println("產品ID = " + orderProduct.getProductID();
+//			System.out.println("產品數量 = " + orderProduct.getNewSaleQty());
+//			String name = orderProduct.getProductName();
+			Integer productId = orderProduct.getProductID();
+			Integer qty = orderProduct.getNewSaleQty();
+			orderProductMap.put(productId,qty);
+		}
+//			System.out.println(cart);
+//			System.out.println(cart.getContent());
+//			for (Integer value : map.values()) {
+//			    System.out.println("Value = " + value);
+//			}
+		return orderProductMap;
+	}
+		
+	//清除購物車(生成訂單後清除購物車)(鄧)
+	public void deleteCart() {
+		cart.clear(); //移除字典所有鍵值對
+	}
+	
+	//測試用(鄧)
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Cart [cart=");
+		builder.append(cart);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }
