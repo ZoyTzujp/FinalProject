@@ -46,7 +46,7 @@ public class OrderList implements Serializable {
 	@Column(name = "ORDERPHONE")
 	private String orderPhone; //收件人電話
 	@Column(name = "PRICE")
-	private double price; //訂單總金額(產品總計+運費)
+	private double price; //訂單總金額(產品總計+運費)(易造成混淆，有空再改名)
 	@Column(name = "CURRENCY")
 	private String currency; //貨幣
 	@Column(name = "METHOD")
