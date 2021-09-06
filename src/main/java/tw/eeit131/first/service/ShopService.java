@@ -34,7 +34,5 @@ public interface ShopService {
 	List<ShopComment> findCommentsById(Integer shopID);
 
 	ShopComment saveComments(ShopComment shopComment);
-
-	ShopComment deleteCommentById(Integer commentID);
 	
 }
