@@ -110,7 +110,7 @@ window.onload = function() {
 			function mouseout(){
 
 				let no=this.id.charAt(1);
-				for (let k = 0; k <=no; k++) {
+				for (let k = 0; k <no; k++) {
 				fivestars[k].classList.remove('fa-star')
 				fivestars[k].classList.add('fa-star-o');
 				}
@@ -252,72 +252,8 @@ window.onload = function() {
                               
                                 
                                 <div class="widget-list widget-mb-4">   
-                                    <h3 class="widget-title"><a href="<c:url value='/showProductFormByShopID/${LoginOK.shopID}' />">Recent Products</a></h3>
-                                    <div class="sidebar-body">
-                                        <div class="sidebar-product align-items-center">
-                                            <a href="product-details.html" class="image">
-                                                <img src="assets/images/product/small-product/1.jpg" alt="product">
-                                            </a>
-                                            <div class="product-content">
-                                                <div class="product-title">
-                                                    <h4 class="title-2"> <a href="product-details.html">Product dummy name</a></h4>
-                                                </div>
-                                                <div class="price-box">
-                                                    <span class="regular-price ">$80.00</span>
-                                                    <span class="old-price"><del>$90.00</del></span>
-                                                </div>
-                                                <div class="product-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sidebar-product align-items-center">
-                                            <a href="product-details.html" class="image">
-                                                <img src="assets/images/product/small-product/2.jpg" alt="product">
-                                            </a>
-                                            <div class="product-content">
-                                                <div class="product-title">
-                                                    <h4 class="title-2"> <a href="product-details.html">Product dummy title</a></h4>
-                                                </div>
-                                                <div class="price-box">
-                                                    <span class="regular-price ">$50.00</span>
-                                                    <span class="old-price"><del>$60.00</del></span>
-                                                </div>
-                                                <div class="product-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sidebar-product align-items-center">
-                                            <a href="product-details.html" class="image">
-                                                <img src="assets/images/product/small-product/3.jpg" alt="product">
-                                            </a>
-                                            <div class="product-content">
-                                                <div class="product-title">
-                                                    <h4 class="title-2"> <a href="product-details.html">Product title here</a></h4>
-                                                </div>
-                                                <div class="price-box">
-                                                    <span class="regular-price ">$40.00</span>
-                                                    <span class="old-price"><del>$50.00</del></span>
-                                                </div>
-                                                <div class="product-rating ">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half-o"></i>
-                                                    <i class="fa fa-star-half-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <h3 class="widget-title"><a href="<c:url value='/showProductFormByShopID/${shopBean.shopID}' />">商品查看</a></h3>
+                                    
                                 </div>
                             </div>
                         </aside>
