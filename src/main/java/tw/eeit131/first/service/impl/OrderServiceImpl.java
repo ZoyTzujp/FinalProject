@@ -29,8 +29,8 @@ public class OrderServiceImpl implements OrderService{
 	};
 	
 	@Override
-	public void update(OrderList orderList) {
-		orderRepository.update(orderList);
+	public void updateOrderList(OrderList orderList) {
+		orderRepository.updateOrderList(orderList);
 	};	
 	
 	@Override
@@ -46,5 +46,15 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public List<OrderProduct> getOrderProductByOrderListId(Integer id) {
 		return orderRepository.getOrderProductByOrderListId(id);
+	}
+	
+	@Override
+	public OrderList getOrderListByOrderListId(Integer id) {;
+		return orderRepository.getOrderListByOrderListId(id);
+	}
+
+	@Override
+	public List<OrderList> getOrderListByShopId(Integer id) {
+		return orderRepository.getOrderListByShopId(id);
 	}
 }

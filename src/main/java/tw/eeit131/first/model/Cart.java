@@ -61,11 +61,6 @@ public class Cart {
 			Integer qty = orderProduct.getNewSaleQty();
 			orderProductMap.put(productId,qty);
 		}
-//			System.out.println(cart);
-//			System.out.println(cart.getContent());
-//			for (Integer value : map.values()) {
-//			    System.out.println("Value = " + value);
-//			}
 		return orderProductMap;
 	}
 		

@@ -17,6 +17,7 @@ public class OrderRepositoryImpl implements OrderRepository{
 	@Autowired
 	EntityManager entityManager;
 
+	//測試用
 	@Override
 	public OrderList findByOrderId(int id) {
 		String hql = "FROM Order WHERE orderID=:id";
@@ -25,7 +26,6 @@ public class OrderRepositoryImpl implements OrderRepository{
 		                    .setParameter("id", id)
 		                    .getSingleResult();	
         return order;
-        
 	}
 	
 	// 鄧
@@ -38,7 +38,7 @@ public class OrderRepositoryImpl implements OrderRepository{
 		
 	// 修改orderList(更新訂單狀態用)
 	@Override
-	public void update(OrderList orderList) {
+	public void updateOrderList(OrderList orderList) {
 		entityManager.merge(orderList);		
 	}
 		
@@ -51,6 +51,28 @@ public class OrderRepositoryImpl implements OrderRepository{
 			                    .setParameter("id", id)
 			                    .getResultList();	
 	    return orderList;
+	}
+	
+	//藉商家ID尋找其訂單
+	@Override
+	public List<OrderList> getOrderListByShopId(Integer id) {
+		String hql = "FROM OrderList WHERE shopID=:id";
+		List<OrderList> orderList = null;
+		orderList = entityManager.createQuery(hql, OrderList.class)
+				                 .setParameter("id", id)
+				                 .getResultList();	
+		return orderList;
+	}
+	
+	//藉訂單ID尋找訂單
+	@Override
+	public OrderList getOrderListByOrderListId(Integer id) {
+		String hql = "FROM OrderList WHERE orderID=:id";
+		OrderList orderList = null;
+		orderList = entityManager.createQuery(hql, OrderList.class)
+								.setParameter("id", id)
+								.getSingleResult();	
+		return orderList;
 	}
 		
 	//藉訂單ID尋找其訂單內容

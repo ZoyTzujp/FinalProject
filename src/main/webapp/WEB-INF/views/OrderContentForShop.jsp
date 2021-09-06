@@ -21,59 +21,25 @@
 <script>
 window.onload=function(){
 // 	var orderListId = allOrderProduct.
-	console.log("orderListId: "+${orderListId});
-	submitOrder = document.getElementById("submitOrder")
-	submitOrder.onclick = function(){// 確認支付
+	console.log("orderListId: "+${orderListIdShop});
+	allOrderProductShop = 
+	submitOrder = document.getElementById("OrderSent")
+	submitOrder.onclick = function(){// 確認寄出
 		
-		var submit = confirm('前往支付');
+		var submit = confirm('商品已寄出');
 
 		if (submit) {
-			console.log("前往支付");
-			window.location.href="<c:url value='/OrderPayment/'/>${orderListId}";
-			//讀取地址、信箱、電話、註記
-			
-			// 如何傳allOrderProduct?
-					
-					
-//	 		var orderAddress = $("#orderAddress").val();
-//	 		var orderEmail = $("#orderEmail").val();
-//	 		var orderPhone = $("#orderPhone").val();
-//	 		var orderDescription = $("#orderDescription").val();
-//	 		//讀取使用者
-//	 		var customerID = ${Customer.id};
-//	 		//測試
-//	 		window.alert("orderAddress: "+orderAddress+"\n"
-//	 				+"orderEmail: "+orderEmail+"\n"
-//	 				+"orderPhone: "+orderPhone+"\n"
-//	 				+"customerID: "+customerID);
-			
-			//送出資料至controller
+			console.log("商品已寄出");
 // 			var xhr = new XMLHttpRequest(); //Ajax引擎物件
-// 			console.log("1");
-// 			xhr.open("GET", "<c:url value='/OrderPayment' />", true); //說明請求內容
-// 			console.log("2");
-//	 		var productID = $(this).siblings("#display-none").text(); //產品ID
-//	 		var updatedSaleQty = $(this).val(); //更新後之數量
-//	 		console.log('產品ID:'+productID);
-//	 		console.log('更新後數量:'+updatedSaleQty);
-// 	 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); //請求標頭
+// 			xhr.open("POST", "<c:url value='/endOfOrderProcess' />", true); //說明請求內容 連結待補
+// 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); //請求標頭
 // 			xhr.send();
-				
-//	 			xhr.onreadystatechange = function(){
-//	 			if(xhr.readyState == 4 && xhr.status == 200){
-	// // 				console.log("測試");
-//	 				window.alert("提交成功，聯絡資訊為-"+"\n"
-//	 						+"orderAddress: "+orderAddress+"\n"
-//	 						+"orderEmail: "+orderEmail+"\n"
-//	 						+"orderPhone: "+orderPhone+"\n"
-//	 						+"orderDescription: "+orderDescription+"\n"
-//	 						+"customerID: "+customerID+"\n"+"\n"
-//	 						+"即將跳轉頁面至訂單列表");
-//	 				window.location.href="<c:url value='/getCustomersAllOrder' />";
-//	 			}
-//	 		}
+// 			xhr.send("orderAddress="+orderAddress+"&orderEmail="+orderEmail
+// 					+"&orderPhone="+orderPhone+"&orderDescription="+orderDescription);
+			window.location.href="<c:url value='/endOfOrderProcess/'/>${orderListId}";
+			
 		} else {
-			console.log("取消前往支付");
+			console.log("尚未寄出");
 		}
 
 	}
@@ -121,7 +87,7 @@ window.onload=function(){
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="orderProduct" items="${allOrderProduct}">
+                                <c:forEach var="orderProduct" items="${allOrderProductShop}">
                                     <tr>
 <%--                                     	<td>${orderProduct.id}</td> --%>
                                     	<td>${orderProduct.orderID}</td>
@@ -143,17 +109,17 @@ window.onload=function(){
                             	運費:70
                             </div>
                             <div style="width:300px;margin:0 0 0 auto;">
-                            	總額:${price}
+                            	總額:${priceShop}
                             </div>
                             <div style="width:300px;margin:0 0 0 auto;">
-                            	訂單狀態:${orderStatus}
+                            	訂單狀態:${orderStatusShop}
                             </div>
                             <!-- 有空再看看怎麼弄到右邊，改顏色 -->
-                            <c:if test="${orderStatus == '未付款'}">
+                            <c:if test="${orderStatusShop == '已付款'}">
                             <div style="width:300px;margin:0 0 0 auto;">
                             	<div class="order-button-payment" >
-                                	<input value="付款" type="button" id="submitOrder">
-                                	<input value="取消" type="button" id="cancelOrder">
+                                	<input value="確認寄出" type="button" id="OrderSent">
+<!--                                 	<input value="取消" type="button" id="cancelOrder"> -->
                            		 </div>
                             </div>
                             </c:if>

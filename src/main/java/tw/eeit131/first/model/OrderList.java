@@ -40,7 +40,7 @@ public class OrderList implements Serializable {
 	@Column(name = "ORDERADDRESS")
 	private String orderAddress;
 
-	//新增7欄位，且新增getter、setter、tostring(鄧)
+	//新增8欄位，且新增getter、setter、tostring(鄧)
 	@Column(name = "ORDEREMAIL")
 	private String orderEmail; //收件人email
 	@Column(name = "ORDERPHONE")
@@ -58,6 +58,11 @@ public class OrderList implements Serializable {
 		
 		
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "shopID")
+	@JsonIgnore
+	private ShopBean shop;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customerID")
 	@JsonIgnore
 	private Customer customer;
@@ -67,6 +72,14 @@ public class OrderList implements Serializable {
 			@JoinColumn(name = "PRODUCTID") })
 	@JsonIgnore
 	private Set<Product> products = new HashSet<Product>();
+
+	public ShopBean getShop() {
+		return shop;
+	}
+
+	public void setShop(ShopBean shop) {
+		this.shop = shop;
+	}
 
 	public Integer getOrderID() {
 		return orderID;
@@ -200,6 +213,8 @@ public class OrderList implements Serializable {
 		builder.append(intent);
 		builder.append(", description=");
 		builder.append(description);
+		builder.append(", shop=");
+		builder.append(shop);
 		builder.append(", customer=");
 		builder.append(customer);
 		builder.append(", products=");
@@ -207,6 +222,7 @@ public class OrderList implements Serializable {
 		builder.append("]");
 		return builder.toString();
 	}
+
 
 	
 }

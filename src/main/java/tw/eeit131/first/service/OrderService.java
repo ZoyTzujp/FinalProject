@@ -10,11 +10,15 @@ public interface OrderService {
 
 	OrderList insertOrderList(OrderList orderList);
 
-	void update(OrderList orderList);
+	void updateOrderList(OrderList orderList);
 
 	OrderProduct insertOrderProduct(OrderProduct orderProduct);
 	
 	List<OrderList> getOrderListByCustomerId(Long customerId);
 	
 	List<OrderProduct> getOrderProductByOrderListId(Integer id);
+
+	OrderList getOrderListByOrderListId(Integer id);
+	
+	List<OrderList> getOrderListByShopId(Integer id);
 }

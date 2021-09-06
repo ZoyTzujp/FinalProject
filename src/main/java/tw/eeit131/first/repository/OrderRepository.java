@@ -14,11 +14,15 @@ public interface OrderRepository {
 	
 	OrderList insertOrderList(OrderList orderList);
 
-	void update(OrderList orderList);	
+	void updateOrderList(OrderList orderList);	
 	
 	public OrderProduct insertOrderProduct(OrderProduct orderProduct);
 
 	List<OrderList> getOrderListByCustomerId(Long id);
 
 	List<OrderProduct> getOrderProductByOrderListId(Integer id);
+
+	OrderList getOrderListByOrderListId(Integer id);
+
+	List<OrderList> getOrderListByShopId(Integer id);
 }

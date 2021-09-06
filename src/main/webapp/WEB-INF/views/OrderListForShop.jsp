@@ -66,9 +66,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="orderList" items="${allOrderList}">
+                                <c:forEach var="orderList" items="${shopAllOrderList}">
                                     <tr>
-                                    	<td><a href="<c:url value='/OrderContent/${orderList.orderID}' />">明細</a></td><!-- 跳轉至訂單明細 -->
+                                    	<td><a href="<c:url value='/OrderContentForShop/${orderList.orderID}' />">明細</a></td><!-- 跳轉至訂單明細 -->
                                     	<td>${orderList.orderID}</td>
                                     	<td>${orderList.orderDate}</td>
                                     	<td>${orderList.orderStatus}</td>

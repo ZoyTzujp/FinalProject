@@ -19,7 +19,6 @@
 <script>
 window.onload=function(){
 	
-	
 	$(function() {
 		
 		var sum = 0;
@@ -43,10 +42,11 @@ window.onload=function(){
 		var submit = confirm('確認生成訂單');
 
 		if (submit) {
-			//讀取地址、信箱、電話
+			//讀取地址、信箱、電話、註記
 			var orderAddress = $("#orderAddress").val();//.attr("text") .attr("value")
 			var orderEmail = $("#orderEmail").val();
 			var orderPhone = $("#orderPhone").val();
+			var orderDescription = $("#orderDescription").val();
 			//讀取使用者
 			var customerID = ${Customer.id};
 //	 		//測試
@@ -64,7 +64,7 @@ window.onload=function(){
 //	 		console.log('更新後數量:'+updatedSaleQty);
 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); //請求標頭
 			xhr.send("orderAddress="+orderAddress+"&orderEmail="+orderEmail
-					+"&orderPhone="+orderPhone);
+					+"&orderPhone="+orderPhone+"&orderDescription="+orderDescription);
 				
 				xhr.onreadystatechange = function(){
 				if(xhr.readyState == 4 && xhr.status == 200){
@@ -73,13 +73,14 @@ window.onload=function(){
 							+"orderAddress: "+orderAddress+"\n"
 							+"orderEmail: "+orderEmail+"\n"
 							+"orderPhone: "+orderPhone+"\n"
+							+"orderDescription: "+orderDescription+"\n"
 							+"customerID: "+customerID+"\n"+"\n"
 							+"即將跳轉頁面至訂單列表");
 					window.location.href="<c:url value='/getCustomersAllOrder' />";
 				}
 			}
 		} else {
-		    
+			console.log("取消生成訂單");
 		}
 
 	}
@@ -129,6 +130,12 @@ window.onload=function(){
                                         <div class="checkout-form-list">
                                             <label>電話 <span class="required">*</span></label>
                                             <input value="${Customer.cellphone}" placeholder=""type="text" id="orderPhone"><!-- 帶使用者電話 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>備註 <span></span></label>
+                                            <input placeholder="填寫註記" type="text" id="orderDescription"><!-- 帶使用者地址 -->
                                         </div>
                                     </div>
                               	</div>
