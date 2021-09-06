@@ -321,7 +321,7 @@
                                                         <ul>
                                                             <li><a href="${pageContext.request.contextPath}/customer/profile">會員資料</a></li>
                                                             <li><a href="/memberArtical">我的發文</a></li>
-                                                            <li><a href="/showOrderForm">訂單查詢</a></li>
+                                                            <li><a href="<c:url value='/getCustomersAllOrder' />">訂單查詢</a></li>
                                                             <li><a href="<c:url value='/showProductCart' />">購物車</a></li>
                                                         </ul>
                                                     </div>
@@ -341,6 +341,7 @@
                                                             <li><a href="<c:url value='/modifyMemberInfo' />">修改店家資料</a></li>  
                                                             <li><a href="<c:url value='/showProductCooperateForm' />">商品銷售合作</a></li>
                                                             <li><a href="<c:url value='/showProductEditFormByShopID/${LoginOK.shopID}' />">編輯銷售商品</a></li>
+                                                            <li><a href="<c:url value='/getShopsAllOrder' />">查看訂單</a></li>
                                                             </c:if>
                                                         </ul>
                                                     </div>
@@ -406,7 +407,7 @@
                                                     </div>
                                                     <div class="cart-links d-flex justify-content-center">
                                                        <a class="obrien-button white-btn" href="<c:url value='/showProductCart' />">前往購物車</a>
-                                                       <a class="obrien-button white-btn" href="checkout.html">結帳</a>
+                                                       <a class="obrien-button white-btn" href="<c:url value='/CartCheckout' />">生成訂單</a><!-- 原字段:結帳 -->
                                                     </div>
                                                  </div>
                                             </li>
@@ -499,7 +500,7 @@
                                                         <ul>   
                                                             <li><a href="${pageContext.request.contextPath}/customer/profil">會員資料</a></li>
                                                             <li><a href="/memberArtical">我的發文</a></li>
-                                                            <li><a href="/orderSelect">訂單查詢</a></li>
+                                                            <li><a href="<c:url value='/getCustomersAllOrder' />">訂單查詢</a></li>
                                                             <li><a href="<c:url value='/showProductCart' />">購物車</a></li>
                                                         </ul>
                                                     </div>
@@ -519,6 +520,7 @@
                                                             <li><a href="<c:url value='/modifyMemberInfo' />">修改店家資料</a></li>  
                                                             <li><a href="<c:url value='/showProductCooperateForm' />">商品銷售合作</a></li>
                                                             <li><a href="<c:url value='/showProductEditFormByShopID/${LoginOK.shopID}' />">編輯銷售商品</a></li>
+                                                            <li><a href="<c:url value='/getShopsAllOrder' />">查看訂單</a></li>
                                                             </c:if>
                                                         </ul>
                                                     </div>
@@ -584,7 +586,7 @@
                                                     </div>
                                                     <div class="cart-links d-flex justify-content-center">
                                                        <a class="obrien-button white-btn" href="<c:url value='/showProductCart' />">前往購物車</a>
-                                                       <a class="obrien-button white-btn" href="checkout.html">結帳</a>
+                                                       <a class="obrien-button white-btn" href="<c:url value='/CartCheckout' />">生成訂單</a><!-- 原字段:結帳 -->
                                                     </div>
                                                  </div>
                                             </li>

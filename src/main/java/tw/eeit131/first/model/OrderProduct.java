@@ -20,45 +20,33 @@ public class OrderProduct implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Transient // 外來鍵可忽略
+//	@Transient // 外來鍵可忽略 註解(鄧)
 	@Column(name = "ORDERID")
 	private Integer orderID;
 
-	@Transient // 外來鍵可忽略
+//	@Transient // 外來鍵可忽略 註解(鄧)
 	@Column(name = "PRODUCTID")
 	private Integer productID;
 
 	@Column(name = "SALEQTY")
-	private Integer saleQty;
+	private Integer saleQty;//已賣出之數量
 
-	private Integer newSaleQty;
+	@Column(name = "newSaleQty")
+	private Integer newSaleQty;//購物車新增
+	
+	@Column(name = "productName")
 	private String productName;
-	private Integer quantity;
+	
+	@Column(name = "quantity")
+	private Integer quantity;//倉庫有幾個
+	
+	@Column(name = "standard")
 	private String standard;
+	
+	@Column(name = "price")
 	private Integer price;
 
 	public OrderProduct() {
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("OrderProduct [productID=");
-		builder.append(productID);
-		builder.append(", saleQty=");
-		builder.append(saleQty);
-		builder.append(", newSaleQty=");
-		builder.append(newSaleQty);
-		builder.append(", productName=");
-		builder.append(productName);
-		builder.append(", quantity=");
-		builder.append(quantity);
-		builder.append(", standard=");
-		builder.append(standard);
-		builder.append(", price=");
-		builder.append(price);
-		builder.append("]");
-		return builder.toString();
 	}
 
 	public OrderProduct(Integer productID, Integer saleQty, Integer newSaleQty, String productName, Integer quantity,
@@ -143,6 +131,31 @@ public class OrderProduct implements Serializable {
 
 	public void setNewSaleQty(Integer newSaleQty) {
 		this.newSaleQty = newSaleQty;
-	}	
+	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("OrderProduct [id=");
+		builder.append(id);
+		builder.append(", orderID=");
+		builder.append(orderID);
+		builder.append(", productID=");
+		builder.append(productID);
+		builder.append(", saleQty=");
+		builder.append(saleQty);
+		builder.append(", newSaleQty=");
+		builder.append(newSaleQty);
+		builder.append(", productName=");
+		builder.append(productName);
+		builder.append(", quantity=");
+		builder.append(quantity);
+		builder.append(", standard=");
+		builder.append(standard);
+		builder.append(", price=");
+		builder.append(price);
+		builder.append("]");
+		return builder.toString();
+	}	
+	
 }

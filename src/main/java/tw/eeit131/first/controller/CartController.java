@@ -110,5 +110,12 @@ public class CartController {
 	 		
 		return "Product";
 	}	
+	
+	// 購物車轉訂單填寫資料頁面(鄧)
+	@GetMapping("/CartCheckout")
+    public String CartCheckout(HttpSession session) {
 
+	    return "CartCheckout";
+	}
+	
 }

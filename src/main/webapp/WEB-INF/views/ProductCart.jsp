@@ -112,7 +112,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <a href="checkout.html" class="btn obrien-button primary-btn d-block">結帳</a>
+                            <a href="<c:url value='/CartCheckout' />" class="btn obrien-button primary-btn d-block">生成訂單</a><!-- 原字段:結帳 -->
                         </div>
                     </div>
                 </div>

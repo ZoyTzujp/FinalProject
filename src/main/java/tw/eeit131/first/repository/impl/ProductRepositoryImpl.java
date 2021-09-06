@@ -18,6 +18,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 	@Autowired
 	EntityManager entityManager;
 	
+	@Override
 	public Product insert(Product product) {
 		entityManager.persist(product);//等於 Hibernate 的 Session.save(member)
 		return product;

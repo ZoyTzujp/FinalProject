@@ -90,6 +90,15 @@ public class Product implements Serializable {
 	@JsonIgnore
 	private Set<OrderList> orders = new HashSet<OrderList>();
 
+	//鄧
+	public ShopBean getShop() {
+		return shopBean;
+	}
+
+	public void setShop(ShopBean shop) {
+		this.shopBean = shop;
+	}
+	
 	public Integer getProductID() {
 		return productID;
 	}
