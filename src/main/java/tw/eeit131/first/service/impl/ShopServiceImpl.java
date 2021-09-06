@@ -48,7 +48,7 @@ public class ShopServiceImpl implements ShopService {
 	public void sendVerificationEmail(ShopBean shopBean, String siteURL) 
 			throws UnsupportedEncodingException, MessagingException {
 		String subject= "註冊成功通知，請確認!!";
-		String senderName = "shopme team";
+		String senderName = "Richtable team";
 		String mailContent ="<p>Dear"+shopBean.getShopName()+",<p>";
 		mailContent += "<p>請點選下面連結，確認以此信箱註冊並開通:</P>";
 		

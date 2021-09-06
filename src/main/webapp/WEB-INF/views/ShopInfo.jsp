@@ -67,7 +67,7 @@ window.onload = function() {
  					
 					+"</div><p>"+shopComments[i].shopContent+"</p>"
 					+"</div></div>"  		
-					+ shopComments[i].starNumber
+
 					
 					
  				}
