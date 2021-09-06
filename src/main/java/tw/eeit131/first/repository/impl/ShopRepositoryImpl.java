@@ -120,6 +120,7 @@ public class ShopRepositoryImpl implements ShopRepository {
 		shopComment= entityManager.createQuery(hql,ShopComment.class)
                 .setParameter("shopID", shopID)
                 .getResultList();	
+		System.out.println("AAAAAAAAA"+shopComment.get(shopComment.size()-1).getCommentCreateTime());
 		return shopComment;
 	}
 
@@ -128,13 +129,6 @@ public class ShopRepositoryImpl implements ShopRepository {
 	public ShopComment saveComments(ShopComment shopComment) {
 		entityManager.persist(shopComment);
 		return shopComment;
-	}
-
-
-	@Override
-	public ShopComment deleteCommentById(Integer commentID) {
-		
-		return null;
 	}
 	
 }

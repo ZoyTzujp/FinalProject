@@ -38,7 +38,4 @@ public interface ShopRepository {
 
 
 	ShopComment saveComments(ShopComment shopComment);
-
-
-	ShopComment deleteCommentById(Integer commentID);
 }

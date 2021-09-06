@@ -121,19 +121,12 @@ public class ShopServiceImpl implements ShopService {
 	//評論專用
 	@Override
 	public List<ShopComment> findCommentsById(Integer shopID) {
-
 		return shopRepository.findCommentsById(shopID);
 	}
 	//評論專用
 	@Override
 	public ShopComment saveComments(ShopComment shopComment) {
 		return shopRepository.saveComments(shopComment);
-	}
-
-	@Override
-	public ShopComment deleteCommentById(Integer commentID) {
-		
-		return shopRepository.deleteCommentById(commentID);
 	}
 	
 	

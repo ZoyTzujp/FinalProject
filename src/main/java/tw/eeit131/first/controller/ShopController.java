@@ -34,6 +34,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.SystemPropertyUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -333,14 +334,25 @@ public class ShopController {
 				){
 		
 			List<ShopComment> shopCommentList = service.findCommentsById(shopID);
-
+			
+			
 			System.err.println("shopID="+shopID);
 			return shopCommentList; 
 		}
 		
+		
+//		// 依照鍵值刪除單筆會員資料
+//		@DeleteMapping("/deleteComment/{commentID}")
+//		public @ResponseBody void deleteCommentById(@PathVariable Integer commentID) {
+//					
+//			service.deleteCommentById(commentID);
+//					
+//		}
+		
 		//新增留言
 		@PostMapping("/saveComment/{shopID}")
 		public @ResponseBody List<ShopComment> saveComment(
+				@RequestParam("starNumber") Integer starNumber,
 				@RequestParam("Name") String name,
 				@RequestParam("email") String email,
 				@RequestParam("shopContent") String shopContent,
@@ -351,11 +363,13 @@ public class ShopController {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date time = sdf.parse(sdf.format(new Date()));
-			
+			System.out.println(time);
 			System.out.println("name="+name);
 			System.out.println("email="+email);
 			ShopBean shopBean = service.findByShopId(shopID);
 			shopComment.setShopBean(shopBean);
+			shopComment.setStarNumber(starNumber);
+			System.out.println(shopComment.getStarNumber());
 			shopComment.setName(name);
 			shopComment.setEmail(email);
 			shopComment.setShopContent(shopContent);
