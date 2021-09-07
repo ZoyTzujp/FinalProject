@@ -53,6 +53,31 @@
                     <div class="col-lg-12">
                         <!-- Wishlist Table Area -->
                         <div class="wishlist-table table-responsive">
+                        <div class="shop-main-area">
+							<div class="container container-default custom-area">
+								<div class="col-lg-3 col-12 col-custom">
+									<!-- 商品銷售欄 右方分類欄 Start -->
+									<aside class="sidebar_widget widget-mt">
+										<div class="widget_inner">
+<!-- 											<h3 class="widget-title">Search</h3> -->
+											<div class="search-box">
+												<div class="input-group">
+													<input type="text" class="form-control" name="" id="myInput" placeholder="搜尋備註" onkeyup="searchFun()">
+													<div class="input-group-append">
+														<button class="btn btn-outline-secondary" type="button">
+															<i class="fa fa-search"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</aside>
+									<!-- 商品銷售欄 右方分類欄 End -->
+								</div>
+							</div>
+						</div>
+						<br>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>

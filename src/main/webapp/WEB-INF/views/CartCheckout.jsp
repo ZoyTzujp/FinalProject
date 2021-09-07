@@ -69,13 +69,7 @@ window.onload=function(){
 				xhr.onreadystatechange = function(){
 				if(xhr.readyState == 4 && xhr.status == 200){
 //	 				console.log("測試");
-					window.alert("提交成功，聯絡資訊為-"+"\n"
-							+"orderAddress: "+orderAddress+"\n"
-							+"orderEmail: "+orderEmail+"\n"
-							+"orderPhone: "+orderPhone+"\n"
-							+"orderDescription: "+orderDescription+"\n"
-							+"customerID: "+customerID+"\n"+"\n"
-							+"即將跳轉頁面至訂單列表");
+					window.alert("提交成功"+"\n"+"即將跳轉頁面至訂單列表");
 					window.location.href="<c:url value='/getCustomersAllOrder' />";
 				}
 			}
@@ -169,7 +163,7 @@ window.onload=function(){
                                     <tr class="cart_item">
                                             <td class="cart-product-name"> 運費<strong class="product-quantity"></strong></td>
 <!--                                             <td class="cart-product-total text-center" id="shippingFee"><span class="amount">70</span></td> -->
-                                            <td class="cart-product-total text-center" id="shippingFee">70</td>
+                                            <td class="cart-product-total text-center" id="shippingFee">${70 * shopCount}</td>
                                         </tr>
                                     </tbody>
                                     <tfoot>

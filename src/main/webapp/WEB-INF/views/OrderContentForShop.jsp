@@ -105,15 +105,29 @@ window.onload=function(){
 <!--                                 </tr> -->
                                 </tbody>
                             </table>
-                            <div style="width:300px;margin:0 0 0 auto;">
-                            	運費:70
-                            </div>
-                            <div style="width:300px;margin:0 0 0 auto;">
-                            	總額:${priceShop}
-                            </div>
-                            <div style="width:300px;margin:0 0 0 auto;">
-                            	訂單狀態:${orderStatusShop}
-                            </div>
+                            <div class="col-lg-5 ml-auto">
+								<!-- Cart Calculation Area -->
+								<div class="cart-calculator-wrapper">
+									<div class="cart-calculate-items">
+										<div class="table-responsive">
+											<table class="table">
+												<tr>
+													<td>運費</td>
+													<td>70</td>
+												</tr>
+												<tr>
+													<td>總計</td>
+													<td>${priceShop}</td>
+												</tr>
+												<tr class="total">
+													<td>訂單狀態</td>
+													<td class="total-amount">${orderStatusShop}</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
                             <!-- 有空再看看怎麼弄到右邊，改顏色 -->
                             <c:if test="${orderStatusShop == '已付款'}">
                             <div style="width:300px;margin:0 0 0 auto;">

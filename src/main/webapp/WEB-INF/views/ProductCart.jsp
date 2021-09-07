@@ -103,7 +103,7 @@
                                         </tr>
                                         <tr>
                                             <td>運費</td>
-                                            <td id="shippingFee">70</td>
+                                            <td id="shippingFee">${70 * shopCount}</td>
                                         </tr>
                                         <tr class="total">
                                             <td>訂單總計</td>
