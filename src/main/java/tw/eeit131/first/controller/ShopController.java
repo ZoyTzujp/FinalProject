@@ -46,6 +46,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.eeit131.first.model.Product;
+import tw.eeit131.first.model.ProductTypeList;
 import tw.eeit131.first.model.ShopBean;
 import tw.eeit131.first.model.ShopComment;
 import tw.eeit131.first.model.Utility;
@@ -252,30 +253,109 @@ public class ShopController {
 		return shop1;
 	};
 	
-	@PutMapping(value ="/updateShop/{shopID}",consumes = { "application/json" }, 
-			produces = { "application/json" })
-//	@PostMapping(value ="/updateShop")
-	public @ResponseBody Map<String, String> update(
-			  @RequestBody ShopBean shopBean
-			  ,@PathVariable Integer shopID
-			) {
-		
-		shopBean.setEmail(service.findById(shopID).getEmail());
-		shopBean.setPassword(service.findById(shopID).getPassword());
-
-
-		System.out.println(shopBean);
-		Map<String, String> map = new HashMap<>();
-		try {
-		service.update(shopBean);
-		map.put("success", "更新成功");
-		}catch(Exception e) {
-			e.printStackTrace();
-			map.put("fail", "更新失敗");
-		}
-		return map;
-	}
+//	@PutMapping(value ="/updateShop/{shopID}",consumes = { "application/json" }, 
+//			produces = { "application/json" })
+////	@PostMapping(value ="/updateShop")
+//	public @ResponseBody Map<String, String> update(
+//			  @RequestBody ShopBean shopBean
+//			  ,@PathVariable Integer shopID
+//			) {
+//		
+//		shopBean.setEmail(service.findById(shopID).getEmail());
+//		shopBean.setPassword(service.findById(shopID).getPassword());
+//
+//
+//		System.out.println(shopBean);
+//		Map<String, String> map = new HashMap<>();
+//		try {
+//		service.update(shopBean);
+//		map.put("success", "更新成功");
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			map.put("fail", "更新失敗");
+//		}
+//		return map;
+//	}
 	
+	//修改資料
+		@PostMapping("/updateShop")
+		public String updateShop(
+				@RequestParam("shopID")Integer shopID,
+	            @RequestParam("shopName")String shopName,
+	            @RequestParam("shopKeeper")String shopKeeper,
+	            @RequestParam("Email")String Email,
+	            @RequestParam("mobile")String mobile,
+	            @RequestParam("shopPhone")String shopPhone,
+	            @RequestParam("webLink")String webLink,
+	            @RequestParam("introduce")String introduce,
+//	            @RequestParam("password")String password,
+	            @RequestParam("shopImage")MultipartFile multipartFile,
+	            Model m
+	           ) throws SerialException, IOException, SQLException {
+			
+			String saveDirPath = request.getSession().getServletContext().getRealPath("/")+"uploadTempDir\\";
+			String fileName;
+			String saveFilePathStr;
+			
+			if(multipartFile.isEmpty()) {
+				fileName =service.findById(shopID).getFilename();
+				saveFilePathStr = saveDirPath+fileName;
+			}else {	
+				fileName = multipartFile.getOriginalFilename();
+				File savefileDir = new File(saveDirPath);
+				savefileDir.mkdirs();
+				
+				File saveFilePath = new File(savefileDir,fileName);
+				multipartFile.transferTo(saveFilePath);
+				
+				saveFilePathStr = saveDirPath+fileName;				
+			}
+				ShopBean shopbean = setFile(shopID,shopName,shopKeeper,Email,mobile,shopPhone,webLink,introduce,fileName,saveFilePathStr);
+				service.update(shopbean);
+				
+				return "Home";
+		}
+		
+		
+		private ShopBean setFile(
+				Integer shopID, 
+				String shopName, 
+				String shopKeeper, 
+//				String password,
+				String email, 
+				String mobile,
+				String shopPhone, 
+				String webLink, 
+				String introduce, 
+				String fileName,
+				String path) throws IOException, SerialException, SQLException{
+			ShopBean shop = new ShopBean();
+			ShopBean shopBean = service.findById(shopID);
+			shop.setShopID(shopID);
+			shop.setShopName(shopName);
+			shop.setShopKeeper(shopKeeper);
+			shop.setPassword(shopBean.getPassword());
+			shop.setEmail(email);
+			shop.setMobile(mobile);
+			shop.setEnabled(true);
+			shop.setShopPhone(shopPhone);
+			shop.setWebLink(webLink);
+			shop.setIntroduce(introduce);
+			shop.setFilename(fileName);
+			
+			//將路徑資料夾中圖片上傳至資料庫
+			FileInputStream fis1 = new FileInputStream(path);
+			byte[] b =new byte[fis1.available()];
+			fis1.read(b);
+			SerialBlob sb = null;
+			fis1.close();
+			sb = new SerialBlob(b);
+			shop.setShopImage(sb);
+			
+			
+		return shop;
+	}
+
 	//查詢所有店家
 	@GetMapping("/showAllShopName")
 	public  @ResponseBody List<ShopBean> showAllShopName() {

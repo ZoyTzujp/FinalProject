@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
@@ -23,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import tw.eeit131.first.model.Cart;
 import tw.eeit131.first.model.Product;
 import tw.eeit131.first.model.ProductTypeList;
 import tw.eeit131.first.model.ShopBean;
@@ -49,6 +52,9 @@ public class ProductController {
 	@Autowired
 	ShopService shopService;
 	
+	@Autowired
+	HttpServletRequest request;
+	
 	@GetMapping("/showProductFormByShopID/{shopID}")
 	public String showProductFormByShopID(@PathVariable("shopID") Integer shopID,
 			                              Model m){
@@ -57,7 +63,6 @@ public class ProductController {
 		//改成getProductTypeListByShopID，未完成
 		List<ProductTypeList> productTypeList = productTypeListService.getAllProductTypeList();   
 //		List<ProductTypeList> productTypeList = productTypeListService.getProductTypeListByShopID(shopID);
-
 		
 		m.addAttribute("productList",productList);
 		m.addAttribute("productTypeList",productTypeList); //給頁面左方商品類型列表使用，未完成
@@ -65,7 +70,7 @@ public class ProductController {
 	}
 	
 	@GetMapping(value="/getAllProductTypeList.json", produces = { "application/json; charset=UTF-8" })
-	public @ResponseBody List<ProductTypeList> getAllProductTypeList(){
+	public @ResponseBody List<ProductTypeList> getAllProductTypeListJson(){
 		List<ProductTypeList> productTypeList = productTypeListService.getAllProductTypeList();
 		return productTypeList;
 	}
@@ -74,6 +79,33 @@ public class ProductController {
 	public @ResponseBody List<ProductTypeList> getProductTypeListByProductID(@PathVariable("productID") Integer productID){
 		List<ProductTypeList> productTypeList = productTypeListService.getProductTypeListByProductID(productID);
 		return productTypeList;
+	}
+	
+	@PostMapping(value="/addNewProductType.json", produces = { "application/json; charset=UTF-8" })
+	public @ResponseBody List<ProductTypeList> addNewProductTypeJson(@RequestParam("productTypeName")String productTypeName,                                             
+                                                    HttpSession session) {
+		ProductTypeList productTypeList = new ProductTypeList();
+		productTypeList.setProductTypeName(productTypeName);
+		productTypeListService.addNewProductType(productTypeList);
+		List<ProductTypeList> allProductTypeList = productTypeListService.getAllProductTypeList();
+		 return allProductTypeList;
+	}
+	
+	@GetMapping("/deleteProductByID/{productID}")
+	public String deleteProductByID(@PathVariable("productID") Integer productID,
+                                     Model m,
+                                     HttpSession session) {
+//		Product product = productService.getProductById(productID);
+		productService.deleteProductById(productID);
+
+		//導回ProductEdit.jsp 帶入商品及商品類型資料
+		ShopBean shop = (ShopBean)session.getAttribute("LoginOK");
+		List<Product> productList = productService.getProductListByShopID(shop.getShopID());
+		List<ProductTypeList> productTypeList = productTypeListService.getAllProductTypeList();
+		m.addAttribute("productList",productList);
+		m.addAttribute("productTypeList",productTypeList); //給頁面左方商品類型列表使用
+				
+	    return "ProductEdit";		
 	}
 	
 	@GetMapping("/getproductDetailsByID/{productID}")
@@ -215,39 +247,45 @@ public class ProductController {
 		return product;		
 	}
 	
-	@PostMapping("/addNewProduct")
-	public String addNewProduct(@RequestParam("shopID")Integer shopID,
+	@PostMapping("/addNewProduct") //新增商品資料
+	public String addNewProduct(@RequestParam(name = "shopID",defaultValue = "")Integer shopID,
 //			                    @RequestParam("saleDate")Timestamp saleDate,
 			                    @RequestParam("productName")String productName,			                   
-			                    @RequestParam("productTypeIDList")String[] productTypeIDList,
-			                    @RequestParam("quantity")Integer quantity,
-			                    @RequestParam("price")Integer price,
+			                    @RequestParam(name ="productTypeIDList",defaultValue = "")String[] productTypeIDList,
+			                    @RequestParam(name ="quantity",defaultValue = "")Integer quantity,
+			                    @RequestParam(name ="price",defaultValue = "")Integer price,
 			                    @RequestParam("standard")String standard,
 			                    @RequestParam("capacity")String capacity,
 			                    @RequestParam("place")String place,
 			                    @RequestParam("preserve")String preserve,
 			                    @RequestParam("productDescribe")String productDescribe,
-			                    @RequestParam("producImage")MultipartFile multipartFile,
-			                    HttpServletRequest request) throws IllegalStateException, IOException, SerialException, SQLException {
+			                    @RequestParam("producImage")MultipartFile multipartFile
+			                    ) throws IllegalStateException, IOException, SerialException, SQLException, MissingServletRequestParameterException {
+		System.err.println("------------------------------->");
 		String fileName = multipartFile.getOriginalFilename();
+		System.out.println("--------fileName--------->"+fileName);
 //		System.out.println("OriginalFilename:"+fileName );
 //		System.out.println("addNewProduct=shopID:"+shopID+";productName:"+productName+";quantity:"+quantity);
 //		System.out.println("productTypeIDList:"+Arrays.toString(productTypeIDList));
-	    
-		//抓出圖片路徑(含建立)
-		String saveDirPath = request.getSession().getServletContext().getRealPath("/")+"uploadTempDir\\";
-		File savefileDir = new File(saveDirPath);
-		savefileDir.mkdirs();
-		
-		File saveFilePath = new File(savefileDir,fileName);
-		multipartFile.transferTo(saveFilePath);
-		System.out.println("saveFilePath:"+saveFilePath);
-		
+
 		if(fileName!=null && fileName.length()!=0) {
+			
+		//抓出圖片路徑(含建立)			
+			String saveDirPath = request.getSession().getServletContext().getRealPath("/")+"uploadTempDir\\";
+			File savefileDir = new File(saveDirPath);
+			savefileDir.mkdirs();
+				
+			File saveFilePath = new File(savefileDir,fileName);
+			multipartFile.transferTo(saveFilePath);
+			System.out.println("saveFilePath:"+saveFilePath);
+		
+		
 			String saveFilePathStr = saveDirPath+fileName;
 			saveFile(shopID,productName,productTypeIDList,quantity,price,standard,capacity,place,preserve,productDescribe,fileName,saveFilePathStr);
-		}		
-		return "success";
+			return "success";  //新增成功
+		}
+				
+		return "ProductCooperate";  //失敗，回到新增商品頁面
 	}
 		
 	private void saveFile(Integer shopID,String productName,String[] productTypeIDList,Integer quantity,Integer price,String standard,String capacity,String place,String preserve,String productDescribe,String fileName,String path) 
@@ -258,6 +296,7 @@ public class ProductController {
 		product.setShopBean(shop);
 //		product.setSaleDate(saleDate);
 		product.setProductName(productName);
+		product.setSaleQty(0);
 		product.setQuantity(quantity);
 		product.setPrice(price);
 		product.setStandard(standard);

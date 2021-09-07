@@ -25,16 +25,16 @@
     <div class="container container-default custom-area">
         <div class="row flex-row-reverse">
             <div class="col-lg-9 col-12 col-custom widget-mt">
-                <!--商品銷售欄 上方分類欄start-->
-                <div class="shop_toolbar_wrapper">
-                    <div class="shop-select">
-                        <form class="d-flex flex-column w-100" action="#">
-                            <div class="form-group">
-                                <select  class="form-control nice-select w-100"  name="productTypeIDList" id="productTypeIDList">
-                                    <option selected value="0">所有分類</option>
-                                    <c:forEach var="productTypeList" items="${productTypeList}">
-                                        <option value="${productTypeList.productTypeID}">${productTypeList.productTypeName}</option>
-                                    </c:forEach> 
+<!--                 商品銷售欄 上方分類欄start -->
+<!--                 <div class="shop_toolbar_wrapper"> -->
+<!--                     <div class="shop-select"> -->
+<%--                         <form class="d-flex flex-column w-100" action="#"> --%>
+<!--                             <div class="form-group"> -->
+<!--                                 <select  class="form-control nice-select w-100"  name="productTypeIDList" id="productTypeIDList"> -->
+<!--                                     <option selected value="0">所有分類</option> -->
+<%--                                     <c:forEach var="productTypeList" items="${productTypeList}"> --%>
+<%--                                         <option value="${productTypeList.productTypeID}">${productTypeList.productTypeName}</option> --%>
+<%--                                     </c:forEach>  --%>
 <!--                                 <select class="form-control nice-select w-100" > -->
 <!--                                     <option selected value="1">Alphabetically, A-Z</option> -->
 <!--                                     <option value="2">Sort by popularity</option> -->
@@ -42,21 +42,21 @@
 <!--                                     <option value="4">Sort by price: low to high</option> -->
 <!--                                     <option value="5">Sort by price: high to low</option> -->
 <!--                                     <option value="6">Product Name: Z</option> -->
-                                </select>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-         <script>
-             var selectElement = document.getElementById('productTypeIDList');
-             selectElement.onchange = function(){
-            	 var productTypeID = selectElement.options[ selectElement.selectedIndex ].value;
-            	 if(productTypeID==0){
-            		 location.href ="<c:url value='/getAllProductInfo' />"
-            	 }else{
-            	     location.href ="<c:url value='/productListSortByTypeID/' />"+productTypeID;
-            	 }
-              }
+<!--                                 </select> -->
+<!--                             </div> -->
+<%--                         </form> --%>
+<!--                     </div> -->
+<!--                 </div> -->
+              <script>
+//              var selectElement = document.getElementById('productTypeIDList');
+//              selectElement.onchange = function(){
+//             	 var productTypeID = selectElement.options[ selectElement.selectedIndex ].value;
+//             	 if(productTypeID==0){
+//             		 location.href ="<c:url value='/getAllProductInfo' />"
+//             	 }else{
+//             	     location.href ="<c:url value='/productListSortByTypeID/' />"+productTypeID;
+//             	 }
+//               }
 	/*              var selectElement = document.getElementById('productTypeIDList');  
                     
                     var xhr0 = new XMLHttpRequest();               
@@ -86,7 +86,7 @@
             					displayPageBooks(xhr0_2.responseText);
             				}
             			}             */
-                </script> 
+                </script>
                 <!--商品銷售欄 上方分類欄 end-->
                 <!-- 商品銷售欄 商品欄 Start -->
                 <div class="row shop_wrapper grid_3" id="single-product">  
@@ -94,7 +94,7 @@
                     <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area" >
                         <div class="single-product position-relative">
                             <div class="product-image" id="img">
-                                <a class="d-block" href="product-details.html">                        
+                                <a class="d-block" href="<c:url value='/getproductDetailsByID/${productList.productID}' />">                        
                                     <img src="<c:url value='/getProductImage' />?id=${productList.productID}" alt="" class="product-image-1 w-100">
                                 </a>
                             </div>
@@ -107,7 +107,7 @@
                                       <div style="text-align:right">
                                         <h6 class="title-2">                                  
                                             <a href="<c:url value='/singleProductEditForm/${productList.productID}' />" title="edit" ><i class="fa fa-edit mr-2"></i></a>
-                                            <a href="#" title="remove"><i class="ion-trash-b"></i></a>
+                                            <a href="<c:url value='/deleteProductByID/${productList.productID}' />" title="remove" onclick="return confirm('確認要刪除銷售內容?');"><i class="ion-trash-b"></i></a>
                                         </h6>
                                       </div>                                   
                                 </div>
@@ -121,21 +121,21 @@
                 <div class="row">
                     <div class="col-sm-12 col-custom">
                         <div class="toolbar-bottom mt-30">
-                            <nav class="pagination pagination-wrap mb-10 mb-sm-0">
-                                <ul class="pagination">
-                                    <li class="disabled prev">
-                                        <i class="ion-ios-arrow-thin-left"></i>
-                                    </li>
-                                    <li class="active"><a>1</a></li>
-                                    <li>
-                                        <a href="#">2</a>
-                                    </li>
-                                    <li class="next">
-                                        <a href="#" title="Next >>"><i class="ion-ios-arrow-thin-right"></i></a>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <p class="desc-content text-center text-sm-right">Showing 1 - 12 of 34 result</p>
+<!--                             <nav class="pagination pagination-wrap mb-10 mb-sm-0"> -->
+<!--                                 <ul class="pagination"> -->
+<!--                                     <li class="disabled prev"> -->
+<!--                                         <i class="ion-ios-arrow-thin-left"></i> -->
+<!--                                     </li> -->
+<!--                                     <li class="active"><a>1</a></li> -->
+<!--                                     <li> -->
+<!--                                         <a href="#">2</a> -->
+<!--                                     </li> -->
+<!--                                     <li class="next"> -->
+<!--                                         <a href="#" title="Next >>"><i class="ion-ios-arrow-thin-right"></i></a> -->
+<!--                                     </li> -->
+<!--                                 </ul> -->
+<!--                             </nav> -->
+<!--                             <p class="desc-content text-center text-sm-right">Showing 1 - 12 of 34 result</p> -->
                         </div>
                     </div>
                 </div>
@@ -212,74 +212,74 @@
                                 </ul>
                             </div>
                         </div>                        
-                        <div class="widget-list widget-mb-4">
-                            <h3 class="widget-title">Recent Products</h3>
-                            <div class="sidebar-body">
-                                <div class="sidebar-product align-items-center">
-                                    <a href="product-details.html" class="image">
-                                        <img src="assets/images/product/small-product/1.jpg" alt="product">
-                                    </a>
-                                    <div class="product-content">
-                                        <div class="product-title">
-                                            <h4 class="title-2"> <a href="product-details.html">Product dummy name</a></h4>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price ">$80.00</span>
-                                            <span class="old-price"><del>$90.00</del></span>
-                                        </div>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="sidebar-product align-items-center">
-                                    <a href="product-details.html" class="image">
-                                        <img src="assets/images/product/small-product/2.jpg" alt="product">
-                                    </a>
-                                    <div class="product-content">
-                                        <div class="product-title">
-                                            <h4 class="title-2"> <a href="product-details.html">Product dummy title</a></h4>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price ">$50.00</span>
-                                            <span class="old-price"><del>$60.00</del></span>
-                                        </div>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="sidebar-product align-items-center">
-                                    <a href="product-details.html" class="image">
-                                        <img src="assets/images/product/small-product/3.jpg" alt="product">
-                                    </a>
-                                    <div class="product-content">
-                                        <div class="product-title">
-                                            <h4 class="title-2"> <a href="product-details.html">Product title here</a></h4>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price ">$40.00</span>
-                                            <span class="old-price"><del>$50.00</del></span>
-                                        </div>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!--                         <div class="widget-list widget-mb-4"> -->
+<!--                             <h3 class="widget-title">Recent Products</h3> -->
+<!--                             <div class="sidebar-body"> -->
+<!--                                 <div class="sidebar-product align-items-center"> -->
+<!--                                     <a href="product-details.html" class="image"> -->
+<!--                                         <img src="assets/images/product/small-product/1.jpg" alt="product"> -->
+<!--                                     </a> -->
+<!--                                     <div class="product-content"> -->
+<!--                                         <div class="product-title"> -->
+<!--                                             <h4 class="title-2"> <a href="product-details.html">Product dummy name</a></h4> -->
+<!--                                         </div> -->
+<!--                                         <div class="price-box"> -->
+<!--                                             <span class="regular-price ">$80.00</span> -->
+<!--                                             <span class="old-price"><del>$90.00</del></span> -->
+<!--                                         </div> -->
+<!--                                         <div class="product-rating"> -->
+<!--                                             <i class="fa fa-star"></i> -->
+<!--                                             <i class="fa fa-star"></i> -->
+<!--                                             <i class="fa fa-star"></i> -->
+<!--                                             <i class="fa fa-star-o"></i> -->
+<!--                                             <i class="fa fa-star-o"></i> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                                 <div class="sidebar-product align-items-center"> -->
+<!--                                     <a href="product-details.html" class="image"> -->
+<!--                                         <img src="assets/images/product/small-product/2.jpg" alt="product"> -->
+<!--                                     </a> -->
+<!--                                     <div class="product-content"> -->
+<!--                                         <div class="product-title"> -->
+<!--                                             <h4 class="title-2"> <a href="product-details.html">Product dummy title</a></h4> -->
+<!--                                         </div> -->
+<!--                                         <div class="price-box"> -->
+<!--                                             <span class="regular-price ">$50.00</span> -->
+<!--                                             <span class="old-price"><del>$60.00</del></span> -->
+<!--                                         </div> -->
+<!--                                         <div class="product-rating"> -->
+<!--                                             <i class="fa fa-star"></i> -->
+<!--                                             <i class="fa fa-star"></i> -->
+<!--                                             <i class="fa fa-star"></i> -->
+<!--                                             <i class="fa fa-star-half-o"></i> -->
+<!--                                             <i class="fa fa-star-o"></i> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                                 <div class="sidebar-product align-items-center"> -->
+<!--                                     <a href="product-details.html" class="image"> -->
+<!--                                         <img src="assets/images/product/small-product/3.jpg" alt="product"> -->
+<!--                                     </a> -->
+<!--                                     <div class="product-content"> -->
+<!--                                         <div class="product-title"> -->
+<!--                                             <h4 class="title-2"> <a href="product-details.html">Product title here</a></h4> -->
+<!--                                         </div> -->
+<!--                                         <div class="price-box"> -->
+<!--                                             <span class="regular-price ">$40.00</span> -->
+<!--                                             <span class="old-price"><del>$50.00</del></span> -->
+<!--                                         </div> -->
+<!--                                         <div class="product-rating"> -->
+<!--                                             <i class="fa fa-star"></i> -->
+<!--                                             <i class="fa fa-star"></i> -->
+<!--                                             <i class="fa fa-star-half-o"></i> -->
+<!--                                             <i class="fa fa-star-half-o"></i> -->
+<!--                                             <i class="fa fa-star-o"></i> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                         </div> -->
                     </div>
                 </aside>
                 <!-- 商品銷售欄 左方分類欄 End -->

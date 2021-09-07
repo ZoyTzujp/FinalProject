@@ -21,6 +21,9 @@ public interface ProductService {
 
 	List<Product> getProductListByShopID(Integer shopID);
 
+	void deleteProductById(Integer productID);
+
+
 
 
 }

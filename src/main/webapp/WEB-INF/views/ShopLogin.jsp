@@ -25,7 +25,7 @@
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-custom">
                     <div class="login-register-wrapper">
                         <div class="section-content text-center mb-5">
-                            <h2 class="title-4 mb-2">登入</h2>
+                            <h2 class="title-4 mb-2">商家登入</h2>
                             <p class="desc-content">請輸入會員資訊</p>
                         </div>
                         <form action="userLogin" role="form" method="post" class="needs-validation " novalidate>
@@ -36,7 +36,7 @@
 									</div>
                            	</div>
                             <div class="col-md-4 single-input-item mb-3">
-                                <input type="text" class="form-control" id="Password" name="Password" placeholder="密碼"  required/>
+                                <input type="password" class="form-control" id="Password" name="Password" placeholder="密碼"  required/>
                                 	<div class="invalid-feedback">
 											密碼不可空白
 									 </div>

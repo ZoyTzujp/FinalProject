@@ -14,4 +14,6 @@ public interface ProductTypeListRepository {
 
 	List<ProductTypeList> getProductTypeListByProductID(Integer productID);
 
+	void addNewProductType(ProductTypeList productTypeList);
+
 }
