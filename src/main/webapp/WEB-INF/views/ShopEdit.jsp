@@ -36,7 +36,7 @@
                                 <h2 class="title-4 mb-2">修改會員資料</h2>
                                 <div id='resultMsg' style="height:18px; font-weight: bold;"></div>
                             </div>
-                            
+                            <form method="POST" action="<c:url value='/updateShop' />" enctype="multipart/form-data">
                             	<div class="single-input-item mb-3">                            	
 						             <input type="hidden" id="shopID"name="shopID"   >
 						        </div>
@@ -57,9 +57,13 @@
                
                                 <div class="single-input-item  mb-3">
 						             <label>電子郵件</label>
-						                	<input type="text"  id="Email" name="Email" disabled />
+						                	<input type="text"  id="Email" name="Email" readonly/>
 						        </div>
-
+								
+								<div class="single-input-item mb-3">                            	
+						             <input type="hidden" id="password"name="password"   >
+						        </div>
+								
 								<div class="single-input-item  mb-3">
 									<label>手機號碼</label> <input type="text" id="mobile" name="mobile" />
 								</div>
@@ -71,6 +75,14 @@
 								<div class="single-input-item  mb-3">
 						              <label>連結網址</label><input type="text" id="webLink" name="webLink" />
 						          </div>
+						        
+						        <div class="single-input-item mb-3">
+                                    <label>店家圖片</label><br><img  src="<c:url value='/getShopImage' />?id=${LoginOK.shopID}" width="400" height="300" alt="" >
+                                </div>
+                                
+                                <div class="single-input-item mb-3">
+                                    <label>修改店家圖片</label><input type="file" name="shopImage" />
+                                </div>
 						                                
 						          <div class="single-input-item  mb-3">
 						              <label>商店介紹</label><br>
@@ -86,9 +98,10 @@
                                     </div>
                                 </div>
                                 <div align="center"	>
-									<button  class="btn obrien-button-2 primary-color" id='updateData' >送出</button>
+									<button  class="btn obrien-button-2 primary-color" id='updateData' onclick="return confirm('確認要修改店家內容?');">送出</button>
 									<input type="button"  class="btn obrien-button-2 primary-color" value="取消" onClick='history.go(-1)'> 
-									</div>
+								</div>
+							</form>	
 <script>
     var hasError = false;
 
@@ -102,7 +115,7 @@
     	let introduce 	= document.getElementById("introduce");
     	let shopPhone 	= document.getElementById("shopPhone");
     	let webLink 	= document.getElementById("webLink");
-
+		let shopImage   = document.getElementById("shopImage");
     	let xhr = new XMLHttpRequest();
 
     	xhr.open("GET", "<c:url value='/editShop' />" ,true);
@@ -121,90 +134,11 @@
     		introduce.value 	= member.introduce;
     		shopPhone.value 	= member.shopPhone;
     		webLink.value 		= member.webLink;
+    		
     		}
     	}
    	
-     	var updateData = document.getElementById("updateData");
-    	
-     	updateData.onclick = function(){
-     		confirm('是否修改完成?');
-     		hasError = false;
-      		// 讀取欄位資料
-      		let shopIDvalue			= document.getElementById("shopID").value;
-    		let shopNameValue		= document.getElementById("shopName").value;
-    		let shopKeeperValue 	= document.getElementById("shopKeeper").value;
-    		let EmailValue 			= document.getElementById("Email").value;
-    		let mobileValue			= document.getElementById("mobile").value;
-    		let introduceValue		= document.getElementById("introduce").value;
-    		let shopPhoneValue		= document.getElementById("shopPhone").value;
-    		let webLinkValue		= document.getElementById("webLink").value;
-    		var div0 = document.getElementById('result0c');
-   		var div1 = document.getElementById('result1c');
-   		var div2 = document.getElementById('result2c');
-   		
-   		var xhr1 = new XMLHttpRequest();
-      		xhr1.open("PUT", "<c:url value='/updateShop/' />"+${LoginOK.shopID}  , true);
-//       		xhr1.open("POST", "<c:url value='/updateShop' />"  , true);
-   		var jsonMember = {					
-   			"shopID": shopIDvalue, 	
-   			"shopName": shopNameValue,
-   			"shopKeeper": shopKeeperValue,
-   			"Email": EmailValue,
-   			"mobile": mobileValue,
-   			"shopPhone": shopPhoneValue,
-   			"webLink": webLinkValue,
-   			"introduce": introduceValue
-      		}
-      		xhr1.setRequestHeader("Content-Type", "application/json");
-      		xhr1.send(JSON.stringify(jsonMember));
-   	
-      
-      		xhr1.onreadystatechange = function() {
-   				// 伺服器請求完成
-      		if (xhr1.readyState == 4 && (xhr1.status == 200 || xhr1.status == 201) ) {
-         		result = JSON.parse(xhr1.responseText);
-         		if (result.fail) {
-   		 		divResult.innerHTML = "<font color='red' >"
-   					+ result.fail + "</font>";
-   	  		} else if (result.success) {
-   	  			
-   				divResult.innerHTML = "<font color='GREEN'>"
-   					+ result.success + "</font>";
-   				div0.innerHTML = "";	
-   				div1.innerHTML = "";
-   				div2.innerHTML = "";
-   				div3.innerHTML = "";
-   	 		} else {
-   				if (result.idError) {
-             			div0.innerHTML = "<font color='green' size='-2'>"
-   	     				+ result.idError + "</font>";
-   				} else {
-             			div0.innerHTML = "";
-   				}
-   				if (result.nameError) {
-   	      			div1.innerHTML = "<font color='green' size='-2'>"
-   						+ result.nameError + "</font>";
-   				} else {
-   	      			div1.innerHTML = "";
-   	   			}
-   				if (result.balanceError) {
-             			div2.innerHTML = "<font color='green' size='-2'>"
-   						+ result.balanceError + "</font>";
-   				} else {
-             			div2.innerHTML = "";
-       			}
-   				if (result.birthdayError) {
-   	    			div3.innerHTML = "<font color='green' size='-2'>"
-   						+ result.birthdayError + "</font>";
-   				} else {
-             			div3.innerHTML = "";
-   				}
-         		}
-   		} 
-     	    
-       }
 
-   	}
    }
 	</script> 
                         </div>
