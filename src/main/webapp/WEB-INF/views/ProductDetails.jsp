@@ -60,27 +60,29 @@
                                 <span>庫存:${product.quantity-product.saleQty}</span>
                             </div>
                             <p class="desc-content mb-5"></p>
-                            <FORM  action="<c:url value='/buyProduct' />" method="POST"> 
+<%--                             <FORM  action="<c:url value='/buyProduct' />" method="POST">  --%>
 	                           <div class="quantity-with_btn mb-4">
 	                               <div class="quantity">
 	                                   <div class="cart-plus-minus">
-	                                      <select name="newSaleQty">
+	                                      <select name="newSaleQty" class='newSaleQty'>
 	                                        <c:forEach var="i" begin="1" end="${product.quantity-product.saleQty}">
 	                                           <option value="${i}">${i}</option>
 	                                        </c:forEach>                                                        
 	                                      </select>
 	                                   </div>
 	                               </div>                                  
-	                               <Input type='hidden' name='productID' value='${product.productID}'>
-	                               <div class="add-to_cart">
-	                                   <Input class="btn obrien-button primary-btn" type="submit" value="加入購物車">
-	                                   <a class="btn obrien-button-2 treansparent-color pt-0 pb-0" href="wishlist.html">收藏</a>
+<%-- 	                               <Input type='hidden' name='productID' value='${product.productID}'> --%>
+	                               <div class="add-to_cart addCart">
+	                                   <Input type='hidden' name='productID' class='productID' value='${product.productID}'>
+<!--                                        <Input type='hidden' name='newSaleQty' class='newSaleQty' value='1'> -->
+	                                   <Input class="btn obrien-button primary-btn" value="加入購物車">
+<!-- 	                                   <a class="btn obrien-button-2 treansparent-color pt-0 pb-0" href="wishlist.html">收藏</a> -->
 	                               </div>
 	                           </div>
 	                           <div class="buy-button mb-5">
 	                               <a href="#" class="btn obrien-button-3 black-button">購買</a>
 	                           </div>
-                            </FORM>
+<!--                             </FORM> -->
                             <div class="social-share mb-4">
                                 <span>分享:</span>
                                 <a href="#"><i class="fa fa-facebook-square facebook-color"></i></a>
@@ -143,7 +145,34 @@
               
  <!-- 引入共同的頁尾 -->
 <jsp:include page="PageFoot.jsp" />
+<Script>
 
+//上方購物車(.addCart按鈕在ProductDetails.jsp頁面)
+//click事件將商品加入購物車
+$(".addCart").click(function(){
+	if(${empty Customer}){
+    	location.href ="<c:url value='/customerLoginPage/' />"
+    }else{
+    console.log("-----clickAccept------>");	
+	var productID = $(this).children(".productID").val();
+	var newSaleQty = $(this).siblings(".quantity").children().children(".newSaleQty").val();
+    console.log("-----productID------>"+productID);
+    console.log("-----newSaleQty------>"+newSaleQty);
+    
+    var xhr2 = new XMLHttpRequest();
+	xhr2.open("POST","<c:url value='/buyProduct.json' />",true);
+	xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr2.send("productID="+productID+"&newSaleQty="+newSaleQty);
+	xhr2.onreadystatechange = function(){
+		if(xhr2.readyState == 4 && xhr2.status == 200){
+			var cartItem = JSON.parse(xhr2.responseText);//將回應的JSON字串轉為javaScript物件
+			getCart(cartItem);	
+		}
+	}
+    }	
+  });
+
+</Script>
 </body>
 
 </html>

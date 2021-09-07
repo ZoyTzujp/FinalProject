@@ -27,6 +27,18 @@ public class ProductRepositoryImpl implements ProductRepository {
 	public void update(Product product) {
 		entityManager.merge(product);		
 	}
+	
+	@Override
+	public void deleteProductById(Integer productID) {
+		
+//		PUser user = entityManager.find(User.class, id);
+//		entityManager.remove(user);
+		
+		entityManager.clear();
+		Product product = entityManager.find(Product.class, productID);
+		entityManager.remove(product);
+		
+	}
 
 	@Override
 	public List<Product> getAllProduct() {		
@@ -62,5 +74,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                      .getResultList();		
 		return productList;
 	}
+
+
 
 }

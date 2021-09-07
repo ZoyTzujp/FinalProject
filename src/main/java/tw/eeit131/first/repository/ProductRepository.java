@@ -18,4 +18,6 @@ public interface ProductRepository {
 
 	List<Product> getProductListByShopID(Integer shopID);
 
+	void deleteProductById(Integer productID);
+
 }

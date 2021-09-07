@@ -89,7 +89,6 @@
 // 		window.onload = function() {	
 			//上方購物車 
 			if(${empty Cart}){
-				console.log("empty");
 				var cartHTML = "<i class='ion-bag'></i> ";
 				
 				var divs = document.getElementById("cartItemCount");
@@ -187,8 +186,7 @@
 						getCart(cartItem);	
 					}
 				}
-			 })
-	
+			 })	
 		});
 		
 		//上方購物車項目寫入
