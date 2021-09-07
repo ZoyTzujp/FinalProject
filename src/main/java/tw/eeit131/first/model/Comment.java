@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -26,9 +27,29 @@ public class Comment implements Serializable {
 	@JoinColumn(name = "ARTICALID")
 	@JsonIgnore
 	private Artical artical;
-
 	private Integer memberID;
 	private String content;
+	private String name;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Taipei")
+	private String commentTime;
+	
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCommentTime() {
+		return commentTime;
+	}
+
+	public void setCommentTime(String commentTime) {
+		this.commentTime = commentTime;
+	}
 
 	public Integer getCommentID() {
 		return commentID;
