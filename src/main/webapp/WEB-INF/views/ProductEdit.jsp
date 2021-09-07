@@ -94,7 +94,7 @@
                     <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area" >
                         <div class="single-product position-relative">
                             <div class="product-image" id="img">
-                                <a class="d-block" href="product-details.html">                        
+                                <a class="d-block" href="<c:url value='/getproductDetailsByID/${productList.productID}' />">                        
                                     <img src="<c:url value='/getProductImage' />?id=${productList.productID}" alt="" class="product-image-1 w-100">
                                 </a>
                             </div>

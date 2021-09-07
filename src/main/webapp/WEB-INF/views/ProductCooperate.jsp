@@ -45,7 +45,7 @@
                                 <!--Ajax 帶出商品分類-->
                                 <div class="checkout-form-list create-acc" id="productTypeIDList">
                                 </div>                                
-                                <input class="form-control newType" type="text" name="" />
+                                <input class="newType" type="text" name="" />
                                 <a class="btn obrien-button-2 treansparent-color pt-0 pb-0 addNewType" >新增商品分類</a>
 
                                 <div class="single-input-item mb-3">
