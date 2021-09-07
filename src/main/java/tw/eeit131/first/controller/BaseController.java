@@ -60,31 +60,6 @@ public class BaseController {
 	
 	@GetMapping("/showProductCart")
     public String showProductCart(HttpSession session) {
-		//鄧2021/09/07
-		//將購物車產品來自多少商家寫入session
-		//取出在session中的ShoppingCart物件
-		Cart cart = (Cart)session.getAttribute("Cart");
-		if (cart != null) { //避免購物車為空
-			//建立set存放所有商家ID
-			Set<Integer> shopIdSet = new HashSet<>();
-			//遍歷全部orderproduct shopid加進set(避免重複）
-			Map<Integer, Integer> orderProductMap = cart.getOrderProductByCart();
-			for(Map.Entry entry:orderProductMap.entrySet()){
-				Integer productID = (Integer)entry.getKey();//產品ID
-				Product product = productService.getProductById(productID);
-				System.err.println("product"+product);
-//				Integer shopId = product.getShopID();
-				ShopBean shop = product.getShop();
-				Integer shopId = shop.getShopID();
-				shopIdSet.add(shopId);
-				System.err.println("shopIdSet"+shopIdSet);
-				
-				
-			}//end of 遍歷全部orderproduct
-			Integer shopCount = shopIdSet.size();
-			session.setAttribute("shopCount",shopCount);//寫進session
-			System.err.println("shopCount:"+shopCount);
-		}
     	return "ProductCart";
 	}
 	

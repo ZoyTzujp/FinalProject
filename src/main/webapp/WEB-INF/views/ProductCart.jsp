@@ -94,21 +94,21 @@
                         <!-- Cart Calculation Area -->
                         <div class="cart-calculator-wrapper">
                             <div class="cart-calculate-items">
-                                <h3>購物車結帳</h3>
+<!--                                 <h3>購物車結帳</h3> -->
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tr>
                                             <td>商品總計</td>
                                             <td id="sum"></td>
                                         </tr>
-                                        <tr>
-                                            <td>運費</td>
-                                            <td id="shippingFee">${70 * shopCount}</td>
-                                        </tr>
-                                        <tr class="total">
-                                            <td>訂單總計</td>
-                                            <td class="total-amount" id="total"></td>
-                                        </tr>
+<!--                                         <tr> -->
+<!--                                             <td>運費</td> -->
+<%--                                             <td id="shippingFee">${70 * shopCount}</td> --%>
+<!--                                         </tr> -->
+<!--                                         <tr class="total"> -->
+<!--                                             <td>訂單總計</td> -->
+<!--                                             <td class="total-amount" id="total"></td> -->
+<!--                                         </tr> -->
                                     </table>
                                 </div>
                             </div>
