@@ -2656,7 +2656,7 @@ button,
 }
 
 .toolbar-bottom {
-  border: 1px solid #e1e1e1;
+/*   border: 1px solid #e1e1e1; */
   padding: 15px 30px;
   display: -webkit-box;
   display: -webkit-flex;

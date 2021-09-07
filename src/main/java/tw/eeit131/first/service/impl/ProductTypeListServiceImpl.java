@@ -38,4 +38,10 @@ public class ProductTypeListServiceImpl implements ProductTypeListService {
 		return productTypeListRepository.getProductTypeListByProductID(productID);
 	}
 
+	@Override
+	public void addNewProductType(ProductTypeList productTypeList) {
+		productTypeListRepository.addNewProductType(productTypeList);
+		
+	}
+
 }

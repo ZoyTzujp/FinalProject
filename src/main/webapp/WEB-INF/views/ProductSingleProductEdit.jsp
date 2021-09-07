@@ -22,7 +22,7 @@
 
         <!-- 商品銷售註冊欄 Start Here -->       
         <div class="login-register-area mt-no-text mb-no-text">
-            <div class="container container-default-2 custom-area">
+            <div class="container custom-area">
                 <div class="row">
                     <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-custom">
                         <div class="login-register-wrapper">
@@ -135,7 +135,7 @@
               			               + allProductTypes[i].productTypeID
               			               + "'>"
               			               + allProductTypes[i].productTypeName
-              			               + "</label>"
+              			               + "</label>&nbsp;&nbsp;"
             				  }           			     
             				}
             				context +="<div><br></div>";

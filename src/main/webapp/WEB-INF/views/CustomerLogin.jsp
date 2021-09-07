@@ -28,8 +28,9 @@
                         <div class="section-content text-center mb-5">
                             <h2 class="title-4 mb-2">會員登入</h2>
                             <p class="desc-content">請輸入會員資訊</p>
-                        </div>
-                        <form action="customerLogin" role="form" method="post" class="needs-validation " novalidate>
+                        </div> 
+<!--                         <form action="customerLogin" role="form" method="post" class="needs-validation " novalidate> -->
+                        <form action="<c:url value='/customerLogin' />" role="form" method="post" class="needs-validation " novalidate>
 							<div class="col-md-4 single-input-item mb-3">
                                 <input type="text" class="form-control" id="Email" name="Email" placeholder="電子郵件，例如:(exsample@gmail.com)"  autofocus required  pattern=".+@.+.com"/>
                                 	<div class="invalid-feedback">
