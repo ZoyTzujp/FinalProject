@@ -4,6 +4,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,17 +35,45 @@ public class PaypalController {
 	
 
 	
+//	//方案1	
+//	@PostMapping("/pay")
+//	public String payment(@ModelAttribute("orderList") OrderList orderList) {
+//		System.out.println(orderList);
+//		try {
+//			Payment payment = paypalService.createPayment(orderList.getPrice(), orderList.getCurrency(),
+//														orderList.getMethod(), orderList.getIntent(),
+//														orderList.getDescription(),
+//														"http://localhost:6060/FinalProject/" + CANCEL_URL,//可能要改
+//														"http://localhost:6060/FinalProject/" + SUCCESS_URL);
+//			for(Links link:payment.getLinks()) {
+//				if (link.getRel().equals("approval_url")) {
+//					return "redirect:" + link.getHref();//跳轉至paypal頁面
+//				}
+//			}
+//		} catch (PayPalRESTException e) {
+//			e.printStackTrace();
+//		}
+//		return "redirect:/";//回首頁
+//	}
+	
+	//方案2
 	@PostMapping("/pay")
-	public String payment(@ModelAttribute("orderList") OrderList orderList) {
-		System.out.println(orderList);
+	public String payment(@RequestParam("orderListId") Integer orderListId
+							,HttpSession session) {
+		OrderList orderList = orderService.getOrderListByOrderListId(orderListId);
+		System.err.println(orderList);
+		
 		try {
 			Payment payment = paypalService.createPayment(orderList.getPrice(), orderList.getCurrency(),
 														orderList.getMethod(), orderList.getIntent(),
 														orderList.getDescription(),
-														"http://localhost:6060/FinalProject/" + CANCEL_URL,//可能要改
+														"http://localhost:6060/FinalProject/" + CANCEL_URL,
 														"http://localhost:6060/FinalProject/" + SUCCESS_URL);
 			for(Links link:payment.getLinks()) {
 				if (link.getRel().equals("approval_url")) {
+					System.err.println("1");
+					System.err.println("orderListIdGoingToPay payment: "+ session.getAttribute("orderListIdGoingToPay"));
+					session.setAttribute("orderListIdGoingToPay",orderListId);
 					return "redirect:" + link.getHref();//跳轉至paypal頁面
 				}
 			}
@@ -58,16 +88,47 @@ public class PaypalController {
 		return "PaymentFailure";//原cancel
 	}
 	
+//	//方案1
+//	@GetMapping(value = SUCCESS_URL)
+//	public String successPay(@RequestParam("paymentId") String paymentId,
+//							@RequestParam("PayerID") String payerId//,@ModelAttribute("orderList") OrderList orderList
+//							,HttpSession session){
+//		try {
+//			Payment payment = paypalService.executePayment(paymentId, payerId);
+//			System.out.println(payment.toJSON());
+//			if (payment.getState().equals("approved")) {
+//				Integer orderListId = (Integer)session.getAttribute("orderListIdGoingToPay");
+//				System.out.println(orderListId);
+//				OrderList orderList = orderService.getOrderListByOrderListId(orderListId);
+//				orderList.setOrderStatus("已付款");
+//				orderService.updateOrderList(orderList);
+////				double orderListId = orderList.getOrderID();
+////				return "PaymentSuccess";
+//				return "redirect:/OrderContent/" + orderListId;
+//			}
+//		} catch (PayPalRESTException e){
+//			System.out.println(e.getMessage());
+//		}
+//		return "redirect:/";
+//	}
+	
+	//方案2
 	@GetMapping(value = SUCCESS_URL)
 	public String successPay(@RequestParam("paymentId") String paymentId,
-							@RequestParam("PayerID") String payerId//,@ModelAttribute("orderList") OrderList orderList
-							,HttpSession session){
+							@RequestParam("PayerID") String payerId
+							,HttpSession session
+							,Model m){
 		try {
 			Payment payment = paypalService.executePayment(paymentId, payerId);
 			System.out.println(payment.toJSON());
 			if (payment.getState().equals("approved")) {
+				System.err.println("orderListIdGoingToPay success1: "+ session.getAttribute("orderListIdGoingToPay"));
 				Integer orderListId = (Integer)session.getAttribute("orderListIdGoingToPay");
-				System.out.println(orderListId);
+				System.err.println("orderListIdGoingToPay success2: "+ session.getAttribute("orderListIdGoingToPay"));
+//				session.setAttribute("orderListIdGoingToPay", "");
+				session.removeAttribute("orderListIdGoingToPay");
+				System.err.println("orderListIdGoingToPay success3: "+ session.getAttribute("orderListIdGoingToPay"));
+				System.out.println("orderListId=" + orderListId);
 				OrderList orderList = orderService.getOrderListByOrderListId(orderListId);
 				orderList.setOrderStatus("已付款");
 				orderService.updateOrderList(orderList);

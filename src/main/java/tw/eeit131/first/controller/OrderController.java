@@ -67,16 +67,17 @@ public class OrderController {
 //		return "OrderPayment";
 //	}
 	
-	@GetMapping("/OrderPayment/{orderListId}")
-	public String OrderPayment(@PathVariable("orderListId") Integer orderListId,
-								HttpSession session, Model m) {
-		System.out.println("支付訊息頁面");
-		OrderList orderList = orderService.getOrderListByOrderListId(orderListId);
-		System.out.println("orderListid:"+orderListId);
-		m.addAttribute("orderList", orderList);
-		session.setAttribute("orderListIdGoingToPay", orderListId);
-		return "OrderPayment";
-	}
+//	//方案1	
+//	@GetMapping("/OrderPayment/{orderListId}")
+//	public String OrderPayment(@PathVariable("orderListId") Integer orderListId,
+//								HttpSession session, Model m) {
+//		System.out.println("支付訊息頁面");
+//		OrderList orderList = orderService.getOrderListByOrderListId(orderListId);
+//		System.out.println("orderListid:"+orderListId);
+//		m.addAttribute("orderList", orderList);
+//		session.setAttribute("orderListIdGoingToPay", orderListId);
+//		return "OrderPayment";
+//	}
 	
 	//登入客戶的訂單列表
 	@GetMapping("/getCustomersAllOrder")
@@ -110,13 +111,13 @@ public class OrderController {
 				                    HttpSession session) {//接收訂單資訊電話、地址、Email、cart
 		// 取出session中的使用者
 		Customer customer = (Customer)session.getAttribute("Customer");
-		
 		// 取出在session中的ShoppingCart物件
 		Cart cart = (Cart)session.getAttribute("Cart");
+		
 		if (cart != null) { //避免購物車為空
 			//建立set存放所有商家ID
 			Set<Integer> shopIdSet = new HashSet<>();
-		
+			
 			//遍歷全部orderproduct shopid加進set(避免重複）
 			Map<Integer, Integer> orderProductMap = cart.getOrderProductByCart();
 			for(Map.Entry entry:orderProductMap.entrySet()){
@@ -224,7 +225,7 @@ public class OrderController {
 				orderList.setShop(shop);//補上商家
 				orderService.updateOrderList(orderList);//存進資料庫
 				
-			}//遍歷set end(o)
+			}//遍歷set end
 			//刪除session中的cart物件中的資訊
 			cart.deleteCart();
 			
@@ -252,7 +253,7 @@ public class OrderController {
 			return "OrderContent";
 		}
 		
-		//藉訂單ID找出訂單內容
+		//藉訂單ID找出訂單內容(商家)
 		@GetMapping("/OrderContentForShop/{orderListId}")
 		public String getOrderProductByOrderListIdForShop(@PathVariable("orderListId")Integer orderListId 
 													,Model m, HttpSession session){
@@ -263,7 +264,6 @@ public class OrderController {
 			double price = orderList.getPrice();
 			String orderStatus = orderList.getOrderStatus();
 			m.addAttribute("allOrderProductShop", allOrderProduct);//所有產品
-//			m.addAttribute("orderList", orderList);
 			m.addAttribute("orderListIdShop", orderListId);//訂單id
 			m.addAttribute("priceShop", price);//訂單總額
 			m.addAttribute("orderStatusShop", orderStatus);//訂單狀態
@@ -271,12 +271,12 @@ public class OrderController {
 			return "OrderContentForShop";
 		}
 		
-	//取消訂單(訂單狀態改為"訂單取消")
+	//取消訂單(訂單狀態改為"取消")
 	@GetMapping("/cancelOrder/{orderListId}")
 	public String abc(@PathVariable("orderListId")Integer orderListId) {
 		System.out.println("orderListId:" + orderListId);
 		OrderList orderList = orderService.getOrderListByOrderListId(orderListId);
-		orderList.setOrderStatus("訂單取消");//修改狀態
+		orderList.setOrderStatus("取消");//修改狀態
 		orderService.updateOrderList(orderList);//存進資料庫
 		
 		return "redirect:/OrderContent/" + orderListId;

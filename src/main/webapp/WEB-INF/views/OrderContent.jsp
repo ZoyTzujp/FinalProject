@@ -23,27 +23,42 @@
 window.onload=function(){
 // 	var orderListId = allOrderProduct.
 	console.log("orderListId: "+${orderListId});
-	submitOrder = document.getElementById("submitOrder")
-	submitOrder.onclick = function(){// 確認支付
+// 	submitOrder = document.getElementById("submitOrder")
+// 	submitOrder.onclick = function(){// 確認支付
 		
-		var submit = confirm('前往支付');
+// 		var submit = confirm('前往支付');
 
-		if (submit) {
-			console.log("前往支付");
-			window.location.href="<c:url value='/OrderPayment/'/>${orderListId}";
+// 		if (submit) {
+// 			console.log("前往支付");
+// 			window.location.href="<c:url value='/OrderPayment/'/>${orderListId}";
+// // 			var orderListId = ${orderListId};
 			
-		} else {
-			console.log("取消前往支付");
-		}
+// // 			//測試
+// // 			let xhr = new XMLHttpRequest();
+// // 			xhr.open("POST", "<c:url value='/pay' />" ,true);
+// // 			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+// // 			xhr.setRequestHeader("Access-Control-Allow-Origin", "https://www.sandbox.paypal.com/");
+			
+// // 			xhr.send("orderListId="+orderListId);//
+			
+// // 			xhr.onreadystatechange = function(){
+// //         		if(xhr.readyState == 4 && xhr.status == 200){
+// //         			console.log("12345");
+// //         		}
+// //         	}	
+// 		} else {
+// 			console.log("取消前往支付");
+// 		}
 
-	}		
+// 	}		
 	
 	cancelOrder = document.getElementById("cancelOrder")
 	cancelOrder.onclick = function(){
 		var cancelcheck = confirm("確認取消訂單");
 		if (cancelcheck){
 			console.log("刪除訂單");
-			window.location.href="<c:url value='/cancelOrder/'/>${orderListId}";//改路徑
+			window.location.href="<c:url value='/cancelOrder/'/>${orderListId}";
+			
 		} else {
 			console.log("取消刪除訂單");
 		}
@@ -52,7 +67,7 @@ window.onload=function(){
 			
 			
 			
-			cancelOrder
+// 			cancelOrder
 			//讀取地址、信箱、電話、註記
 			
 			// 如何傳allOrderProduct?
@@ -151,37 +166,54 @@ window.onload=function(){
 								</c:forEach>
 							</tbody>
 						</table>
-<!-- 						<div class="row"> -->
-							<div class="col-lg-5 ml-auto">
-								<!-- Cart Calculation Area -->
-								<div class="cart-calculator-wrapper">
-									<div class="cart-calculate-items">
-										<div class="table-responsive">
-											<table class="table">
-												<tr>
-													<td>運費</td>
-													<td>70</td>
-												</tr>
-												<tr>
-													<td>總計</td>
-													<td>${price}</td>
-												</tr>
-												<tr class="total">
-													<td>訂單狀態</td>
-													<td class="total-amount">${orderStatus}</td>
-												</tr>
-											</table>
-										</div>
+						<div class="col-lg-5 ml-auto">
+							<!-- Cart Calculation Area -->
+							<div class="cart-calculator-wrapper">
+								<div class="cart-calculate-items">
+									<div class="table-responsive">
+										<table class="table">
+											<tr>
+												<td>運費</td>
+												<td>70</td>
+											</tr>
+											<tr>
+												<td>總計</td>
+												<td>${price}</td>
+											</tr>
+											<tr class="total">
+												<td>訂單狀態</td>
+												<td class="total-amount">${orderStatus}</td>
+											</tr>
+										</table>
 									</div>
 								</div>
 							</div>
-<!-- 						</div> -->
+						</div>
 						<!-- 有空再看看怎麼弄到右邊，改顏色 -->
 						<c:if test="${orderStatus == '未付款'}">
 							<div style="width: 300px; margin: 0 0 0 auto;">
+							<!-- 方案2 -->
+								<form method="POST" action="<c:url value='/pay' />">
+									<label style="display: none" for="price">總額</label>
+									<input style="display: none" type="text" id="price" name="price" value="${orderList.price}">
+									<label style="display: none" for="currency">幣種</label>
+									<input style="display: none" type="text" id="currency" name="currency" placeholder="Enter Currency" value="TWD">
+									<label style="display: none" for="method">支付方式</label>
+									<input style="display: none" type="text" id="method" name="method" placeholder="Payment Method" value="paypal">
+									<label style="display: none" for="intent">Intent</label>
+									<input style="display: none" type="text" id="intent" name="intent" value="sale">
+									<label style="display: none" for="description">付款描述</label><!-- 原字段:Payment Description -->
+									<input style="display: none" type="text" id="description" name="description" placeholder="Payment Description" value="${orderList.description}">
+									<label style="display: none" for="orderListId">付款描述</label>
+									<input style="display: none" type="text" id="orderListId" name="orderListId" value="${orderListId}">
+									<div class="order-button-payment">
+									<input type="submit" value="付款" class="btn">
+									</div>
+								</form>
 								<div class="order-button-payment">
-									<input value="付款" type="button" id="submitOrder"> <input
-										value="取消" type="button" id="cancelOrder">
+										<!-- 方案1 -->
+<!-- 									<input value="付款" type="button" id="submitOrder"> -->
+									<input value="取消" type="button" id="cancelOrder">
 								</div>
 							</div>
 						</c:if>
