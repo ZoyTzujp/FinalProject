@@ -60,9 +60,9 @@
 						                	<input type="text"  id="Email" name="Email" readonly/>
 						        </div>
 								
-								<div class="single-input-item mb-3">                            	
-						             <input type="hidden" id="password"name="password"   >
-						        </div>
+<!-- 								<div class="single-input-item mb-3">                            	 -->
+<!-- 						             <input type="hidden" id="password" name="password"   /> -->
+<!-- 						        </div> -->
 								
 								<div class="single-input-item  mb-3">
 									<label>手機號碼</label> <input type="text" id="mobile" name="mobile" />

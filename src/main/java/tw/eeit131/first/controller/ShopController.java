@@ -288,7 +288,7 @@ public class ShopController {
 	            @RequestParam("shopPhone")String shopPhone,
 	            @RequestParam("webLink")String webLink,
 	            @RequestParam("introduce")String introduce,
-	            @RequestParam("password")String password,
+//	            @RequestParam("password")String password,
 	            @RequestParam("shopImage")MultipartFile multipartFile,
 	            Model m
 	           ) throws SerialException, IOException, SQLException {
@@ -310,7 +310,7 @@ public class ShopController {
 				
 				saveFilePathStr = saveDirPath+fileName;				
 			}
-				ShopBean shopbean = setFile(shopID,shopName,shopKeeper,password,Email,mobile,shopPhone,webLink,introduce,fileName,saveFilePathStr);
+				ShopBean shopbean = setFile(shopID,shopName,shopKeeper,Email,mobile,shopPhone,webLink,introduce,fileName,saveFilePathStr);
 				service.update(shopbean);
 				
 				return "Home";
@@ -321,7 +321,7 @@ public class ShopController {
 				Integer shopID, 
 				String shopName, 
 				String shopKeeper, 
-				String password,
+//				String password,
 				String email, 
 				String mobile,
 				String shopPhone, 
@@ -330,12 +330,14 @@ public class ShopController {
 				String fileName,
 				String path) throws IOException, SerialException, SQLException{
 			ShopBean shop = new ShopBean();
+			ShopBean shopBean = service.findById(shopID);
 			shop.setShopID(shopID);
 			shop.setShopName(shopName);
 			shop.setShopKeeper(shopKeeper);
-			shop.setPassword(password);
+			shop.setPassword(shopBean.getPassword());
 			shop.setEmail(email);
 			shop.setMobile(mobile);
+			shop.setEnabled(true);
 			shop.setShopPhone(shopPhone);
 			shop.setWebLink(webLink);
 			shop.setIntroduce(introduce);
