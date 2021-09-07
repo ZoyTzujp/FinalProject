@@ -346,22 +346,15 @@
                                                 </div>
                                             </li>                                           
                                             <li>
-                                                <a href="<c:url value='/allartical' />">  
+                                                <a href="<c:url value='/allartical' />">
                                                     <span class="menu-text">論壇</span>
-                                                    <i class="fa fa-angle-down"></i>
                                                 </a>
-                                                <div class="mega-menu dropdown-hover">
-                                                    <div class="menu-colum">
-                                                        <ul>
-                                                            <li><a href="#">主題A</a></li>
-                                                            <li><a href="#">主題B</a></li>
-                                                            <li><a href="#">主題C</a></li>
-                                                            <li><a href="#">主題D</a></li>
-                                                            <li><a href="#">主題E</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            </li> 
+                                            <li>
+                                                <a href="https://confident-montalcini-99dd99.netlify.app/">
+                                                    <span class="menu-text">地圖</span>
+                                                </a>
+                                            </li>                                          
                                             <li>
                                                 <a href="#">
                                                     <span class="menu-text">關於</span>
@@ -523,24 +516,17 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </li>                                           
+                                            </li>
                                             <li>
                                                 <a href="<c:url value='/allartical' />">
                                                     <span class="menu-text">論壇</span>
-                                                    <i class="fa fa-angle-down"></i>
                                                 </a>
-                                                <div class="mega-menu dropdown-hover">
-                                                    <div class="menu-colum">
-                                                        <ul>
-                                                            <li><a href="#">主題A</a></li>
-                                                            <li><a href="#">主題B</a></li>
-                                                            <li><a href="#">主題C</a></li>
-                                                            <li><a href="#">主題D</a></li>
-                                                            <li><a href="#">主題E</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            </li>                                                                                      
+                                            <li>
+                                                <a href="https://confident-montalcini-99dd99.netlify.app/">
+                                                    <span class="menu-text">地圖</span>
+                                                </a>
+                                            </li> 
                                             <li>
                                                 <a href="#">
                                                     <span class="menu-text">關於</span>
