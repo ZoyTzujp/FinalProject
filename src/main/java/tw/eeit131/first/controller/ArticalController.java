@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.eeit131.first.model.Artical;
+import tw.eeit131.first.model.Customer;
+import tw.eeit131.first.model.ShopBean;
 import tw.eeit131.first.service.ArticalService;
 @Controller
 public class ArticalController {
 	
 	@Autowired
 	ArticalService service;
+	
+	@Autowired
+	HttpSession session;
 	
 	Logger log = LoggerFactory.getLogger(ArticalController.class);
 	
@@ -68,6 +75,8 @@ public class ArticalController {
 			@RequestParam("content") String content,
 			@PathVariable Integer id,
 			Artical artical) {
+		
+		
 		System.out.println("id======"+id);
 		System.out.println("id======"+id);
 		System.err.println("subject======="+subject);
@@ -87,6 +96,8 @@ public class ArticalController {
 		
 		return "ArticalIndex";		//之後改成return 成功修改頁面
 	}
+	
+	
 	
 	@GetMapping("/artical/delete/{id}")
 	public String deleteAritcal(			
@@ -108,9 +119,15 @@ public class ArticalController {
 			//@RequestParam("puctire") Byte[] picture,
 			Model model,
 			Artical artical){
+		
+		Customer member = (Customer)session.getAttribute("Customer");
+		Long m = member.getId();
+		if (m != null) {
+		Integer i = m == null ? null : Math.toIntExact(m);
+		artical.setMemberID(i);  //假會員，到時候再連結會員資料表
+		}
 		artical.setSubject(subject);
 		artical.setContent(content);
-		artical.setMemberID(2);  //假會員，到時候再連結會員資料表
 		artical.setPicture(null);
 		System.out.println(artical);
 		
@@ -157,6 +174,16 @@ public class ArticalController {
 	
 	@GetMapping("/create")
 	public  String create() {
+		
+		
+		ShopBean shop = (ShopBean)session.getAttribute("LoginOK");
+		Customer member = (Customer)session.getAttribute("Customer");
+		System.err.println("shop========="+shop);
+		System.err.println("member========="+member);
+		System.err.println("member========="+member.getId());
+		Long m = member.getId();
+		System.err.println(m);
+		
 		return "ArticalCreate";
 	}
 	
