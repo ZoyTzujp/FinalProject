@@ -24,7 +24,7 @@
                                 <p class="desc-content"></p>
                              </div>
                              <a class="btn obrien-button-2 treansparent-color pt-0 pb-0" href="<c:url value='/showProductCooperateForm' />">繼續新增商品</a>
-                             <a class="btn obrien-button-2 treansparent-color pt-0 pb-0" href="<c:url value='/getAllProductInfo' />"">回賣場</a>
+                             <a class="btn obrien-button-2 treansparent-color pt-0 pb-0" href="<c:url value='/showProductEditFormByShopID/${LoginOK.shopID}' />">回賣場</a>
                              </div></div></div></div></div>
 </body>
 </html>
