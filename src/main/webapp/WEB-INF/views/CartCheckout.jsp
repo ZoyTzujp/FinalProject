@@ -20,10 +20,10 @@
 window.onload=function(){
 	
 	$("#writeBtn").click(function(){
-		   $("#orderAddress").val("板橋");
+		   $("#orderAddress").val("新北市板橋區文化路一段25號");
 		   $("#orderEmail").val("Banqiao@gmail.com");
 		   $("#orderPhone").val("0912345678");
-		   $("#orderDescription").val("小採買");
+		   $("#orderDescription").val("週五採買時間");
 		  })
 		  
 	$(function() {
