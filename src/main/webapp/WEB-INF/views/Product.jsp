@@ -51,8 +51,8 @@
                 <!--商品銷售欄 上方分類欄 end-->
                 <!-- 商品銷售欄 商品欄 Start -->
                 <div class="row shop_wrapper grid_3" id="single-product">
-                <c:forEach var="productList" items="${productList}">
-                    <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area" >
+                  <c:forEach var="productList" items="${productList}">
+                    <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area alldiv" >
                         <div class="single-product position-relative">
                             <div class="product-image" id="img">  
                                 <a class="d-block" href="<c:url value='/getproductDetailsByID/${productList.productID}' />">                        
@@ -61,7 +61,7 @@
                             </div>
                             <div class="product-content" id="product_name_price">
                                 <div class="product-title">
-                                    <h4 class="title-2"> <a href="<c:url value='/getproductDetailsByID/${productList.productID}' />">${productList.productName}</a></h4>
+                                    <h4 class="title-2"> <a class="a" href="<c:url value='/getproductDetailsByID/${productList.productID}' />">${productList.productName}</a></h4>
                                 </div>
                                 <div class="product-title">
                                     <span class="regular-price ">$${productList.price}</span>       
@@ -115,9 +115,9 @@
                             <h3 class="widget-title">Search</h3>
                             <div class="search-box">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search Our Store" aria-label="Search Our Store">
+                                    <input type="text" class="form-control" id="myInput" placeholder="搜尋商品" aria-label="Search Our Store" >
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="searchFun()">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </div>
@@ -294,8 +294,29 @@
 		}
 	    }	
 	  });
-	           
+	
+//    關鍵字搜尋
+   	const searchFun = () =>{
+   		let filter = document.getElementById('myInput').value.toUpperCase();
+   		
+   		let myTable = document.getElementById('single-product');
+   		let div = myTable.getElementsByClassName('alldiv');
+
+   		for(var i=0; i< div.length; i++){
+   			let a = div[i].getElementsByClassName('a')[0];
+   			
+   			if(a){
+   				let textvalue = a.textContent || a.innerHTML;
+   				if(textvalue.toUpperCase().indexOf(filter) > -1){  
+   					div[i].style.display = "";
+   				}else{
+   					div[i].style.display= "none";
+   				}
+   			}
+   	    }
+       }	           
 </script>
+
 </body>
 
 </html>
