@@ -49,33 +49,17 @@ window.onload=function(){
 			var orderDescription = $("#orderDescription").val();
 			//讀取使用者
 			var customerID = ${Customer.id};
-//	 		//測試
-//	 		window.alert("orderAddress: "+orderAddress+"\n"
-//	 				+"orderEmail: "+orderEmail+"\n"
-//	 				+"orderPhone: "+orderPhone+"\n"
-//	 				+"customerID: "+customerID);
 			
 			//送出資料至controller
 			var xhr = new XMLHttpRequest(); //Ajax引擎物件
 			xhr.open("POST", "<c:url value='/addOrderList' />", true); //說明請求內容
-//	 		var productID = $(this).siblings("#display-none").text(); //產品ID
-//	 		var updatedSaleQty = $(this).val(); //更新後之數量
-//	 		console.log('產品ID:'+productID);
-//	 		console.log('更新後數量:'+updatedSaleQty);
 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); //請求標頭
 			xhr.send("orderAddress="+orderAddress+"&orderEmail="+orderEmail
 					+"&orderPhone="+orderPhone+"&orderDescription="+orderDescription);
 				
 				xhr.onreadystatechange = function(){
 				if(xhr.readyState == 4 && xhr.status == 200){
-//	 				console.log("測試");
-					window.alert("提交成功，聯絡資訊為-"+"\n"
-							+"orderAddress: "+orderAddress+"\n"
-							+"orderEmail: "+orderEmail+"\n"
-							+"orderPhone: "+orderPhone+"\n"
-							+"orderDescription: "+orderDescription+"\n"
-							+"customerID: "+customerID+"\n"+"\n"
-							+"即將跳轉頁面至訂單列表");
+					window.alert("提交成功"+"\n"+"即將跳轉頁面至訂單列表");
 					window.location.href="<c:url value='/getCustomersAllOrder' />";
 				}
 			}
@@ -106,7 +90,7 @@ window.onload=function(){
                     <div class="col-lg-6 col-12">
                         <form action="#">
                             <div class="checkbox-form">
-                                <h3>Billing Details</h3>
+                                <h3>貨運訊息</h3>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
@@ -138,13 +122,19 @@ window.onload=function(){
                                             <input placeholder="填寫註記" type="text" id="orderDescription"><!-- 帶使用者地址 -->
                                         </div>
                                     </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            商品來自 ${shopCount} 間店家，將生成 ${shopCount} 張訂單，各訂單運費皆為70元
+                                        </div>
+                                    </div>
+                                    
                               	</div>
                             </div>
                         </form>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="your-order">
-                            <h3>Your order</h3>
+                            <h3>明細</h3>
                             <div class="your-order-table table-responsive">
                                 <table class="table">
                                     <thead>
@@ -169,7 +159,7 @@ window.onload=function(){
                                     <tr class="cart_item">
                                             <td class="cart-product-name"> 運費<strong class="product-quantity"></strong></td>
 <!--                                             <td class="cart-product-total text-center" id="shippingFee"><span class="amount">70</span></td> -->
-                                            <td class="cart-product-total text-center" id="shippingFee">70</td>
+                                            <td class="cart-product-total text-center" id="shippingFee">${70 * shopCount}</td>
                                         </tr>
                                     </tbody>
                                     <tfoot>

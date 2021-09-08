@@ -45,7 +45,7 @@ public class OrderRepositoryImpl implements OrderRepository{
 	//藉使用者ID尋找其訂單
 	@Override
 	public List<OrderList> getOrderListByCustomerId(Long id) {
-		String hql = "FROM OrderList WHERE customerID=:id";
+		String hql = "FROM OrderList WHERE customerID=:id ORDER BY orderID DESC";//照時間反向排序
 		List<OrderList> orderList = null;
 		orderList = entityManager.createQuery(hql, OrderList.class)
 			                    .setParameter("id", id)
@@ -56,7 +56,7 @@ public class OrderRepositoryImpl implements OrderRepository{
 	//藉商家ID尋找其訂單
 	@Override
 	public List<OrderList> getOrderListByShopId(Integer id) {
-		String hql = "FROM OrderList WHERE shopID=:id";
+		String hql = "FROM OrderList WHERE shopID=:id ORDER BY orderID DESC";//照時間反向排序
 		List<OrderList> orderList = null;
 		orderList = entityManager.createQuery(hql, OrderList.class)
 				                 .setParameter("id", id)

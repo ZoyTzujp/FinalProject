@@ -1,6 +1,9 @@
 package tw.eeit131.first.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,8 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import tw.eeit131.first.model.Cart;
 import tw.eeit131.first.model.Product;
 import tw.eeit131.first.model.ProductTypeList;
+import tw.eeit131.first.model.ShopBean;
 import tw.eeit131.first.service.ProductService;
 import tw.eeit131.first.service.ProductTypeListService;
 import tw.eeit131.first.service.ShopService;
@@ -54,7 +59,7 @@ public class BaseController {
 	}
 	
 	@GetMapping("/showProductCart")
-    public String showProductCart() {
+    public String showProductCart(HttpSession session) {
     	return "ProductCart";
 	}
 	
