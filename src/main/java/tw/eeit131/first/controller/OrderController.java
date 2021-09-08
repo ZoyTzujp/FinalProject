@@ -208,6 +208,9 @@ public class OrderController {
 					    orderProduct.setNewSaleQty(newSaleQty);
 					    orderProduct.setProductName(product.getProductName());
 					    orderProduct.setPrice(product.getPrice());
+					    orderProduct.setSaleQty(0);//09/08臨時宿改
+					    orderProduct.setQuantity(0);//09/08臨時宿改
+					    orderProduct.setStandard("");//09/08臨時宿改
 					    orderProduct.setOrderID(orderID);//與剛建立的訂單關聯
 						System.err.println(orderProduct);
 						//持續累計各產品小計

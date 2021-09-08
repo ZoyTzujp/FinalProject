@@ -289,8 +289,6 @@
 </div>
 <!-- 商品銷售欄 End Here -->
 
-<!-- 引入共同的頁尾 -->
-<%-- <jsp:include page="PageFoot.jsp" /> --%>
 <Script>
 //關鍵字搜尋
 	const searchFun = () =>{

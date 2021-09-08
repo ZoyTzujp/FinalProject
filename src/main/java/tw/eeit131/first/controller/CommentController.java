@@ -58,10 +58,6 @@ public class CommentController {
 		@RequestParam(value="content", defaultValue = "(未輸入)") String content,
 		@PathVariable("id") Integer articalId 
 			){
-		Customer member = (Customer)session.getAttribute("Customer");
-		System.err.println("content==="+content);
-		System.err.println("articalId==="+articalId);
-		Long mID = member.getId();
 		
 		Artical artical = articalservice.selectById(articalId);
 		Comment c = new Comment();
@@ -69,13 +65,20 @@ public class CommentController {
 		c.setContent(content);
 		c.setMemberID(articalId);
 		
+		Customer member = (Customer)session.getAttribute("Customer");   //get memberID
+		System.err.println("content==="+content);
+		System.err.println("articalId==="+articalId);
+		Long mID = member.getId();
+		Customer customer = customerService.findByIdReturnCustomer(mID);
+		c.setName(customer.getName());
+		
+		
 		long currentTime = System.currentTimeMillis();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:s");
 		String commentTime = sdf.format(currentTime);
 		c.setCommentTime(commentTime);
 		
-		Customer customer = customerService.findByIdReturnCustomer(mID);
-		c.setName(customer.getName());
+		
 		commentService.saveComment(c);
 		
 		List<Comment> comment = commentService.findCommentByArticalId(articalId);		
