@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>蔬果論壇</title>
 </head>
 <body>
 
@@ -26,12 +26,60 @@
 		<td><input name="commentTime" id='commentTime' value="${artical.commentTime }"></td>
 </tr>
 </table>
-<button  formaction="<c:url value='/artical/edit/'/>${artical.articalID }">submit${artical.articalID }</button>
-<button  formaction="<c:url value='/artical/delete/'/>${artical.articalID }">delete${artical.articalID }</button>
+<button onclick="location.href='<c:url value="/artical/" />${artical.articalID }'" formaction="<c:url value='/artical/edit/'/>${artical.articalID }">確認修改</button>
+<button  formaction="<c:url value='/artical/delete/'/>${artical.articalID }">刪除文章</button>
 </form>
 </div>
 <hr>
 <a href="<c:url value='/allartical' />">所有文章</a>
+
+
+...
+
+<div class="tab-pane fade" id="addArtical" role="tabpanel">
+										<div class="myaccount-content">
+											<!--       <h3>新增文章</h3> -->
+											<div class="account-details-form">
+												<div class="myaccount-content">
+													<!--  <h3>新增文章</h3> -->
+													<div class="account-details-form">
+														<form:form modelAttribute="artical" action="save"
+															method="POST">
+<!-- 															<table> -->
+																<div class="row">
+																	<div class="col-lg-6 col-custom">
+																		<fieldset>
+																			<div class="single-input-item mb-3">
+																				<h1> 文章標題 </h1>
+																				<label for="display-name" class="required mb-1">
+																				</label>
+																				<form:input path="subject" placeholder="請輸入標題內容"
+																					id="display-name" type="text"></form:input>
+																			</div>
+																		</fieldset>
+																	</div>
+																</div>
+
+																<div class="single-input-item mb-4">
+																	<h1>文章內容:</h1>
+																	<textarea rows="15" cols="10" name="content"></textarea>
+<%-- 																	<form:input path="content" placeholder="請輸入文章內容" --%>
+<%-- 																		id="display-name" type="text"></form:input> --%>
+																</div>
+																<div align="center">
+																<form:button value="Send" id="addArtical"
+																	class="btn obrien-button primary-btn"
+																	>Submit</form:button>
+																</div>
+
+<!-- 															</table> -->
+														</form:form>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 
 </body>
 </html>
