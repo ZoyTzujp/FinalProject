@@ -56,8 +56,9 @@
                             <div class="single-input-item mb-3">
                             	<button class="btn obrien-button-2 primary-color" type="submit"	>登入</button>
                             	 <small>${errors.msg}</small> 
-                           
+                                <a class="btn obrien-button-2 treansparent-color pt-0 pb-0" id="writeBtn" >一鍵登入</a>
                             </div>
+                            
 <script type="text/javascript">
 			(function () {
 		  'use strict'
@@ -79,7 +80,13 @@
 		      }, false)
 		    })
 		})()
-	</script>
+		
+		$("#writeBtn").click(function(){
+			$("#Email").val("a2u453@gmail.com");
+			$("#Password").val("Do!ng123");
+		})
+				
+</script>
                         </form>
                     </div>
                 </div>
