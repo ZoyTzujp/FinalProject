@@ -40,7 +40,7 @@
 <!-- 									 	</div> -->
 <!--                                 </div> -->
 								<div class="col-md-4 single-input-item mb-3">
-									<input type="text" class="form-control" id="validationCustom01" name="shopName" placeholder="店家名稱" required>
+									<input type="text" class="form-control" id="shopName" name="shopName" placeholder="店家名稱" required>
 										<div class="invalid-feedback">
 											名稱不可空白
 										</div>
@@ -87,7 +87,7 @@
                                 
                                 <div class="col-md-4 single-input-item mb-3">
                                 	<label>店家介紹</label>
-                                    <textarea  name="introduce" class="form-control" cols="30" rows="5" placeholder="請輸入內容" required></textarea>
+                                    <textarea  name="introduce" id="introduce" class="form-control" cols="30" rows="5" placeholder="請輸入內容" required></textarea>
                                 		<div class="invalid-feedback">
 									 	</div>
                                 </div>
@@ -105,6 +105,7 @@
                                 <div align="center"	>
 									<button class="btn obrien-button-2 primary-color" type="submit" style="margin-right:15px;">新增</button>
 									<input type="button"  class="btn obrien-button-2 primary-color" value="取消" onClick='history.go(-1)'> 
+									<input type="button"  class="btn obrien-button-2 primary-color" value="小幫手" id="addNewShop" onclick="click()"> 
 									</div>
                             </form>
    		<script type="text/javascript">
@@ -129,28 +130,16 @@
 		    })
 		})()
 		
-// 		function sendRegisterSuccessEmail(email) {
-
-//     	let xhremail = new XMLHttpRequest();
-//     	xhremail.open("POST", "<c:url value='/send' />" ,true);
-    	
-//     	let msg="請點選下面連結，確認是否以此信箱註冊:";
-//     	var mailDetail={
-//     			"recipient"	= "a0926611416@gmail.com",
-//         		"subject"	= "註冊成功通知，請確認!!",
-//         		"message" 	= msg
-// //     			"您的驗證碼為：" + checkCode +"，請輸入驗證碼完成驗證，（請勿向任何人提供您收到的驗證碼）";
-//     	}
-//     	console.log(mailDetail);
-//     	xhremail.setRequestHeader("Content-Type","application/json");
-//     	xhremail.send(JSON.stringify(mailDetail));
-//     	xhremail.onreadystatechange = function(){
-//     		if (xhremail.readyState == 4 && xhremail.status == 200){
-//     			var result = xhremail.responseText;
-			
-//     		}
-//     	}
-// }  	
+		$('#addNewShop').click(function(){
+			  $("#shopName").val("肯德基KFC");
+			  $("#shopKeeper").val("奧巴碼");
+			  $("#Email").val("a2u453jp@gmail.com");
+			  $("#password").val("Do!ng123");
+			  $("#mobile").val("0947261845");
+			  $("#shopPhone").val("02-23566432");
+			  $("#webLink").val('https://www.kfcclub.com.tw/');
+			  $("#introduce").val("肯德基是源自美國的快餐連鎖店，總部設於肯塔基州路易維爾市，以炸雞為主力產品。總體來說是全球第二大的餐飲連鎖企業，僅次於麥當勞，截至2015年12月，在123個國家和地區擁有20,000+個分店。目前與必勝客、塔可鐘同為美國跨國餐飲集團百勝旗下子公司。");
+		})
 	</script>
                         </div>
                     </div>
