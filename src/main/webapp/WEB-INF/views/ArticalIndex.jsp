@@ -34,8 +34,8 @@
 					<div class="breadcrumb-content position-relative section-content">
 						<h3 class="title-3">蔬果論壇</h3>
 						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li>所有文章</li>
+							<li><a href='<c:url value='/'/>'>Home</a></li>
+							<li><a href='<c:url value='/allartical'/>'> 所有文章</a></li>
 						</ul>
 					</div>
 				</div>

@@ -21,7 +21,7 @@
 						<!-- 模板 -->
 						<!-- 模板 -->
 
-<a href='<c:url value="/artical/editform/" />${artical.articalID }'>修改文章</a>
+<%-- <a href='<c:url value="/artical/editform/" />${artical.articalID }'>修改文章</a> --%>
            
             
         
@@ -286,6 +286,7 @@ xhr.onreadystatechange = function(){
 			
 		}
 		content+="</div><br>";
+		console.log('comment.length==='+comment.length);
 		commentArea.innerHTML = content;
 	}
 }
@@ -315,6 +316,7 @@ btn.onclick = function(){
 // 	xhr2.onreadystatechange = function(){
 // 		if (xhr2.readyState == 4 && xhr2.status == 200){
 			var comment = JSON.parse(xhr.responseText);
+			var content = "<div class='comments-view-area'><h3 class='mb-5'>"+comment.length+" 則留言</h3>";
 			for(var i=0; i<comment.length; i++){
 	            let imgURL = "<c:url value='/images/review/1.jpg'/>";
 				content+="<div class='single-comment-wrap mb-4 d-flex'>";
@@ -336,7 +338,8 @@ btn.onclick = function(){
 			}
 			content+="</div><br>";
 			commentArea.innerHTML = content;
-	console.log(document.getElementById("content").value);
+	console.log("document.getElementById(content).value="+document.getElementById("content").value);
+	console.log('comment.length==='+comment.length);
 	document.getElementById("content").value=''; //把input清空
 				}
 			}
