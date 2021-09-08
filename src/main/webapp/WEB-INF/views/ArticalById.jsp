@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <div class="breadcrumb-content position-relative section-content">
-                            <h3 class="title-3">Blog Details Fullwidth</h3>
+                            <h3 class="title-3">${artical.subject } </h3>
                             <ul>
                                 <li><a href="index.html">Home</a></li>
                                 <li>Blog</li>
@@ -65,11 +65,12 @@
                                 </div>
                                 <div class="share-article">
                                     <span class="left-side">
-                                    <a href="#"> <i class="fa fa-long-arrow-left"></i> Older Post</a>
+                                    <a href='<c:url value="/allartical" />'> <i class="fa fa-long-arrow-left"></i> 全部文章</a>
                                 </span>
                                     <h6 class="text-uppercase">Share this article</h6>
                                     <span class="right-side">
-                                   <a href="#">Newer Post <i class="fa fa-long-arrow-right"></i></a>
+<!--                                    <a href="#">Newer Post <i class="fa fa-long-arrow-right"></i></a> -->
+                                   <a href='<c:url value="/artical/editform/" />${artical.articalID }'>修改文章<i class="fa fa-long-arrow-right"></i></a>
                                 </span>
                                 </div>
                                 <div class="social-share">
@@ -134,7 +135,7 @@
                         
                         
                         <!-- Blog Comments Area Start -->
-                        <form action="#">
+                        
                             <div class="comment-box">
                                 <h3>Leave A Comment</h3>
                                 <div class="row">
@@ -144,21 +145,20 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-custom">
-                                        <div class="input-item mb-4">
-                                            <input class="border rounded-0 w-100 input-area name" type="text" placeholder="Name">
-                                        </div>
+<!--                                         <div class="input-item mb-4"> -->
+<!--                                             <input class="border rounded-0 w-100 input-area name" type="text" placeholder="Name"> -->
+<!--                                         </div> -->
                                     </div>
                                     <div class="col-md-6 col-custom">
-                                        <div class="input-item mb-4">
-                                            <input class="border rounded-0 w-100 input-area email" type="text" placeholder="Email">
-                                        </div>
+<!--                                         <div class="input-item mb-4"> -->
+<!--                                             <input class="border rounded-0 w-100 input-area email" type="text" placeholder="Email"> -->
+<!--                                         </div> -->
                                     </div>
                                     <div class="col-12 col-custom mt-40 mb-no-text">
                                         <button  id="sendBtn" class="btn obrien-button primary-btn rounded-0 mb-0 w-100">Post comment</button>
                                     </div>
                                 </div>
                             </div>
-                        </form>
                         <!-- Blog Comments Area End -->
                     </div>
                 </div>
@@ -167,93 +167,78 @@
         <!-- Blog Main Area End Here -->
         <!--
 
-    <!-- Modal Area Start Here -->
-    <div class="modal fade obrien-modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="close close-button" data-dismiss="modal" aria-label="Close">
-                    <span class="close-icon" aria-hidden="true">x</span>
-                </button>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 text-center">
-                                <div class="product-image">
-                                    <img src="assets/images/product/1.jpg" alt="Product Image">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="modal-product">
-                                    <div class="product-content">
-                                        <div class="product-title">
-                                            <h4 class="title">Product dummy name</h4>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price ">$80.00</span>
-                                            <span class="old-price"><del>$90.00</del></span>
-                                        </div>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <span>1 Review</span>
-                                        </div>
-                                        <p class="desc-content">we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame bel...</p>
-                                        <form class="d-flex flex-column w-100" action="#">
-                                            <div class="form-group">
-                                                <select class="form-control nice-select w-100">
-                                                    <option>S</option>
-                                                    <option>M</option>
-                                                    <option>L</option>
-                                                    <option>XL</option>
-                                                    <option>XXL</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                        <div class="quantity-with_btn">
-                                            <div class="quantity">
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" value="0" type="text">
-                                                    <div class="dec qtybutton">-</div>
-                                                    <div class="inc qtybutton">+</div>
-                                                </div>
-                                            </div>
-                                            <div class="add-to_cart">
-                                                <a class="btn obrien-button primary-btn" href="cart.html">Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
- <div class="single-comment-wrap mb-4 d-flex">
-                                            <figure class="author-thumb">
-                                                <a href="#">
-                                                    <img src="assets/images/review/1.jpg" alt="Author">
-                                                </a>
-                                            </figure>
-                                            </div>
-                                            <div class="single-comment-wrap mb-4 d-flex">
-                                            <figure class="author-thumb">
-                                                <a href="#">
-                                                    <img src="assets/images/review/1.jpg" alt="Author">
-                                                </a>
-                                            </figure>
-                                            </div>
-    <!-- Modal Area End Here -->
+<!--     Modal Area Start Here -->
+<!--     <div class="modal fade obrien-modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true"> -->
+<!--         <div class="modal-dialog modal-dialog-centered" role="document"> -->
+<!--             <div class="modal-content"> -->
+<!--                 <button type="button" class="close close-button" data-dismiss="modal" aria-label="Close"> -->
+<!--                     <span class="close-icon" aria-hidden="true">x</span> -->
+<!--                 </button> -->
+<!--                 <div class="modal-body"> -->
+<!--                     <div class="container-fluid"> -->
+<!--                         <div class="row"> -->
+<!--                             <div class="col-lg-6 col-md-6 text-center"> -->
+<!--                                 <div class="product-image"> -->
+<!--                                     <img src="assets/images/product/1.jpg" alt="Product Image"> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                             <div class="col-lg-6 col-md-6"> -->
+<!--                                 <div class="modal-product"> -->
+<!--                                     <div class="product-content"> -->
+<!--                                         <div class="product-title"> -->
+<!--                                             <h4 class="title">Product dummy name</h4> -->
+<!--                                         </div> -->
+<!--                                         <div class="price-box"> -->
+<!--                                             <span class="regular-price ">$80.00</span> -->
+<!--                                             <span class="old-price"><del>$90.00</del></span> -->
+<!--                                         </div> -->
+<!--                                         <div class="product-rating"> -->
+<!--                                             <i class="fa fa-star"></i> -->
+<!--                                             <i class="fa fa-star"></i> -->
+<!--                                             <i class="fa fa-star"></i> -->
+<!--                                             <i class="fa fa-star-o"></i> -->
+<!--                                             <i class="fa fa-star-o"></i> -->
+<!--                                             <span>1 Review</span> -->
+<!--                                         </div> -->
+<!--                                         <p class="desc-content">we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame bel...</p> -->
+<%--                                         <form class="d-flex flex-column w-100" action="#"> --%>
+<!--                                             <div class="form-group"> -->
+<!--                                                 <select class="form-control nice-select w-100"> -->
+<!--                                                     <option>S</option> -->
+<!--                                                     <option>M</option> -->
+<!--                                                     <option>L</option> -->
+<!--                                                     <option>XL</option> -->
+<!--                                                     <option>XXL</option> -->
+<!--                                                 </select> -->
+<!--                                             </div> -->
+<%--                                         </form> --%>
+<!--                                         <div class="quantity-with_btn"> -->
+<!--                                             <div class="quantity"> -->
+<!--                                                 <div class="cart-plus-minus"> -->
+<!--                                                     <input class="cart-plus-minus-box" value="0" type="text"> -->
+<!--                                                     <div class="dec qtybutton">-</div> -->
+<!--                                                     <div class="inc qtybutton">+</div> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                             <div class="add-to_cart"> -->
+<!--                                                 <a class="btn obrien-button primary-btn" href="cart.html">Add to cart</a> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
 
-    <!-- Scroll to Top Start -->
-    <a class="scroll-to-top" href="#">
-        <i class="ion-chevron-up"></i>
-    </a>
-    <!-- Scroll to Top End -->
+<!--     Scroll to Top Start -->
+<!--     <a class="scroll-to-top" href="#"> -->
+<!--         <i class="ion-chevron-up"></i> -->
+<!--     </a> -->
+<!--     Scroll to Top End -->
 
 
 
@@ -329,20 +314,27 @@ btn.onclick = function(){
 // 	console.log("ststus="+xhr2.status);
 // 	xhr2.onreadystatechange = function(){
 // 		if (xhr2.readyState == 4 && xhr2.status == 200){
-			var content = "<div class='comments-view-area'><h3 class='mb-5'>"+comment.length+" 則留言</h3>";
 			var comment = JSON.parse(xhr.responseText);
 			for(var i=0; i<comment.length; i++){
-				 let imgURL = "<c:url value='/images/review/1.jpg'/>";
-					content+="<div class='single-comment-wrap mb-4 d-flex'>";
-					content+="<figure class='author-thumb'>";
-					content+="<a href='#'>";
-					content+="<img src='" + imgURL +"' alt='Author'>";
-		            content+="</a>";
-		            content+=" </figure>";
-		            content+="<h3>"+comment[i].content+"</h3>";
-		            content+="</div>";
-				}	
-			content+="</div><hr><br>";
+	            let imgURL = "<c:url value='/images/review/1.jpg'/>";
+				content+="<div class='single-comment-wrap mb-4 d-flex'>";
+				content+="<figure class='author-thumb'>";
+				content+="<a href='#'>";
+				content+="<img src='" + imgURL +"' alt='Author'>";
+	            content+="</a>";
+	            content+=" </figure>";
+	            content+='<div class="comments-info">';
+	            content+="<p>"+comment[i].content+"\n\n</p>";
+	            
+	            content+='<div class="comment-footer d-flex justify-content-between">';
+	            content+='<a href="#" class="author"><strong>'+comment[i].name+'</strong>'+' \b\b\b -'+comment[i].commentTime+'</a>';
+	            content+='</div>';
+	            content+='</div>';
+	            content+="</div><hr>";
+				
+				
+			}
+			content+="</div><br>";
 			commentArea.innerHTML = content;
 	console.log(document.getElementById("content").value);
 	document.getElementById("content").value=''; //把input清空
