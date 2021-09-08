@@ -255,9 +255,6 @@
 </div>
 <!-- 商品銷售欄 End Here -->
 
-<!-- 引入共同的頁尾 -->
-<jsp:include page="PageFoot.jsp" />
-
 <script>
     //<!--商品銷售欄 上方分類欄start-->的內容(待修改....)
 // 	var selectElement = document.getElementById('productTypeIDList');

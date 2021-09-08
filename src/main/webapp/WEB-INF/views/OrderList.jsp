@@ -132,11 +132,6 @@ const searchFun = () =>{
 		</div>
 	</div>
 
-
-	<!-- 引入共同的頁尾 -->
-	<jsp:include page="PageFoot.jsp" />
-
-
 </body>
 
 </html>
