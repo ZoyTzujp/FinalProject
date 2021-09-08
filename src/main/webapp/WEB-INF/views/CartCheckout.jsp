@@ -97,11 +97,11 @@ window.onload=function(){
                     <div class="col-lg-6 col-12">
                         <form action="#">
                             <div class="checkbox-form">
-                                <h3>貨運訊息</h3>
+                                <h3>送貨資訊</h3>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
-                                            <label>姓名 <span class="required"></span></label>
+                                            <label>姓名 <span class="required">*</span></label>
                                             <input readonly value="${Customer.name}" placeholder="" type="text"><!-- 帶使用者名稱 -->
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@ window.onload=function(){
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>備註 <span></span></label>
-                                            <input placeholder="填寫註記" type="text" id="orderDescription"><!-- 帶使用者地址 -->
+                                            <input placeholder="填寫註記，可配合搜尋功能查找訂單" type="text" id="orderDescription"><!-- 帶使用者地址 -->
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -142,7 +142,7 @@ window.onload=function(){
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="your-order">
-                            <h3>明細</h3>
+                            <h3>訂單明細</h3>
                             <div class="your-order-table table-responsive">
                                 <table class="table">
                                     <thead>
@@ -160,7 +160,7 @@ window.onload=function(){
                                         </tr>
                                     </c:forEach>
                                     <tr class="cart_item">
-                                            <td class="cart-product-name"> 總計<strong class="product-quantity"></strong></td>
+                                            <td class="cart-product-name"> 產品總計<strong class="product-quantity"></strong></td>
 <!--                                             <td class="cart-product-total text-center" id="sum"><span class="amount"></span></td> -->
                                         	<td class="cart-product-total text-center" id="sum"></td>
                                         </tr>
@@ -176,7 +176,7 @@ window.onload=function(){
 <!--                                             <td class="text-center"><span class="amount">£215.00</span></td> -->
 <!--                                         </tr> -->
                                         <tr class="order-total">
-                                            <th>Total</th>
+                                            <th>訂單總計</th>
 <!--                                             <td class="text-center" id="total"><strong><span class="amount"></span></strong></td> -->
 												<td class="text-center" id="total"></td>
                                         </tr>

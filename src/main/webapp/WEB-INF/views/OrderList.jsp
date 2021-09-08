@@ -82,7 +82,7 @@ const searchFun = () =>{
 <!-- 											<h3 class="widget-title">Search</h3> -->
 											<div class="search-box">
 												<div class="input-group">
-													<input type="text" class="form-control" name="" id="myInput" placeholder="搜尋備註" onkeyup="searchFun()">
+													<input type="text" class="form-control" name="" id="myInput" placeholder="搜尋" onkeyup="searchFun()">
 													<div class="input-group-append">
 														<button class="btn btn-outline-secondary" type="button">
 															<i class="fa fa-search"></i>
