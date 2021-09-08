@@ -37,7 +37,7 @@
                                     <label>上架時間</label><input  type="text" name="saleDate" id="saleDate" readonly/>
                                 </div>                                
                                 <div class="col-md-4 single-input-item mb-3">
-                                    <label>商品名稱</label><input class="form-control" type="text" name="productName" required/>
+                                    <label>商品名稱*</label><input class="form-control" type="text" name="productName" id="productName" required/>
 	                                   <div class="invalid-feedback">
 										 名稱不可空白
 									   </div>
@@ -56,36 +56,36 @@
                                 </div>
                                                                                                
                                 <div class="col-md-4 single-input-item mb-3">
-                                    <label>可供數量</label><input class="form-control" type="text" name="quantity" required/>
+                                    <label>可供數量*</label><input class="form-control" type="text" name="quantity" id="quantity" required/>
 	                                  <div class="invalid-feedback">
 										 數量不可空白
 									  </div>
                                 </div>
                                 <div class="col-md-4 single-input-item mb-3">
-                                    <label>價格</label><input class="form-control" type="text" name="price" required/>
+                                    <label>價格*</label><input class="form-control" type="text" name="price" id="price" required/>
 	                                  <div class="invalid-feedback">
 										 價格不可空白
 									  </div>
                                 </div>
                                 <div class="col-md-4 single-input-item mb-3">
-                                    <label>規格</label><input  type="text" name="standard" />
+                                    <label>規格</label><input  type="text" name="standard" id="standard" />
                                 </div>
                                 <div class="col-md-4 single-input-item mb-3">
-                                    <label>重量/容量</label><input  type="text" name="capacity" />
+                                    <label>重量/容量</label><input  type="text" name="capacity" id="capacity" />
                                 </div>
                                 <div class="single-input-item mb-3">
-                                    <label>產地</label><input  type="text" name="place" />
+                                    <label>產地</label><input  type="text" name="place" id="place" />
                                 </div>
                                 <div class="single-input-item mb-3">
-                                    <label>保存方式</label><input  type="text" name="preserve" />
+                                    <label>保存方式</label><input  type="text" name="preserve" id="preserve"/>
                                 </div>
                                 <div class="col-md-4 single-input-item mb-3">
-                                    <label>商品特色</label><textarea class="form-control" name="productDescribe" required></textarea>
+                                    <label>商品特色*</label><textarea class="form-control" name="productDescribe" id="productDescribe" required></textarea>
                                       <div class="invalid-feedback">
 									  </div>
                                 </div>
                                 <div class="single-input-item mb-3">
-                                    <label>商品圖片</label><input class="form-control" type="file" name="producImage" required/>
+                                    <label>商品圖片*</label><input class="form-control" type="file" name="producImage" required/>
                                       <div class="invalid-feedback">
                                          圖片不可空白
 									  </div>
@@ -98,6 +98,7 @@
                                 </div>
                                 <div class="single-input-item mb-3">
                                     <button class="btn obrien-button-2 primary-color" type="submit">新增</button>
+                                    <a class="btn obrien-button-2 treansparent-color pt-0 pb-0" id="writeBtn" >一鍵新增</a>
                                 </div>
                             </form>
                         </div>
@@ -170,7 +171,7 @@
 //              將商品類別列表 放進checkbox( <input type="checkbox" ...> )
 		        function showProductTypeList(productTypes){
                     var selectElement = document.getElementById('productTypeIDList');
-			        var context = "<label>商品分類</label><br>";
+			        var context = "<label>商品分類*</label><br>";
 			        for (var i = 0; i < productTypes.length; i++) {
 						context += "<input class='form-control' id='" + productTypes[i].productTypeID
 						        + "' type='checkbox' name='productTypeIDList' value='"
@@ -185,6 +186,17 @@
 			        context +="<div><br></div>";
 					selectElement.innerHTML = context; 
 		         }
+//          一鍵新增商品
+            $("#writeBtn").click(function(){
+            	$("#productName").val("光泉100%純天然鮮乳");
+            	$("#quantity").val("15");
+            	$("#price").val("195");
+            	$("#standard").val("瓶");
+            	$("#capacity").val("1857ml");
+            	$("#place").val("台灣");
+            	$("#preserve").val("冷藏");
+            	$("#productDescribe").val("光泉鮮乳100%純天然無添加，乳源來自100%國家A級生乳，來自健康的乳牛，現代化專業飼養技術，提供國人最優質的鮮乳產品。");
+            })    
         
          </script>
        <!-- 商品銷售註冊欄 End Here -->

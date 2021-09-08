@@ -47,6 +47,7 @@
                               
                             <div class="single-input-item mb-3">
                             	<button class="btn obrien-button-2 primary-color" type="submit"	>登入</button>
+                            	<a class="btn obrien-button-2 treansparent-color pt-0 pb-0" id="writeBtn">一鍵登入</a>
                             	<a class="btn obrien-button-2 treansparent-color pt-0 pb-0 addNewType" href="<c:url value='/shopLoginForm' />">商家登入</a>
                             	 <small>${errors.msg}</small> 
                             	 
@@ -74,6 +75,11 @@
 		      }, false)
 		    })
 		})()
+		
+		$("#writeBtn").click(function(){
+			$("#Email").val("A@gmail.com");
+			$("#Password").val("12345678");
+		})
 	</script>
                         </form>
                     </div>
