@@ -147,9 +147,6 @@
             </div>
         </div>
         <!-- 商品銷售註冊欄 End Here -->
-  	
-<!-- 引入共同的頁尾 -->
-<jsp:include page="PageFoot.jsp" />
   
 </body>
 

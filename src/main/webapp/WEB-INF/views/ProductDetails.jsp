@@ -143,8 +143,6 @@
         </div>
         <!-- Single Product Main Area End -->
               
- <!-- 引入共同的頁尾 -->
-<jsp:include page="PageFoot.jsp" />
 <Script>
 
 //上方購物車(.addCart按鈕在ProductDetails.jsp頁面)
