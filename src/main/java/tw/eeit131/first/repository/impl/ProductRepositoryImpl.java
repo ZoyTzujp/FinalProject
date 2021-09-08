@@ -29,7 +29,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 		entityManager.merge(product);		
 	}
 	
-	@Override
+	@Override  //未完成
 	public void deleteProductById(Integer productID) {
 		
 //		PUser user = entityManager.find(User.class, id);

@@ -91,7 +91,7 @@
                 <!-- 商品銷售欄 商品欄 Start -->
                 <div class="row shop_wrapper grid_3" id="single-product">  
                 <c:forEach var="productList" items="${productList}">
-                    <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area" >
+                    <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area alldiv" >
                         <div class="single-product position-relative">
                             <div class="product-image" id="img">
                                 <a class="d-block" href="<c:url value='/getproductDetailsByID/${productList.productID}' />">                        
@@ -100,14 +100,14 @@
                             </div>
                             <div class="product-content" id="product_name_price">
                                 <div class="product-title">
-                                    <h4 class="title-2"> <a href="product-details.html">${productList.productName}</a></h4>                                                                      
+                                    <h4 class="title-2"> <a class="a" href="<c:url value='/getproductDetailsByID/${productList.productID}' />">${productList.productName}</a></h4>                                                                      
                                 </div>                          
                                 <div class="product-title">                                   
                                     <h4 class="title-2"><span class="regular-price " >$${productList.price}</span></h4> 
                                       <div style="text-align:right">
                                         <h6 class="title-2">                                  
                                             <a href="<c:url value='/singleProductEditForm/${productList.productID}' />" title="edit" ><i class="fa fa-edit mr-2"></i></a>
-                                            <a href="<c:url value='/deleteProductByID/${productList.productID}' />" title="remove" onclick="return confirm('確認要刪除銷售內容?');"><i class="ion-trash-b"></i></a>
+<%--                                             <a href="<c:url value='/deleteProductByID/${productList.productID}' />" title="remove" onclick="return confirm('確認要刪除銷售內容?');"><i class="ion-trash-b"></i></a> --%>
                                         </h6>
                                       </div>                                   
                                 </div>
@@ -149,9 +149,9 @@
                             <h3 class="widget-title">Search</h3>
                             <div class="search-box">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search Our Store" aria-label="Search Our Store">
+                                    <input type="text" class="form-control" id="myInput" placeholder="搜尋商品" aria-label="Search Our Store">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="searchFun()">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </div>
@@ -290,7 +290,30 @@
 <!-- 商品銷售欄 End Here -->
 
 <!-- 引入共同的頁尾 -->
-<jsp:include page="PageFoot.jsp" />
+<%-- <jsp:include page="PageFoot.jsp" /> --%>
+<Script>
+//關鍵字搜尋
+	const searchFun = () =>{
+		let filter = document.getElementById('myInput').value.toUpperCase();
+		
+		let myTable = document.getElementById('single-product');
+		let div = myTable.getElementsByClassName('alldiv');
+
+		for(var i=0; i< div.length; i++){
+			let a = div[i].getElementsByClassName('a')[0];
+			
+			if(a){
+				let textvalue = a.textContent || a.innerHTML;
+				if(textvalue.toUpperCase().indexOf(filter) > -1){  
+					div[i].style.display = "";
+				}else{
+					div[i].style.display= "none";
+				}
+			}
+	    }
+   }
+
+</Script>
       
 </body>
 

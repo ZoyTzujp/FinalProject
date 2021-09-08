@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="single-input-item mb-3">
                                     <button class="btn obrien-button-2 primary-color" type="submit" onclick="return confirm('確認要修改銷售內容?');">修改</button>
-                                    <button class="btn obrien-button-2 primary-color" type="submit" onclick="return confirm('確認要刪除銷售內容?');">刪除</button>
+<!--                                     <button class="btn obrien-button-2 primary-color" type="submit" onclick="return confirm('確認要刪除銷售內容?');">刪除</button> -->
                                 </div>
                             </form>
                         </div>
@@ -146,7 +146,7 @@
          </script>
         <!-- 商品銷售註冊欄 End Here -->        
  <!-- 引入共同的頁尾 -->
-<jsp:include page="PageFoot.jsp" />
+<%-- <jsp:include page="PageFoot.jsp" /> --%>
 
 </body>
 
