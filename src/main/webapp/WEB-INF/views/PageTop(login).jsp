@@ -351,7 +351,7 @@
                                                 </a>
                                             </li> 
                                             <li>
-                                                <a href="https://condescending-edison-ffccd5.netlify.app/">
+                                                <a href="https://silly-keller-d0dabd.netlify.app">
                                                     <span class="menu-text">地圖</span>
                                                 </a>
                                             </li>                                          
@@ -523,7 +523,7 @@
                                                 </a>
                                             </li>                                                                                      
                                             <li>
-                                                <a href="https://condescending-edison-ffccd5.netlify.app/">
+                                                <a href="https://silly-keller-d0dabd.netlify.app">
                                                     <span class="menu-text">地圖</span>
                                                 </a>
                                             </li> 
