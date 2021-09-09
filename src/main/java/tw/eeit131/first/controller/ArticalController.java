@@ -75,8 +75,6 @@ public class ArticalController {
 			@RequestParam("content") String content,
 			@PathVariable Integer id,
 			Artical artical) {
-		
-		
 		System.out.println("id======"+id);
 		System.out.println("id======"+id);
 		System.err.println("subject======="+subject);
@@ -87,14 +85,12 @@ public class ArticalController {
 		artical.setMemberID(2); //假會員，到時候再連結會員資料表
 		artical.setPicture(null);
 		Artical edit = service.updateArtical(artical);
-
-		//		Artical editArtical = service.updateArtical(artical);
 		System.out.println(edit);
 		System.out.println("~~~~~~Artical in controller"+artical);
 		System.out.println("~~~~~~Artical in controller"+artical.getArticalID());
 		System.out.println(id+"~~~~~~~id");
-		
-		return "ArticalIndex";		//之後改成return 成功修改頁面
+		artical = service.selectById(id);
+		return "ArticalById";		//之後改成return 成功修改頁面
 	}
 	
 	
@@ -107,7 +103,7 @@ public class ArticalController {
 		service.deleteArtical(id);
 			
 		
-		return "ArticalIndex";		//之後改成return 成功修改頁面
+		return "ArticalDelete";		//之後改成return 成功修改頁面
 	}
 	
 	
@@ -158,7 +154,7 @@ public class ArticalController {
 		
 		List<Artical> allArtical = service.findAllArticals();	
 		model.addAttribute("allArtical",allArtical);		
-		return "ArticalCreate";
+		return "ArticalIndex";
 		
 	}
 	
