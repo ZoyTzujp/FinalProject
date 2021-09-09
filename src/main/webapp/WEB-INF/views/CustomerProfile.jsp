@@ -137,8 +137,8 @@
         </p>
       </form:form>
       
-			<a style="position:absolute; left:800px; bottom:300px;" href="<c:url value='/customer/profile/edit' />">修改會員資料</a>
-            <a id="idAForDeleteUser" style="position:absolute; left:940px; bottom:300px;" href="<c:url value='/customer/profile/delete' />">刪除會員資料</a>
+			<a style="position:absolute; left:900px; bottom:500px;" href="<c:url value='/customer/profile/edit' />">修改會員資料</a>
+            <a id="idAForDeleteUser" style="position:absolute; left:1100px; bottom:500px;" href="<c:url value='/customer/profile/delete' />">刪除會員資料</a>
     
       <br>
       <br>

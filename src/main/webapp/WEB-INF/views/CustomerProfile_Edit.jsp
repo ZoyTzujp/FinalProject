@@ -128,8 +128,8 @@
         <input id=submitBt class="btn btn-secondary btn-lg" style="position:relative; width:200px; height:50px;" type="submit" value="送出修改資料"/>
       </form:form>
         
-      <a style="position:absolute; left:810px; bottom:300px;" href="<c:url value='/customer/profile/changePassword' />">修改密碼</a>
-      <a id="idAForDeleteUser" style="position:absolute; left:940px; bottom:300px;" href="<c:url value='/customer/profile' />">回會員資料</a>
+      <a style="position:absolute; left:900px; bottom:500px;" href="<c:url value='/customer/profile/changePassword' />">修改密碼</a>
+      <a id="idAForDeleteUser" style="position:absolute; left:1100px; bottom:500px;" href="<c:url value='/customer/profile' />">回會員資料</a>
              
     
       <br>
