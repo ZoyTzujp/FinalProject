@@ -116,7 +116,7 @@
                                     <input id="submitBt" class="btn obrien-button-2 primary-color" type="submit" value="會員註冊"/>
                                 </div>
                             </form:form>
-                            <div><a style="position:absolute; left:850px; bottom:470px;" href='${pageContext.request.contextPath}/TODO' >成為商家？</a></div>
+                            <div><a style="position:absolute; left:1100px; bottom:690px;" href='${pageContext.request.contextPath}/addShopForm' >成為商家？</a></div>
                             
                         </div>
                     </div>
