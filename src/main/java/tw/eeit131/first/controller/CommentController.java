@@ -68,7 +68,9 @@ public class CommentController {
 		Customer member = (Customer)session.getAttribute("Customer");   //get memberID
 		System.err.println("content==="+content);
 		System.err.println("articalId==="+articalId);
+		
 		Long mID = member.getId();
+		System.err.println("customerId==="+mID);
 		Customer customer = customerService.findByIdReturnCustomer(mID);
 		c.setName(customer.getName());
 		
